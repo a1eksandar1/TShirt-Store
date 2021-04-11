@@ -1,4 +1,4 @@
-# Project ProdavnicaMajica
+# ProdavnicaMajica
 
 E-commerce sajt za prodaju majica sa custom printovima
 
