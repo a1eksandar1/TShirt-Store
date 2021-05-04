@@ -15,11 +15,21 @@ router.get("/", (req, res, next) => {
       const response = {
         numberOfTshirts: tshirts.length,
         tshirtsAvailable: tshirts.map((tshirt) => {
+
+            // removing _id from stock (for response)
+            let stock = [];
+            for (entry of tshirt.stock) {
+            //   console.log(entry);
+              stock.push({
+                size: entry.size,
+                quantity: entry.quantity,
+              });
+            }
           return {
             _id: tshirt._id,
             name: tshirt.tshirtName,
             price: tshirt.price,
-            stock: tshirt.stock,
+            stock: stock,
             image: tshirt.image,
           };
         }),
@@ -133,5 +143,66 @@ router.post("/", (req, res, next) => {
       });
     });
 });
+
+router.patch("/:tshirtId", (req, res, next) => {
+    const id = req.params.tshirtId;
+    const updateOptions = {};
+    for (const option of Object.keys(req.body)) {
+      updateOptions[option] = req.body[option];
+    }
+
+    // console.log(updateOptions);
+    // Tshirt.findOne({"stock.quantity":11}).exec().then(tshirt=>{
+    //     console.log("ovde");
+    //     console.log(tshirt);
+    //     console.log("ovde");
+    // }).catch(err=>{
+    //     console.log("error");
+    // })
+
+    // runValidators=true for checking enum
+    Tshirt.updateOne({ _id: id }, { $set: updateOptions },{runValidators:true})
+      .exec()
+      .then(result => {
+        res.status(200).json({
+            message: 'Tshirt updated',
+            check: {
+                type: 'GET',
+                url: 'http://localhost:3000/tshirts/' + id
+            }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
+
+
+  router.delete("/:tshirtId", (req, res, next) => {
+    const id = req.params.tshirtId;
+    Tshirt.deleteOne({ _id: id })
+      .exec()
+      .then(result => {
+        if(result.deletedCount===0){
+            res.status(404).json({
+                message: 'Tshirt with given id not available',
+            });
+        }else{
+            res.status(200).json({
+                message: 'Tshirt deleted',
+           });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
+
 
 module.exports = router;
