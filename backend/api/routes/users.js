@@ -96,5 +96,22 @@ router.post("/login", (req, res, next) => {
   });
 });
 
+router.delete('/:userId',(req,res,next)=>{
+    User.deleteOne({_id:req.params.userId})
+    .exec()
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({
+            message:"deleted successfully"
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
+    });
+});
+
 
 module.exports = router;
