@@ -19,10 +19,9 @@ const tshirtSchema=mongoose.Schema({
         },
 
     }],
-    // image:{
-    //     type:String,
-    //     // default:""
-    // },
+    image:{
+        type:String
+    },
     price:{
         type:Number,
         required:true

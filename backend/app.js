@@ -17,6 +17,8 @@ mongoose.connect("mongodb+srv://pveb:"+process.env.MONGO_PASSWORD+"@cluster0.hzc
 
 app.use(morgan("dev"));
 
+app.use('/assets/images', express.static("./assets/images"));
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
