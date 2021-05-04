@@ -65,25 +65,25 @@ router.post("/login", (req, res, next) => {
   .then(user=>{
       if(!user){
           return res.status(401).json({
-              message: "login failed"
+              message: "Login failed"
           });
       }else{
           bcrypt.compare(req.body.password,user.password,(error,result)=>{
             // comparison failed  
             if(error){
                 return res.status(401).json({
-                    message: "login failed"
+                    message: "Login failed"
                 });
               }
               // correct password
               if (result){
                   return res.status(200).json({
-                      message: "login successful"
+                      message: "Login successful"
                   })
               // incorrect password
               }else{
                 return res.status(401).json({
-                    message: "login failed"
+                    message: "Login failed"
                 });
               }
           });
@@ -103,7 +103,7 @@ router.delete('/:userId',(req,res,next)=>{
     .then(result=>{
         console.log(result)
         res.status(200).json({
-            message:"deleted successfully"
+            message:"Deleted successfully"
         });
     })
     .catch((err) => {
