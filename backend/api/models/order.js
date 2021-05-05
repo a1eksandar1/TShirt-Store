@@ -5,27 +5,25 @@ const orderSchema = mongoose.Schema({
   tshirtId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Tshirt",
-    required: true
+    required: true,
   },
-  userId:{
-      type:mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
-  quantity: { 
-      type: Number, 
-      default: 1 
+  quantity: {
+    type: Number,
+    default: 1,
   },
-  address:{
-      type: String,
-      required:true
+  address: {
+    type: String,
+    required: true,
   },
-  phone:{
-      type:String,
-      required:true
-  }
-
-
+  phone: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Order", orderSchema);
