@@ -31,3 +31,6 @@
 | GET     | /orders/{orderId} | Gets order with _id=orderId   |                                            | _id, tshirtId, userId, quantity, address, phone |
 | POST    | /orders           | Add new order                 | tshirtId, userId, quantity, address, phone | _id, tshirtId, userId, quantity, address, phone |
 | DELETE  | /orders/{orderId} | Delete order with _id=orderId |                                            |                                                 |
+
+
+**Use Authorization header set to *"Bearer "+ token* when sending requests (most of them wont work without this)**
