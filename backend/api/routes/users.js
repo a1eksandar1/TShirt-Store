@@ -2,8 +2,14 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jwt=require("jsonwebtoken");
+
+const checkAuth=require("../middleware/checkAuth");
+const checkAdminAuth=require("../middleware/checkAdminAuth");
 
 const User = require("../models/user");
+
+
 
 router.post("/signup", (req, res, next) => {
   User.findOne({ email: req.body.email })
@@ -77,8 +83,19 @@ router.post("/login", (req, res, next) => {
           }
           // correct password
           if (result) {
+
+            const token=jwt.sign({
+                userId:user._id,
+                email:user.email
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn:"1d"
+            }
+            );
             return res.status(200).json({
               message: "Login successful",
+              token:token
             });
             // incorrect password
           } else {
@@ -97,7 +114,7 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.delete("/:userId", (req, res, next) => {
+router.delete("/:userId",checkAuth,checkAdminAuth, (req, res, next) => {
   User.deleteOne({ _id: req.params.userId })
     .exec()
     .then((result) => {
@@ -114,7 +131,7 @@ router.delete("/:userId", (req, res, next) => {
     });
 });
 
-router.get("/", (req, res, next) => {
+router.get("/",checkAuth,checkAdminAuth, (req, res, next) => {
   User.find()
     .exec()
     .then((users) => {
@@ -139,7 +156,7 @@ router.get("/", (req, res, next) => {
 });
 
 // we get email currentPassword and newPassword
-router.patch("/", (req, res, next) => {
+router.patch("/",checkAuth, (req, res, next) => {
   User.findOne({ email: req.body.email })
     .exec()
     .then((user) => {

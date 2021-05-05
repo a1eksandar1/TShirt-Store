@@ -3,11 +3,14 @@ const router = express.Router();
 
 const mongoose = require("mongoose");
 
+const checkAuth=require("../middleware/checkAuth");
+const checkAdminAuth=require("../middleware/checkAdminAuth");
+
 const Order = require("../models/order");
 const Tshirt = require("../models/tshirt");
 const User = require("../models/user");
 
-router.get("/", (req, res, next) => {
+router.get("/",checkAuth,checkAdminAuth, (req, res, next) => {
   Order.find()
     .exec()
     .then((orders) => {
@@ -23,7 +26,7 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("/:orderId", (req, res, next) => {
+router.get("/:orderId",checkAuth,checkAdminAuth, (req, res, next) => {
     const id = req.params.orderId;
     Order.findById(id)
       .exec()
@@ -53,7 +56,7 @@ router.get("/:orderId", (req, res, next) => {
       });
   });
 
-router.post("/", (req, res, next) => {
+router.post("/",checkAuth, (req, res, next) => {
   User.findById(req.body.userId)
     .exec()
     .then((user) => {
@@ -112,7 +115,7 @@ router.post("/", (req, res, next) => {
 });
 
 
-router.delete("/:orderId", (req, res, next) => {
+router.delete("/:orderId",checkAuth,checkAdminAuth, (req, res, next) => {
     const id = req.params.orderId;
     Order.deleteOne({ _id: id })
       .exec()

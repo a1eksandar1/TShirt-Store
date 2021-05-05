@@ -5,6 +5,9 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 
+const checkAuth=require("../middleware/checkAuth");
+const checkAdminAuth=require("../middleware/checkAdminAuth");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./assets/images");
@@ -91,7 +94,7 @@ router.get("/:tshirtId", (req, res, next) => {
     });
 });
 
-router.post("/", upload.single("image"), (req, res, next) => {
+router.post("/", checkAuth,checkAdminAuth, upload.single("image"), (req, res, next) => {
   Tshirt.findOne({ tshirtName: req.body.tshirtName })
     .exec()
     .then((tshirt) => {
@@ -155,7 +158,7 @@ router.post("/", upload.single("image"), (req, res, next) => {
     });
 });
 
-router.patch("/:tshirtId", (req, res, next) => {
+router.patch("/:tshirtId",checkAuth,checkAdminAuth, (req, res, next) => {
   const id = req.params.tshirtId;
   const updateOptions = {};
   for (const option of Object.keys(req.body)) {
@@ -195,7 +198,7 @@ router.patch("/:tshirtId", (req, res, next) => {
     });
 });
 
-router.delete("/:tshirtId", (req, res, next) => {
+router.delete("/:tshirtId",checkAuth,checkAdminAuth, (req, res, next) => {
   const id = req.params.tshirtId;
   Tshirt.deleteOne({ _id: id })
     .exec()
