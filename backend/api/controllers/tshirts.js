@@ -21,7 +21,7 @@ module.exports.tshirtsGetAll = (req, res, next) => {
           }
           return {
             _id: tshirt._id,
-            name: tshirt.tshirtName,
+            tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             stock: stock,
             image: tshirt.image,
@@ -60,6 +60,7 @@ module.exports.tshirtsGetById = (req, res, next) => {
           tshirt: {
             _id: tshirt._id,
             tshirtName: tshirt.tshirtName,
+            price: tshirt.price,
             stock: stock,
             image: tshirt.image,
           },
@@ -117,7 +118,7 @@ module.exports.tshirtsPost = (req, res, next) => {
               message: "Added tshirt",
               addedTshirt: {
                 _id: result._id,
-                name: result.name,
+                tshirtName: result.tshirtName,
                 stock: stock,
                 price: result.price,
                 image: result.image,
@@ -157,6 +158,7 @@ module.exports.tshirtsPatchById = (req, res, next) => {
   )
     .exec()
     .then((result) => {
+        console.log(result);
       if (result.nModified == 0) {
         res.status(404).json({
           message: "No tshirt with given id",
