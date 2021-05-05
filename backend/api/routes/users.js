@@ -114,5 +114,31 @@ router.delete('/:userId',(req,res,next)=>{
     });
 });
 
+router.get("/",(req,res,next)=>{
+    User.find()
+    .exec()
+    .then(users=>{
+        const response = {
+        numberOfUsers: users.length,
+        usersSignedUp: users.map((user) => {
+          return {
+            _id: user._id,
+            email: user.email,
+            username: user.username
+          };
+        }),
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+
+    
+})
+
 
 module.exports = router;
