@@ -10,21 +10,12 @@ module.exports.tshirtsGetAll = (req, res, next) => {
       const response = {
         numberOfTshirts: tshirts.length,
         tshirtsAvailable: tshirts.map((tshirt) => {
-          // removing _id from stock (for response)
-          let stock = [];
-          for (entry of tshirt.stock) {
-            //   console.log(entry);
-            stock.push({
-              size: entry.size,
-              quantity: entry.quantity,
-            });
-          }
           return {
             _id: tshirt._id,
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
-            stock: stock,
             image: tshirt.image,
+            comments: tshirt.comments
           };
         }),
       };
@@ -46,23 +37,13 @@ module.exports.tshirtsGetById = (req, res, next) => {
       console.log(tshirt);
 
       if (tshirt) {
-        // removing _id from stock (for response)
-        let stock = [];
-        for (entry of tshirt.stock) {
-          console.log(entry);
-          stock.push({
-            size: entry.size,
-            quantity: entry.quantity,
-          });
-        }
-
         res.status(200).json({
           tshirt: {
             _id: tshirt._id,
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
-            stock: stock,
             image: tshirt.image,
+            comments: tshirt.comments
           },
         });
       } else {
@@ -90,7 +71,6 @@ module.exports.tshirtsPost = (req, res, next) => {
         const tshirt = new Tshirt({
           _id: new mongoose.Types.ObjectId(),
           tshirtName: req.body.tshirtName,
-          stock: req.body.stock,
           price: req.body.price,
           // if we dont send image use default
           image:
@@ -103,23 +83,11 @@ module.exports.tshirtsPost = (req, res, next) => {
           .save()
           .then((result) => {
             console.log(result);
-
-            // removing _id from stock (for response)
-            let stock = [];
-            for (entry of result.stock) {
-              console.log(entry);
-              stock.push({
-                size: entry.size,
-                quantity: entry.quantity,
-              });
-            }
-
             res.status(201).json({
               message: "Added tshirt",
               addedTshirt: {
                 _id: result._id,
                 tshirtName: result.tshirtName,
-                stock: stock,
                 price: result.price,
                 image: result.image,
               },
@@ -131,6 +99,35 @@ module.exports.tshirtsPost = (req, res, next) => {
               error: err,
             });
           });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+module.exports.tshirtsPostComment = (req, res, next) => {
+  const name = req.params.tshirtName;
+  const comment = req.body.comment;
+  Tshirt.updateOne(
+    {tshirtName: name},
+    {$push: {comments: comment}}
+  )
+  .exec()
+    .then((result) => {
+        console.log(result);
+      if (result.nModified == 0) {
+        res.status(404).json({
+          message: "No tshirt with given name",
+        });
+      } else {
+        // console.log(result);
+        res.status(200).json({
+          message: "Comment added"
+        });
       }
     })
     .catch((err) => {
