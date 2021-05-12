@@ -1,0 +1,7 @@
+<div class="container">
+  <app-filter></app-filter>
+  <div class="row row-cols-md-4 row-cols-1 g-3">
+    <app-card *ngFor="let tshirt of tshirts" [tshirt]="tshirt"></app-card>
+  </div>
+  <app-filter></app-filter>
+</div>
