@@ -1,76 +1,76 @@
-<div class="container-md">
+<div class="container-md mx-auto mt-5">
   <div class="p-3 border bg-light">
-    <div class="container-md">
-      <div class="row gx-4">
+    <div class="row">
 
-        <div class="col-sm">
-          <div class="p-3 border">
-          <a href="classic-zoom-in-shit">
-            <img src="/assets/tshirtDefault.png" class = "img-responsive" width="100%">
-          </a>
-          </div>
+      <div class="col-md">
+        <div class="p-3 border">
+        <a href="classic-zoom-in-shit">
+          <img src="/assets/tshirtDefault.png" class="img-fluid">
+        </a>
         </div>
+      </div>
 
-        <div class="col-sm">
-          <!-- <div class="p-3 border"> -->
-            <h2>Suuper nice T-shirt</h2>
+      <div class="col-sm">
+        <h2>Suuper nice T-shirt</h2>
+        <hr>
+
+        <div class="row px-4 my-3">
+          <!-- <div class="col-sm"> -->
+            Rating system? ono sa zvezdicama
+            <!-- <span class="fa fa-star fa-2x" [class.rate]="rating>=1" (click)="changeRating(1)"></span>
+            <span class="fa fa-star fa-2x" [class.rate]="rating>=2" (click)="changeRating(2)"></span>
+            <span class="fa fa-star fa-2x" [class.rate]="rating>=3" (click)="changeRating(3)"></span>
+            <span class="fa fa-star fa-2x" [class.rate]="rating>=4" (click)="changeRating(4)"></span>
+            <span class="fa fa-star fa-2x" [class.rate]="rating==5" (click)="changeRating(5)"></span> -->
           <!-- </div> -->
-
-          <div class="row">
-            <div class="col-sm">
-              Rating system?
-              <!-- <span class="fa fa-star fa-2x" [class.rate]="rating>=1" (click)="changeRating(1)"></span>
-              <span class="fa fa-star fa-2x" [class.rate]="rating>=2" (click)="changeRating(2)"></span>
-              <span class="fa fa-star fa-2x" [class.rate]="rating>=3" (click)="changeRating(3)"></span>
-              <span class="fa fa-star fa-2x" [class.rate]="rating>=4" (click)="changeRating(4)"></span>
-              <span class="fa fa-star fa-2x" [class.rate]="rating==5" (click)="changeRating(5)"></span> -->
-            </div>
-          </div>
-
-          <div class="row">
-            <h5>
-              Short description
-            </h5>
-            <!--moze da pise isto na svakoj macji, da ne cimamo sad i to u svaki product -->
-            <ul>
-              <li>High quality fiber</li>
-              <li>Made in Serbia</li>
-              <li>Feels super nice</li>
-              <li>w/e</li>
-            </ul>
-          </div>
-          <div class="row">
-              <div class="d-flex justify-conten-around">
-                <button type="button" class="btn btn-outline-primary">Small</button>
-                <button type="button" class="btn btn-outline-primary">Medium</button>
-                <button type="button" class="btn btn-outline-primary">Large</button>
-                <button type="button" class="btn btn-outline-primary">Extra large</button>
-              </div>
-          </div>
-          <div class="row">
-            <h3>17$</h3>
-          </div>
-          <div class="row">
-            <div class="d-flex justify-content-start">
-              <button type="button" class="btn btn-primary">Buy now</button>
-              <button type="button" class="btn btn-outline-primary">Add to cart</button>
-            </div>
-          </div>
-
-
-          <div class="row">a</div>
         </div>
 
-      </div> <!--row-->
+        <h5 class="list-heading">Short description</h5>
+        <!--moze da pise isto na svakoj macji, da ne cimamo sad i to u svaki product -->
+        <ul>
+          <li>High quality fiber</li>
+          <li>Made in Serbia</li>
+          <li>Feels super nice</li>
+          <li>w/e</li>
+        </ul>
+
+        <span class="label-rating mr-3 text-muted">Avalible sizes:</span>
+        <div class="d-flex justify-content-start mb-3">
+          <div class="btn-group" role="group">
+            <input type="radio" class="btn-check" name="btnradio" id="small" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="small">Small</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="medium" autocomplete="off">
+            <label class="btn btn-outline-primary" for="medium">Medium</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="large" autocomplete="off">
+            <label class="btn btn-outline-primary" for="large">Large</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="extra_large" autocomplete="off">
+            <label class="btn btn-outline-primary" for="extra_large">Extra large</label>
+          </div>
+        </div>
+
+        <span class="label-rating ms-2 text-muted">Price:</span>
+        <h3 class="label-rating mb-3 ms-2">17$</h3>
+
+        <div class="d-flex justify-content-start mb-3">
+          <button type="button" class="btn btn-primary me-2">Buy now</button>
+          <button type="button" class="btn btn-outline-primary">Add to cart</button>
+        </div>
+
+
+        <!-- <div class="row my-3">a</div> -->
+        <!-- dodao sam ovaj glupavi my-3 u svaki red a ustvari hocu space-between za celu kolonu ali nznm kako to uspeti -->
+      </div>
+
     </div>
+
   </div>
 </div>
 
-
-
-
-<!--
-<article class="card mt-5">
+<div class="container-md mx-auto">
+  <article class="card mt-5">
     <div class="card-body">
         <div class="row">
             <aside class="col-md-6">
@@ -105,7 +105,7 @@
         </div>
         <hr>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            Genericni tekst kako mi pravimo najbolje proizvode Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
             quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -113,5 +113,5 @@
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
     </div>
-</article>
- -->
+  </article>
+</div>
