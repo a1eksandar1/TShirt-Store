@@ -28,34 +28,40 @@
           <span class="align-middle"> {{numberOfRatings}} people rated this product. The people have spoken! </span>
         </div>
 
-        <h5 class="list-heading">Short description</h5>
-        <!--moze da pise isto na svakoj macji, da ne cimamo sad i to u svaki product -->
-        <ul>
-          <li>High quality fiber</li>
-          <li>Made in Serbia</li>
-          <li>Feels super nice</li>
-          <li>w/e</li>
-        </ul>
-
-        <span class="label-rating mr-3 text-muted">Avalible sizes:</span>
-        <div class="d-flex justify-content-start mb-3">
-          <div class="btn-group" role="group">
-            <input type="radio" class="btn-check" name="btnradio" id="small" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="small" (click)="setTShirtSize(0)">Small</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="medium" autocomplete="off">
-            <label class="btn btn-outline-primary" for="medium" (click)="setTShirtSize(1)">Medium</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="large" autocomplete="off">
-            <label class="btn btn-outline-primary" for="large" (click)="setTShirtSize(2)">Large</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="extra_large" autocomplete="off">
-            <label class="btn btn-outline-primary" for="extra_large" (click)="setTShirtSize(3)">Extra large</label>
-          </div>
+        <div>
+          <h5 class="list-heading">Short description</h5>
+          <!--moze da pise isto na svakoj macji, da ne cimamo sad i to u svaki product -->
+          <ul>
+            <li>High quality fiber</li>
+            <li>Made in Serbia</li>
+            <li>Feels super nice</li>
+            <li>w/e</li>
+          </ul>
         </div>
 
-        <span class="label-rating text-muted">Price:</span>
-        <h3 class="label-rating mb-3 ms-1">{{tshirt.price}}$</h3>
+        <div>
+          <span class="label-rating text-muted">Price:</span>
+          <h3 class="label-rating mb-3 ms-1">{{tshirt.price}}$</h3>
+        </div>
+
+        <div>
+          <span class="label-rating mr-3 text-muted">Avalible sizes:</span>
+          <div class="d-flex justify-content-start mb-3">
+            <div class="btn-group" role="group">
+              <input type="radio" class="btn-check" name="btnradio" id="small" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="small" (click)="setTShirtSize(0)">Small</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="medium" autocomplete="off">
+              <label class="btn btn-outline-primary" for="medium" (click)="setTShirtSize(1)">Medium</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="large" autocomplete="off">
+              <label class="btn btn-outline-primary" for="large" (click)="setTShirtSize(2)">Large</label>
+
+              <input type="radio" class="btn-check" name="btnradio" id="extra_large" autocomplete="off">
+              <label class="btn btn-outline-primary" for="extra_large" (click)="setTShirtSize(3)">Extra large</label>
+            </div>
+          </div>
+        </div>
 
         <div class="d-flex justify-content-start mb-3">
           <button type="button" class="btn btn-primary me-2">Buy now</button>
