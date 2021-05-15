@@ -3,7 +3,7 @@ export class TShirt {
     public _id: number = 1,
     public name: string = "Majica",
     public price: number = 1,
-    public image: string = "",
+    public image: string = "/assets/tshirtDefault.png",
     public comments: string = ""
     ){}
 }

@@ -5,13 +5,13 @@
       <div class="col-md">
         <div class="p-3 border">
         <a href="classic-zoom-in-shit">
-          <img src="/assets/tshirtDefault.png" class="img-fluid">
+          <img [src]="tshirt.image" class="img-fluid">
         </a>
         </div>
       </div>
 
       <div class="col-sm">
-        <h2>Suuper nice T-shirt</h2>
+        <h2>{{tshirt.name}}</h2>
         <hr>
 
         <div class="row px-4 my-3">
@@ -38,21 +38,21 @@
         <div class="d-flex justify-content-start mb-3">
           <div class="btn-group" role="group">
             <input type="radio" class="btn-check" name="btnradio" id="small" autocomplete="off" checked>
-            <label class="btn btn-outline-primary" for="small">Small</label>
+            <label class="btn btn-outline-primary" for="small" (click)="setTShirtSize(0)">Small</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="medium" autocomplete="off">
-            <label class="btn btn-outline-primary" for="medium">Medium</label>
+            <label class="btn btn-outline-primary" for="medium" (click)="setTShirtSize(1)">Medium</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="large" autocomplete="off">
-            <label class="btn btn-outline-primary" for="large">Large</label>
+            <label class="btn btn-outline-primary" for="large" (click)="setTShirtSize(2)">Large</label>
 
             <input type="radio" class="btn-check" name="btnradio" id="extra_large" autocomplete="off">
-            <label class="btn btn-outline-primary" for="extra_large">Extra large</label>
+            <label class="btn btn-outline-primary" for="extra_large" (click)="setTShirtSize(3)">Extra large</label>
           </div>
         </div>
 
-        <span class="label-rating ms-2 text-muted">Price:</span>
-        <h3 class="label-rating mb-3 ms-2">17$</h3>
+        <span class="label-rating text-muted">Price:</span>
+        <h3 class="label-rating mb-3 ms-1">{{tshirt.price}}$</h3>
 
         <div class="d-flex justify-content-start mb-3">
           <button type="button" class="btn btn-primary me-2">Buy now</button>
@@ -115,3 +115,35 @@
     </div>
   </article>
 </div>
+
+<!-- izdvoji posle u posebnu komponentu komentar-->
+<div class="container-md mx-auto my-5">
+  <div class="row p-3 border-top bg-light">
+    <div class="col-sm-1">
+      <a href="#non"> <img src="\assets\userIconDefault.png" alt="" class="img-fluid"> </a>
+    </div>
+    <div class="col-md-11">
+      <div class="row p-3 border bg-white">
+        Hello, this is an example comment. Hello, this is an example comment.
+      </div>
+      <div class="row">
+        <p class="label-rating mr-3 text-muted">by <a href="#non">Fikret Mijic</a> at 14:23pm, 4 Dec 2015</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row p-3 border-top bg-light">
+    <div class="col-sm-1">
+      <a href="#non"> <img src="\assets\userIconDefault.png" alt="" class="img-fluid"> </a>
+    </div>
+    <div class="col-md-11">
+      <div class="row p-3 border bg-white">
+        Hello, this is an example comment. Hello, this is an example comment.
+      </div>
+      <div class="row">
+        <p class="label-rating mr-3 text-muted">by <a href="#non">Fikret Mijic</a> at 14:23pm, 4 Dec 2015</p>
+      </div>
+    </div>
+  </div>
+</div>
+
