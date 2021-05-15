@@ -1,4 +1,7 @@
+
+<!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
 <div class="container-md mx-auto mt-5">
+
   <div class="p-3 border bg-light">
     <div class="row">
 
@@ -10,19 +13,19 @@
         </div>
       </div>
 
-      <div class="col-sm">
+      <!-- kolko moze da odjebe ovaj flex space between za kolone ja nmg da verujem kolko je to ne moguce ovde, flutter i miss you -->
+      <div class="col d-flex flex-column justify-content-between">
         <h2>{{tshirt.name}}</h2>
         <hr>
-
-        <div class="row px-4 my-3">
-          <!-- <div class="col-sm"> -->
-            Rating system? ono sa zvezdicama
-            <!-- <span class="fa fa-star fa-2x" [class.rate]="rating>=1" (click)="changeRating(1)"></span>
-            <span class="fa fa-star fa-2x" [class.rate]="rating>=2" (click)="changeRating(2)"></span>
-            <span class="fa fa-star fa-2x" [class.rate]="rating>=3" (click)="changeRating(3)"></span>
-            <span class="fa fa-star fa-2x" [class.rate]="rating>=4" (click)="changeRating(4)"></span>
-            <span class="fa fa-star fa-2x" [class.rate]="rating==5" (click)="changeRating(5)"></span> -->
-          <!-- </div> -->
+        <div class="col d-flex flex-column justify-content-between">
+        <!-- ne mozes da menjas rating ustvari, nisi kupio majcu -->
+        <div class="d-flex align-items-center mb-3">
+          <span class="fa fa-star fa-2x me-1" [class.rate]="rating>=1"></span>
+          <span class="fa fa-star fa-2x me-1" [class.rate]="rating>=2"></span>
+          <span class="fa fa-star fa-2x me-1" [class.rate]="rating>=3"></span>
+          <span class="fa fa-star fa-2x me-1" [class.rate]="rating>=4"></span>
+          <span class="fa fa-star fa-2x me-3" [class.rate]="rating==5"></span>
+          <span class="align-middle"> {{numberOfRatings}} people rated this product. The people have spoken! </span>
         </div>
 
         <h5 class="list-heading">Short description</h5>
@@ -58,17 +61,18 @@
           <button type="button" class="btn btn-primary me-2">Buy now</button>
           <button type="button" class="btn btn-outline-primary">Add to cart</button>
         </div>
+      </div>
 
-
-        <!-- <div class="row my-3">a</div> -->
-        <!-- dodao sam ovaj glupavi my-3 u svaki red a ustvari hocu space-between za celu kolonu ali nznm kako to uspeti -->
       </div>
 
     </div>
 
   </div>
 </div>
+<!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
 
+
+<!-- BULLSHITTING SECTION -------------------------- ----------------------------- -------------------- -->
 <div class="container-md mx-auto">
   <article class="card mt-5">
     <div class="card-body">
@@ -115,35 +119,31 @@
     </div>
   </article>
 </div>
+<!-- BULLSHITTING SECTION END -------------------------- ----------------------------- -------------------- -->
 
-<!-- izdvoji posle u posebnu komponentu komentar-->
+<!-- COMMENT SECTION -------------------------- ----------------------------- ----------------------------- -->
 <div class="container-md mx-auto my-5">
-  <div class="row p-3 border-top bg-light">
-    <div class="col-sm-1">
-      <a href="#non"> <img src="\assets\userIconDefault.png" alt="" class="img-fluid"> </a>
-    </div>
-    <div class="col-md-11">
-      <div class="row p-3 border bg-white">
-        Hello, this is an example comment. Hello, this is an example comment.
-      </div>
-      <div class="row">
-        <p class="label-rating mr-3 text-muted">by <a href="#non">Fikret Mijic</a> at 14:23pm, 4 Dec 2015</p>
-      </div>
-    </div>
-  </div>
+  <app-comment></app-comment>
+  <app-comment></app-comment>
 
   <div class="row p-3 border-top bg-light">
-    <div class="col-sm-1">
+
+    <div class="col-1">
       <a href="#non"> <img src="\assets\userIconDefault.png" alt="" class="img-fluid"> </a>
     </div>
-    <div class="col-md-11">
-      <div class="row p-3 border bg-white">
-        Hello, this is an example comment. Hello, this is an example comment.
+
+    <div class="col-11">
+      <div class="row p-3 border bg-white mb-2">
+        <span class="label-rating mr-3 text-muted"> Add a new comment</span>
       </div>
-      <div class="row">
-        <p class="label-rating mr-3 text-muted">by <a href="#non">Fikret Mijic</a> at 14:23pm, 4 Dec 2015</p>
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-secondary" type="button">Post</button>
       </div>
     </div>
-  </div>
 </div>
+
+<!-- COMMENT SECTION END -------------------------- ----------------------------- -------------------- -->
+
+
 

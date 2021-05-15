@@ -13,6 +13,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
 import { UserComponent } from './pages/user/user.component';
+import { CommentComponent } from './pages/product/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserComponent } from './pages/user/user.component';
     ContactComponent,
     HomeComponent,
     ProductComponent,
-    UserComponent
+    UserComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule

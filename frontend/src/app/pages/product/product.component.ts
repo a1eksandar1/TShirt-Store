@@ -15,27 +15,25 @@ enum TShirtSize {
 })
 export class ProductComponent implements OnInit {
 
-  // ovo treba dodati u model
-  // msm i ne moramo
-  // necu onda jos da dodajem rating sistem
-  // rating = 4.5;
-  // numberOfRatings = 20;
-
   // public _id: number = 1,
   // public name: string = "Majica",
   // public price: number = 1,
   // public image: string = "",
-  // public comments: string = ""
-
-  // kako jadan product page mogu da napravim sa 3 informacije hahhahahahah
+  // public comments: string = ""  koments trenutno je samo jedan jedini string? Treba da bude niz comment modela
 
   public tshirt : TShirt;
+  // necemo avalible sizes da dodajemo u model nek bude da su uvek sve velicine dostupne, ali treba dodati u order model
   public tshirtSize : TShirtSize;
+  //treba dodati rating i numberOfRatings u model
+  public rating : number;
+  public numberOfRatings : number;
 
-  // da li da primam celu majcu ili mozda bolje samo id majce pa cu ja da zovem bazu da uzmem, nemam pojma sta je bolje
+  //keep in mind primam tshirt id kroz url
   constructor() {
     this.tshirt = new TShirt();
     this.tshirtSize = TShirtSize.SMALL;
+    this.rating = 4.5;
+    this.numberOfRatings = 20;
    }
 
   ngOnInit(): void {
@@ -46,10 +44,8 @@ export class ProductComponent implements OnInit {
     this.tshirtSize = TShirtSize[TShirtSize[size]];
   }
 
-  // (click)="setTShirtSize({{TShirtSize.SMALL}})"
-
-  // changeRating(newRating : number){
-  //   this.rating = newRating;
-  // }
+  changeRating(newRating : number){
+    this.rating = newRating;
+  }
 
 }
