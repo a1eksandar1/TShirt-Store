@@ -21,6 +21,8 @@ export class ProductComponent implements OnInit {
   // public image: string = "",
   // public comments: string = ""  koments trenutno je samo jedan jedini string? Treba da bude niz comment modela
 
+  TShirtSizeEnum = TShirtSize;
+
   public tshirt : TShirt;
   // necemo avalible sizes da dodajemo u model nek bude da su uvek sve velicine dostupne, ali treba dodati u order model
   public tshirtSize : TShirtSize;
