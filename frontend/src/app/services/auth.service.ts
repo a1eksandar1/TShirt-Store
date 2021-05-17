@@ -22,7 +22,7 @@ export class AuthService {
   constructor(private http: HttpClient, private jwtService: JwtService) { }
 
   public isLoggedIn(): boolean {
-    return (this.jwtService.getToken != null);
+    return (this.jwtService.getToken() != null);
   }
 
   public sendUserDataIfExists(): User {

@@ -85,9 +85,9 @@ export class StoreComponent implements OnInit, OnDestroy {
   }
 
   setupStore(): void {
-    // for (let i = 0; i < 100; i++) {
-    //   this.tshirts.push(new TShirt(i.toString(),this.makeid(10),Math.round(Math.random()*100)));
-    // }
+    for (let i = 0; i < 100; i++) {
+      this.tshirts.push(new TShirt(this.makeid(20),this.makeid(10),Math.round(Math.random()*100)));
+    }
 
     this.tshirtsAlphAtZ = [...this.tshirts];
     this.tshirtsAlphAtZ.sort((a: TShirt, b: TShirt) => {
