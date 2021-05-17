@@ -1,9 +1,5 @@
-<div class="col">
-  <div
-    style="cursor: pointer"
-    class="card"
-    [routerLink]="['/product', tshirt._id]"
-  >
+<div class="col myCard">
+  <div class="card" [routerLink]="['/product', tshirt._id]">
     <div class="card-body">
       <img src="assets/tshirtDefault.png" class="card-img-top" alt="..." />
       <h5 class="card-text">{{ tshirt.tshirtName }} (${{ tshirt.price }})</h5>
