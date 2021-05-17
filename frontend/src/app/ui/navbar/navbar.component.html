@@ -18,10 +18,32 @@
           mb-md-0
         "
       >
-        <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
-        <li><a href="#" class="nav-link px-2 text-warning">Store</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white" [routerLink]="['/']"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="nav-link px-2 text-warning"
+            [routerLink]="['/store']"
+            >Store</a
+          >
+        </li>
+        <li>
+          <a
+            href="#"
+            class="nav-link px-2 text-white"
+            [routerLink]="['/contact']"
+            >Contact</a
+          >
+        </li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white" [routerLink]="['/about']"
+            >About</a
+          >
+        </li>
       </ul>
 
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -33,10 +55,38 @@
         />
       </form>
 
-      <div class="text-end">
-        <button type="button" class="btn btn-outline-light me-2">Login</button>
-        <button type="button" class="btn btn-warning">Sign-up</button>
+      <div class="text-end" *ngIf="isLoggedIn; else loginAndRegistration">
+        <button
+          type="button"
+          class="btn btn-outline-light me-2"
+          (click)="logout()"
+        >
+          Logout
+        </button>
       </div>
+      <ng-template #loginAndRegistration>
+        <div class="text-end">
+          <button
+            type="button"
+            class="btn btn-outline-light me-2"
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning"
+            data-bs-toggle="modal"
+            data-bs-target="#registerModal"
+          >
+            Register
+          </button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </header>
+
+<app-login></app-login>
+<app-register></app-register>

@@ -14,6 +14,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
 import { UserComponent } from './pages/user/user.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './ui/modals/login/login.component';
+import { RegisterComponent } from './ui/modals/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,11 +33,16 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     HomeComponent,
     ProductComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

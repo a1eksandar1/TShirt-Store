@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { TShirt } from '../../models/tshirt.model';
 import { SortBy } from './models/store.model';
+import { tshirtsResponse } from './services/models/tshirtsResponse.model';
+import { StoreService } from './services/store.service';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css']
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, OnDestroy {
 
   makeid(length) :string {
     var result           = [];
@@ -20,6 +23,7 @@ export class StoreComponent implements OnInit {
   }
 
   public tshirts: TShirt[] = [];
+  public tshirtsSub: Subscription;
 
   public tshirtsAlphAtZ: TShirt[];
   public tshirtsPriceLtH: TShirt[];
@@ -68,18 +72,27 @@ export class StoreComponent implements OnInit {
     this.sortBy = this.sortBy;
   }
 
-  constructor() { }
+  constructor( private store: StoreService) { }
 
   ngOnInit(): void {
 
-    for (let i = 0; i < 100; i++) {
-      this.tshirts.push(new TShirt(i,this.makeid(10),Math.round(Math.random()*100)));
-    }
+    this.tshirtsSub = this.store.getShirts().subscribe((payload: tshirtsResponse) => {
+      this.tshirts = [...payload.tshirtsAvailable];
+      this.setupStore();
+    });
+
+    
+  }
+
+  setupStore(): void {
+    // for (let i = 0; i < 100; i++) {
+    //   this.tshirts.push(new TShirt(i.toString(),this.makeid(10),Math.round(Math.random()*100)));
+    // }
 
     this.tshirtsAlphAtZ = [...this.tshirts];
     this.tshirtsAlphAtZ.sort((a: TShirt, b: TShirt) => {
-      let nameA: string = a.name.toUpperCase(); // ignore upper and lowercase
-      let nameB: string = b.name.toUpperCase(); // ignore upper and lowercase
+      let nameA: string = a.tshirtName.toUpperCase(); // ignore upper and lowercase
+      let nameB: string = b.tshirtName.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
         return -1;
       }
@@ -100,6 +113,10 @@ export class StoreComponent implements OnInit {
 
     this.tshirts = this.tshirtsAlphAtZ;
     this.showPerPage = this.showPerPage;
+  }
+
+  ngOnDestroy(): void {
+    this.tshirtsSub ? this.tshirtsSub.unsubscribe() : null;
   }
 
 }

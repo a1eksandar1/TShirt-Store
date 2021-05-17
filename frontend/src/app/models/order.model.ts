@@ -1,6 +1,6 @@
 export class Order {
   constructor(
-    public _id: number = 1,
+    public _id: string = "1",
     public tshirtId: number = 1,
     public userId: number = 1,
     public quantity: number = 1,
