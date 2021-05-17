@@ -35,7 +35,7 @@ import { CommentComponent } from './pages/product/comment/comment.component';
     ProductComponent,
     UserComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
     CommentComponent
   ],
   imports: [
