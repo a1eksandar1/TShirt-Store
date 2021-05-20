@@ -20,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommentComponent } from './pages/product/comment/comment.component';
 import { CarouselComponent } from './pages/home/carousel/carousel.component';
-import { CarouselItemComponent } from './pages/home/carousel/carousel-item/carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { CarouselItemComponent } from './pages/home/carousel/carousel-item/carou
     LoginComponent,
     RegisterComponent,
     CommentComponent,
-    CarouselComponent,
-    CarouselItemComponent
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
