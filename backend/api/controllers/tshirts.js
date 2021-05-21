@@ -43,6 +43,7 @@ module.exports.tshirtsGetById = (req, res, next) => {
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
+            popularity: tshirt.popularity + 1,
             comments: tshirt.comments
           },
         });

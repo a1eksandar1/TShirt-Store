@@ -12,6 +12,15 @@ const orderSchema = mongoose.Schema({
     ref: "User",
     required: true,
   },
+  isCustomMade: {
+    type: Boolean,
+    default: false
+  },
+  size: {
+    type: String,
+    enum: ['S', 'M', 'L', 'XL'],
+    required: true
+  },
   quantity: {
     type: Number,
     default: 1,

@@ -13,6 +13,10 @@ const tshirtSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  popularity: {
+    type: Number,
+    default: 0
+  },
   comments: [{
     type: String
   }]

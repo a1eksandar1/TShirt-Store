@@ -17,8 +17,8 @@
 
 | Request | Endpoint            | Description                                            | Request parameters                                                            | Response parameters                                    |
 |---------|---------------------|--------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------|
-| GET     | /tshirts            | Get all tshirts                                       |                                                                               | _id, tshirtName, price, image, comments |
-| GET     | /tshirts/{tshirtId} | Get tshirt with _id=tshirtId                          |                                                                               | _id, tshirtName, price, image, comments |
+| GET     | /tshirts            | Get all tshirts                                       |                                                                               | _id, tshirtName, price, image, popularity, comments |
+| GET     | /tshirts/{tshirtId} | Get tshirt with _id=tshirtId                          |                                                                               | _id, tshirtName, price, image, popularity, comments |
 | POST    | /tshirts            | Add new tshirt to database                             | **form-data** tshirtName, price, image [optional]       | _id, tshirtName, price, image, comments |
 | POST   | /tshirts/{tshirtName} | Add comment on tshirt with tshirtName=tshirtName | tshirtName, comment  | 
 |                                                        |
@@ -30,9 +30,9 @@
 
 | Request | Endpoint          | Description                   | Request parameters                         | Response parameters                             |
 |---------|-------------------|-------------------------------|--------------------------------------------|-------------------------------------------------|
-| GET     | /orders           | Gets all orders               |                                            | _id, tshirtId, userId, quantity, address, phone |
-| GET     | /orders/{orderId} | Gets order with _id=orderId   |                                            | _id, tshirtId, userId, quantity, address, phone |
-| POST    | /orders           | Add new order                 | tshirtId, userId, quantity, address, phone | _id, tshirtId, userId, quantity, address, phone |
+| GET     | /orders           | Gets all orders               |                                            | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
+| GET     | /orders/{orderId} | Gets order with _id=orderId   |                                            | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
+| POST    | /orders           | Add new order                 | tshirtId, userId, isCustomMade, size, quantity, address, phone | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
 | DELETE  | /orders/{orderId} | Delete order with _id=orderId |                                            |                                                 |
 
 
