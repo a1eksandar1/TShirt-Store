@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
   }
 
   getImageSrc(): string {
-    console.log(this.urls.backend + this.tshirt.image);
+    //console.log(this.urls.backend + this.tshirt.image);
     return this.urls.backend + this.tshirt.image;
   }
 
