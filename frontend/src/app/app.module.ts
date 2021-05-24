@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommentComponent } from './pages/product/comment/comment.component';
+import { CarouselComponent } from './pages/home/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CommentComponent } from './pages/product/comment/comment.component';
     UserComponent,
     LoginComponent,
     RegisterComponent,
-    CommentComponent
+    CommentComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
