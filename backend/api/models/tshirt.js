@@ -6,20 +6,6 @@ const tshirtSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  stock: [
-    {
-      size: {
-        // ["S","M","L","XL"]
-        type: String,
-        required: true,
-        enum: ["S", "M", "L", "XL"],
-      },
-      quantity: {
-        type: Number,
-        default: 0,
-      },
-    },
-  ],
   image: {
     type: String,
   },
@@ -27,6 +13,13 @@ const tshirtSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  popularity: {
+    type: Number,
+    default: 0
+  },
+  comments: [{
+    type: String
+  }]
 });
 
 module.exports = mongoose.model("Tshirt", tshirtSchema);
