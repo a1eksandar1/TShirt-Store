@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class ProductService {
 
   private urls = {
-    getProductById: "http://localhost:3000/tshirts/"
+    getProductById: "http://localhost:3000/tshirts"
   }
 
   constructor(private http: HttpClient) { }

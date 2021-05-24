@@ -4,6 +4,10 @@
   <h1>{{p.price}}</h1>
 </ng-container>
 
+<h1>F: {{(product | async)?.price}}</h1>
+
+<h1>FF: {{(product | async).tshirtName}}</h1>
+
 <div class="container-md mx-auto mt-5">
   <div class="p-3 border bg-light">
     <div class="row">

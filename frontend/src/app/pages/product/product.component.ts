@@ -26,10 +26,11 @@ export class ProductComponent implements OnInit {
     this.product = this.activatedRoute.paramMap.pipe(
       switchMap((params : ParamMap) => {
         const productId: string = params.get('_id');
+        console.log(productId);
+
         return this.productService.getProductById(productId);
       })
     );
-
     this.rating = 4;
     this.numberOfRatings = 20;
   }
