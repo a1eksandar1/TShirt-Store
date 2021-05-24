@@ -1,0 +1,14 @@
+<div class="container">
+  <form class="mt-5">
+    <label for="formFileLg" class="form-label"
+      >Choose an image for your shirt.
+    </label>
+    <input
+      class="form-control form-control-lg"
+      id="formFileLg"
+      type="file"
+      (change)="selectFiles($event)"
+    />
+  </form>
+  <canvas #canvas width="500px" height="500px"></canvas>
+</div>
