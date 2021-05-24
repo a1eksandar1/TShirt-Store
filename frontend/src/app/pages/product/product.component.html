@@ -1,18 +1,23 @@
 <!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
+
+<ng-container *ngIf="product | async as p">
+  <h1>{{p.price}}</h1>
+</ng-container>
+
 <div class="container-md mx-auto mt-5">
   <div class="p-3 border bg-light">
     <div class="row">
       <div class="col-md">
         <div class="p-3 border">
           <a href="classic-zoom-in-shit">
-            <img [src]="tshirt.image" class="img-fluid" />
+            <!-- <img [src]="(product | async).image" class="img-fluid" /> -->
           </a>
         </div>
       </div>
 
       <!-- kolko moze da odjebe ovaj flex space between za kolone ja nmg da verujem kolko je to ne moguce ovde, flutter i miss you -->
       <div class="col d-flex flex-column justify-content-between">
-        <h2>{{ tshirt.tshirtName }}</h2>
+        <h2> NAME </h2>
         <hr />
         <div class="col d-flex flex-column justify-content-between">
           <!-- ne mozes da menjas rating ustvari, nisi kupio majcu -->
@@ -56,7 +61,7 @@
 
           <div>
             <span class="label-rating text-muted">Price:</span>
-            <strong class="label-rating mb-3 ms-1">{{ tshirt.price }}$</strong>
+            <strong class="label-rating mb-3 ms-1">PRICE $</strong>
             <!--  ??? proveri ovo -->
           </div>
 

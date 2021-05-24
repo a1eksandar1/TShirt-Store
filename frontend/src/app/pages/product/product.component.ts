@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../services/auth.service';
+import { ProductService } from './services/product.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { TShirt } from 'src/app/models/tshirt.model';
-
-enum TShirtSize {
-  SMALL = 0,
-  MEDIUM = 1,
-  LARGE = 2,
-  EXTRALARGE = 3,
-}
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -15,35 +13,32 @@ enum TShirtSize {
 })
 export class ProductComponent implements OnInit {
 
-  // public _id: number = 1,
-  // public name: string = "Majica",
-  // public price: number = 1,
-  // public image: string = "",
-  // public comments: string = ""  koments trenutno je samo jedan jedini string? Treba da bude niz comment modela
+  public product : Observable<TShirt>;
 
-  TShirtSizeEnum = TShirtSize;
-
-  public tshirt : TShirt;
-  // necemo avalible sizes da dodajemo u model nek bude da su uvek sve velicine dostupne, ali treba dodati u order model
-  public tshirtSize : TShirtSize;
-  //treba dodati rating i numberOfRatings u model
   public rating : number;
   public numberOfRatings : number;
 
-  //keep in mind primam tshirt id kroz url
-  constructor() {
-    this.tshirt = new TShirt();
-    this.tshirtSize = TShirtSize.SMALL;
-    this.rating = 4.5;
+  constructor(
+    private productService : ProductService,
+    private authService : AuthService,
+    private activatedRoute : ActivatedRoute
+  ) {
+    this.product = this.activatedRoute.paramMap.pipe(
+      switchMap((params : ParamMap) => {
+        const productId: string = params.get('_id');
+        return this.productService.getProductById(productId);
+      })
+    );
+
+    this.rating = 4;
     this.numberOfRatings = 20;
-   }
+  }
 
   ngOnInit(): void {
   }
 
 
   setTShirtSize(size : number){
-    this.tshirtSize = TShirtSize[TShirtSize[size]];
   }
 
   changeRating(newRating : number){
