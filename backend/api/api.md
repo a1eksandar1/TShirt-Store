@@ -17,19 +17,22 @@
 
 | Request | Endpoint            | Description                                            | Request parameters                                                            | Response parameters                                    |
 |---------|---------------------|--------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------|
-| GET     | /tshirts            | Get all tshirts                                       |                                                                               | _id, tshirtName, price, stock [{size,quantity}], image |
-| GET     | /tshirts/{tshirtId} | Get tshirt with _id=tshirtId                          |                                                                               | _id, tshirtName, price, stock [{size,quantity}], image |
-| POST    | /tshirts            | Add new tshirt to database                             | **form-data** tshirtName, stock [{size,quantity [optional]}], price, image [optional]       | _id, tshirtName, stock [{size,quantity}], price, image |
+| GET     | /tshirts            | Get all tshirts                                       |                                                                               | _id, tshirtName, price, image, popularity, comments |
+| GET     | /tshirts/{tshirtId} | Get tshirt with _id=tshirtId                          |                                                                               | _id, tshirtName, price, image, popularity, comments |
+| POST    | /tshirts            | Add new tshirt to database                             | **form-data** tshirtName, price, image [optional]       | _id, tshirtName, price, image, comments |
+| POST   | /tshirts/{tshirtName} | Add comment on tshirt with tshirtName=tshirtName | tshirtName, comment  | 
+|                                                        |
 | DELETE  | /tshirts/{tshirtId} | Delete tshirt with _id=tshirtId                        |                                                                               |                                                        |
-| PATCH   | /tshirts/{tshirtId} | Update quantity/size/price of tshirt with _id=tshirtId | tshirtName [optional], stock [{size,quantity}] [optional], price [optional],  |                                                        |
+| PATCH   | /tshirts/{tshirtId} | Update quantity/size/price of tshirt with _id=tshirtId | tshirtName [optional], price [optional],  |                                                        |
+
 
 ### /orders route
 
 | Request | Endpoint          | Description                   | Request parameters                         | Response parameters                             |
 |---------|-------------------|-------------------------------|--------------------------------------------|-------------------------------------------------|
-| GET     | /orders           | Gets all orders               |                                            | _id, tshirtId, userId, quantity, address, phone |
-| GET     | /orders/{orderId} | Gets order with _id=orderId   |                                            | _id, tshirtId, userId, quantity, address, phone |
-| POST    | /orders           | Add new order                 | tshirtId, userId, quantity, address, phone | _id, tshirtId, userId, quantity, address, phone |
+| GET     | /orders           | Gets all orders               |                                            | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
+| GET     | /orders/{orderId} | Gets order with _id=orderId   |                                            | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
+| POST    | /orders           | Add new order                 | tshirtId, userId, isCustomMade, size, quantity, address, phone | _id, tshirtId, userId, isCustomMade, size, quantity, address, phone |
 | DELETE  | /orders/{orderId} | Delete order with _id=orderId |                                            |                                                 |
 
 

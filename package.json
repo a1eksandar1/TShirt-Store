@@ -1,0 +1,19 @@
+{
+  "name": "21-prodavnicamajica",
+  "version": "1.0.0",
+  "description": "E-commerce sajt za prodaju majica sa custom printovima",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/matfpveb/projekti/2020-2021/21-ProdavnicaMajica.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/matfpveb/projekti/2020-2021/21-ProdavnicaMajica/issues"
+  },
+  "homepage": "https://gitlab.com/matfpveb/projekti/2020-2021/21-ProdavnicaMajica#readme"
+}
