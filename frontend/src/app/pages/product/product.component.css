@@ -1,0 +1,17 @@
+.rate{
+  color: orange;
+}
+
+/* * { border: 1px solid black; } */
+
+.primaryButton
+{
+  background-color:orange;
+}
+
+.secondaryButton
+{
+  border-color:black;
+  color:black;
+}
+

@@ -1,0 +1,227 @@
+<!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
+<div class="container-md mx-auto mt-5">
+  <div class="p-3 border bg-light">
+    <div class="row">
+      <div class="col-md">
+        <div class="p-3 border">
+          <a href="classic-zoom-in-shit">
+            <img [src]="tshirt.image" class="img-fluid" />
+          </a>
+        </div>
+      </div>
+
+      <!-- kolko moze da odjebe ovaj flex space between za kolone ja nmg da verujem kolko je to ne moguce ovde, flutter i miss you -->
+      <div class="col d-flex flex-column justify-content-between">
+        <h2>{{ tshirt.tshirtName }}</h2>
+        <hr />
+        <div class="col d-flex flex-column justify-content-between">
+          <!-- ne mozes da menjas rating ustvari, nisi kupio majcu -->
+          <div class="d-flex align-items-center mb-3">
+            <span
+              class="fa fa-star fa-2x me-1"
+              [class.rate]="rating >= 1"
+            ></span>
+            <span
+              class="fa fa-star fa-2x me-1"
+              [class.rate]="rating >= 2"
+            ></span>
+            <span
+              class="fa fa-star fa-2x me-1"
+              [class.rate]="rating >= 3"
+            ></span>
+            <span
+              class="fa fa-star fa-2x me-1"
+              [class.rate]="rating >= 4"
+            ></span>
+            <span
+              class="fa fa-star fa-2x me-3"
+              [class.rate]="rating == 5"
+            ></span>
+            <span class="align-middle">
+              {{ numberOfRatings }} people rated this product. The people have
+              spoken!
+            </span>
+          </div>
+
+          <div>
+            <h5 class="list-heading">Short description</h5>
+            <!--moze da pise isto na svakoj macji, da ne cimamo sad i to u svaki product -->
+            <ul>
+              <li>High quality fiber</li>
+              <li>Made in Serbia</li>
+              <li>Feels super nice</li>
+              <li>w/e</li>
+            </ul>
+          </div>
+
+          <div>
+            <span class="label-rating text-muted">Price:</span>
+            <strong class="label-rating mb-3 ms-1">{{ tshirt.price }}$</strong>
+            <!--  ??? proveri ovo -->
+          </div>
+
+          <!-- ovde ne moze da se promeni boja aktivnog buttona jer je frontend do jaja -->
+          <!-- jedna opcija po meni najlaksa jer sam se vec 2 sata drkao sa svim i svacim:  -->
+          <!-- https://getbootstrap.com/docs/3.4/customize/ -->
+          <div>
+            <span class="label-rating mr-3 text-muted">Avalible sizes:</span>
+            <div class="d-flex justify-content-start mb-3">
+              <div class="btn-group" data-toggle="buttons" role="group">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="small"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="small"
+                  (click)="setTShirtSize(0)"
+                  >Small</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="medium"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="medium"
+                  (click)="setTShirtSize(1)"
+                  >Medium</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="large"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="large"
+                  (click)="setTShirtSize(2)"
+                  >Large</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="extra_large"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="extra_large"
+                  (click)="setTShirtSize(3)"
+                  >Extra large</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-start mb-3">
+            <button type="button" class="btn primaryButton me-2">
+              Buy now
+            </button>
+            <button type="button" class="btn secondaryButton">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
+
+<!-- BULLSHITTING SECTION -------------------------- ----------------------------- -------------------- -->
+<div class="container-md mx-auto">
+  <article class="card mt-5">
+    <div class="card-body">
+      <div class="row">
+        <aside class="col-md-6">
+          <h5>Parameters</h5>
+          <dl class="row">
+            <dt class="col-sm-3">Display</dt>
+            <dd class="col-sm-9">13.3-inch LED-backlit display with IPS</dd>
+
+            <dt class="col-sm-3">Processor</dt>
+            <dd class="col-sm-9">2.3GHz dual-core Intel Core i5</dd>
+
+            <dt class="col-sm-3">Camera</dt>
+            <dd class="col-sm-9">720p FaceTime HD camera</dd>
+
+            <dt class="col-sm-3">Memory</dt>
+            <dd class="col-sm-9">8 GB RAM or 16 GB RAM</dd>
+
+            <dt class="col-sm-3">Graphics</dt>
+            <dd class="col-sm-9">Intel Iris Plus Graphics 640</dd>
+          </dl>
+        </aside>
+        <aside class="col-md-6">
+          <h5>Features</h5>
+          <ul class="list-check">
+            <li>Best performance of battery</li>
+            <li>5 years warranty for this product</li>
+            <li>Amazing features and high quality</li>
+            <li>Best performance of battery</li>
+            <li>5 years warranty for this product</li>
+          </ul>
+        </aside>
+      </div>
+      <hr />
+      <p>
+        Genericni tekst kako mi pravimo najbolje proizvode Lorem ipsum dolor sit
+        amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      </p>
+    </div>
+  </article>
+</div>
+<!-- BULLSHITTING SECTION END -------------------------- ----------------------------- -------------------- -->
+
+<!-- COMMENT SECTION -------------------------- ----------------------------- ----------------------------- -->
+<div class="container-md mx-auto my-5">
+  <app-comment></app-comment>
+  <app-comment></app-comment>
+
+  <div class="row p-3 border-top bg-light">
+    <div class="col-1">
+      <a href="#non">
+        <img src="\assets\userIconDefault.png" alt="" class="img-fluid" />
+      </a>
+    </div>
+
+    <div class="col-11">
+      <div class="row p-3 border bg-white mb-2">
+        <!-- disabled ako user nije ulogovan ili moze da se postavi komentar a da samo bude anon i pepe kao slika -->
+        <textarea
+          class="form-control"
+          type="text"
+          placeholder="Add a new comment"
+          rows="1"
+        ></textarea>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-outline-secondary" type="button">
+          Post
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMENT SECTION END -------------------------- ----------------------------- -------------------- -->
+</div>
