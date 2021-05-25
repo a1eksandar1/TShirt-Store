@@ -1,5 +1,5 @@
 .msg-right{
-  background:#f7f7f7;
+  background:lightgray;
   padding:10px;
   text-align:right;
   margin:5px;
@@ -35,5 +35,5 @@
   position: relative;
   border-style: solid;
   border-width: 20px 20px 00px 0px;
-  border-color: #f7f7f7 transparent transparent transparent;
+  border-color: lightgray transparent transparent transparent;
 }

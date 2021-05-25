@@ -30,7 +30,7 @@ export class ProductComponent implements OnInit {
         return this.productService.getProductById(productId);
       })
     );
-    this.rating = 4;
+    this.rating = 3.3;
     this.numberOfRatings = 20;
   }
 

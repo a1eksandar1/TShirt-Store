@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
-import { JwtService } from 'src/app/services/common/jwt.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,6 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
-    private jwtService: JwtService
   ) { }
 
   public getProductById(productId : string) : Observable<{tshirt : TShirt}>{
@@ -28,6 +26,7 @@ export class ProductService {
         return null;
       }),
       map((response: {tshirt : TShirt}) => {
+        console.log(response);
       return response;
     }));
   }

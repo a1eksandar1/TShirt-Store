@@ -20,7 +20,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommentComponent } from './pages/product/comment/comment.component';
 import { CarouselComponent } from './pages/home/carousel/carousel.component';
-import { ComSectionComponent } from './pages/product/com-section/com-section.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { ComSectionComponent } from './pages/product/com-section/com-section.com
     LoginComponent,
     RegisterComponent,
     CommentComponent,
-    CarouselComponent,
-    ComSectionComponent
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

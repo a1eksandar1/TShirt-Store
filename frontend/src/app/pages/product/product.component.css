@@ -1,5 +1,9 @@
-.rate{
+.rated{
   color: orange;
+}
+
+.unrated{
+  color: gray;
 }
 
 /* * { border: 1px solid black; } */
@@ -14,4 +18,3 @@
   border-color:black;
   color:black;
 }
-

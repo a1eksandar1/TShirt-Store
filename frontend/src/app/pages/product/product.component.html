@@ -1,47 +1,44 @@
 <!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
 <ng-container *ngIf="(product | async) as p">
 
-  <h2> {{p.tshirt.tshirtName}} </h2>
-
-<div class="container-md mx-auto mt-5" >
+<div class="col-md-8 mx-auto mt-5" >
   <div class="p-3 border bg-light">
     <div class="row">
+
       <div class="col-md">
         <div class="p-3 border">
-          <a href="classic-zoom-in-shit">
-            <img [src]="p.image" class="img-fluid" />
-          </a>
+          <img src="assets/tshirtDefault.png" class="img-fluid" />
+
         </div>
       </div>
 
       <div class="col d-flex flex-column justify-content-between">
-        <h2> {{p.tshirtName}} </h2>
+        <h2> {{p.tshirt.tshirtName}} </h2>
         <hr />
         <div class="col d-flex flex-column justify-content-between">
           <div class="d-flex align-items-center mb-3">
             <span
               class="fa fa-star fa-2x me-1"
-              [class.rate]="rating >= 1"
+              [ngClass]="rating >= 1 ? 'rated': 'unrated' "
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [class.rate]="rating >= 2"
+              [ngClass]="rating >= 2 ? 'rated': 'unrated' "
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [class.rate]="rating >= 3"
+              [ngClass]="rating >= 3 ? 'rated': 'unrated' "
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [class.rate]="rating >= 4"
+              [ngClass]="rating >= 4 ? 'rated': 'unrated' "
             ></span>
             <span
               class="fa fa-star fa-2x me-3"
-              [class.rate]="rating == 5"
+              [ngClass]="rating >= 5 ? 'rated': 'unrated' "
             ></span>
             <span class="align-middle">
-              {{ numberOfRatings }} people rated this product. The people have
-              spoken!
+              {{ numberOfRatings }} people rated this product.
             </span>
           </div>
 
@@ -51,13 +48,12 @@
               <li>High quality fiber</li>
               <li>Made in Serbia</li>
               <li>Feels super nice</li>
-              <li>w/e</li>
             </ul>
           </div>
 
           <div>
             <span class="label-rating text-muted">Price:</span>
-            <strong class="label-rating mb-3 ms-1">{{p.price}} $</strong>
+            <strong class="label-rating ps-2" style="font-size: 25px">{{p.tshirt.price}}$</strong>
           </div>
 
           <div>
@@ -73,7 +69,7 @@
                   checked
                 />
                 <label
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-secondary"
                   for="small"
                   (click)="setTShirtSize(0)"
                   >Small</label
@@ -87,7 +83,7 @@
                   autocomplete="off"
                 />
                 <label
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-secondary"
                   for="medium"
                   (click)="setTShirtSize(1)"
                   >Medium</label
@@ -101,7 +97,7 @@
                   autocomplete="off"
                 />
                 <label
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-secondary"
                   for="large"
                   (click)="setTShirtSize(2)"
                   >Large</label
@@ -115,7 +111,7 @@
                   autocomplete="off"
                 />
                 <label
-                  class="btn btn-outline-primary"
+                  class="btn btn-outline-secondary"
                   for="extra_large"
                   (click)="setTShirtSize(3)"
                   >Extra large</label
@@ -128,7 +124,7 @@
             <button type="button" class="btn primaryButton me-2">
               Buy now
             </button>
-            <button type="button" class="btn secondaryButton">
+            <button type="button" class="btn btn-outline-secondary">
               Add to cart
             </button>
           </div>
@@ -140,7 +136,6 @@
 <!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
 
 <!-- COMMENT SECTION -------------------------- ----------------------------- ----------------------------- -->
-  <!-- kad se klikne na post comment on treba da doda novi komentar u listu komentara za trenutnu majcu -->
   <div class="col-md-6 mx-auto mt-5">
     <div class="row">
       <app-comment *ngFor="let comment of p.tshirt.comments; let i = index" [commentText]="comment" [alignRight]="i%2"></app-comment>
@@ -153,8 +148,6 @@
       </div>
     </div>
   </div>
-  <!-- registerUser(p.tshirt.tshirtName, commentText.value) -->
-
 <!-- COMMENT SECTION END -------------------------- ----------------------------- -------------------- -->
 
 
