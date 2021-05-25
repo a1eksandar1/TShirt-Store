@@ -114,7 +114,7 @@ module.exports.tshirtsPost = (req, res, next) => {
 
 module.exports.tshirtsAddRating = (req, res, next) => {
   const id = req.params.tshirtId;
-  const rating= req.params.rating;
+  const rating= req.body.rating;
 
 
   Tshirt.updateOne(
