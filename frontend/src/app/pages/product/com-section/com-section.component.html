@@ -1,0 +1,25 @@
+<!-- <div class="frame">
+  <ul>
+    <app-comment *ngFor="let comment of comments"></app-comment>
+    <li style="width:70%">
+      <div class="msj macro">
+          <div class="text text-l">
+              <p>kako je sad</p>
+          </div>
+      </div>
+    </li>
+  </ul>
+  <div>
+      <div class="msj-rta macro" style="margin:auto">
+          <div class="text text-r" style="background:whitesmoke !important">
+              <input class="mytext" placeholder="Type a message"/>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+<div class="container">
+	<div class="container-md">
+      <app-comment *ngFor="let comment of comments; let i = index" [commentText]="comment" [alignRight]="i%2"></app-comment>
+	</div>
+</div>
