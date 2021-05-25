@@ -14,10 +14,7 @@ import { Observable, of } from 'rxjs';
 export class ProductComponent implements OnInit {
 
   public product : Observable<{tshirt : TShirt}>;
-
-  public rating : number;
-  public numberOfRatings : number;
-
+  private productId : string;
 
   constructor(
     private productService : ProductService,
@@ -26,30 +23,29 @@ export class ProductComponent implements OnInit {
   ) {
     this.product = this.activatedRoute.paramMap.pipe(
       switchMap((params : ParamMap) => {
-        const productId: string = params.get('_id');
-        return this.productService.getProductById(productId);
+        this.productId = params.get('_id');
+        console.log(this.productId);
+        return this.productService.getProductById(this.productId);
       })
     );
-    this.rating = 3.3;
-    this.numberOfRatings = 20;
   }
 
   ngOnInit(): void {
   }
 
+  changeRating(userRating : number){
 
-  setTShirtSize(size : number){
+    this.productService.rateProduct(1, this.productId);
   }
 
-  changeRating(newRating : number){
-    this.rating = newRating;
+  setTShirtSize(size : number){
   }
 
   simpleFunction(tshirtName: string, comment: string){
     if(comment.trim().length == 0){
       return;
     }
-    this.productService.postComment(tshirtName, comment).subscribe();
+    this.productService.postComment(tshirtName, comment);
   }
 
 }

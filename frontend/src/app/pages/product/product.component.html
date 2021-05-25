@@ -19,26 +19,31 @@
           <div class="d-flex align-items-center mb-3">
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="rating >= 1 ? 'rated': 'unrated' "
+              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 1 ? 'rated': 'unrated' "
+              (click)="changeRating(1)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="rating >= 2 ? 'rated': 'unrated' "
+              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 2 ? 'rated': 'unrated' "
+              (click)="changeRating(2)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="rating >= 3 ? 'rated': 'unrated' "
+              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 3 ? 'rated': 'unrated' "
+              (click)="changeRating(3)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="rating >= 4 ? 'rated': 'unrated' "
+              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 4 ? 'rated': 'unrated' "
+              (click)="changeRating(4)"
             ></span>
             <span
               class="fa fa-star fa-2x me-3"
-              [ngClass]="rating >= 5 ? 'rated': 'unrated' "
+              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 5 ? 'rated': 'unrated' "
+              (click)="changeRating(5)"
             ></span>
             <span class="align-middle">
-              {{ numberOfRatings }} people rated this product.
+              {{ p.tshirt.numberOfRatings }} {{p.tshirt.numberOfRatings == 1 ? "person" : "people"}} rated this product.
             </span>
           </div>
 
@@ -57,7 +62,7 @@
           </div>
 
           <div>
-            <span class="label-rating mr-3 text-muted">Avalible sizes:</span>
+            <span class="label-rating mr-3 text-muted">Available sizes:</span>
             <div class="d-flex justify-content-start mb-3">
               <div class="btn-group" data-toggle="buttons" role="group">
                 <input
@@ -123,7 +128,7 @@
 
 
           <div class="d-flex justify-content-start mb-3">
-            <button type="button" class="btn btn-warning me-2">
+            <button type="button" class="btn primaryButton me-2">
               Buy now
             </button>
             <button type="button" class="btn btn-outline-secondary">

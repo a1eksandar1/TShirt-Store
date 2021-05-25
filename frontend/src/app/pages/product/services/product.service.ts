@@ -11,7 +11,8 @@ export class ProductService {
 
   private urls = {
     getProductById: "http://localhost:3000/tshirts",
-    postComment: "http://localhost:3000/tshirts"
+    postComment: "http://localhost:3000/tshirts",
+    rateProduct: "http://localhost:3000/tshirts",
   }
 
   constructor(
@@ -31,17 +32,17 @@ export class ProductService {
     }));
   }
 
-  public postComment(tshirtName: string, comment: string) : Observable<{ok : boolean}>{
-    const body = { tshirtName, comment};
-    return this.http.post<{ message: string }>(`${this.urls.postComment}/${tshirtName}`, body).pipe(
-      catchError((error: HttpErrorResponse) => {
-        const serverError: { message: string; status: number; stack: string } = error.error;
-        window.alert(`There was an error: ${serverError.message}. Server returned code: ${serverError.status}`);
-        return null;
-      }),
-      map((response: {ok : boolean}) => {
-      return response;
-    }));
+  public postComment(tshirtName: string, comment: string){
+    this.http.post<{ message: string }>(`${this.urls.postComment}/${tshirtName}`,  {
+      tshirtName : tshirtName,
+      comment : comment
+    }).toPromise().then((data : any) => {console.log(data)});
+  }
+
+  public rateProduct(rating: number, productId : string){
+    this.http.post<{ message: string }>(`${this.urls.rateProduct}/${productId}`,  {
+      rating : rating.toString()
+    }).toPromise().then((data : any) => {console.log(data)});
   }
 
 }

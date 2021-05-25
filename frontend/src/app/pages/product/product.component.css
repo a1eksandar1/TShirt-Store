@@ -13,12 +13,6 @@
   background-color:orange;
 }
 
-.secondaryButton
-{
-  border-color:black;
-  color:black;
-}
-
 .btn-outline-warning:hover {
   background-color: black;
   color: #f0ad4e;
