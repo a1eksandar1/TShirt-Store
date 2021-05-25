@@ -15,6 +15,8 @@ module.exports.tshirtsGetAll = (req, res, next) => {
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
+            ratingSum: tshirt.ratingSum,
+            numberOfRatings: tshirt.numberOfRatings,
             comments: tshirt.comments
           };
         }),
@@ -43,6 +45,8 @@ module.exports.tshirtsGetById = (req, res, next) => {
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
+            ratingSum: tshirt.ratingSum,
+            numberOfRatings: tshirt.numberOfRatings,
             popularity: tshirt.popularity + 1,
             comments: tshirt.comments
           },
