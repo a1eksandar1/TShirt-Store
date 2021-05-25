@@ -110,6 +110,43 @@ module.exports.tshirtsPost = (req, res, next) => {
     });
 };
 
+
+
+module.exports.tshirtsAddRating = (req, res, next) => {
+  const id = req.params.tshirtId;
+  const rating= req.params.rating;
+
+
+  Tshirt.updateOne(
+    { _id: id },
+    { $inc: { ratingSum: rating, numberOfRatings: 1 } }
+  )
+    .exec()
+    .then((result) => {
+        console.log(result);
+      if (result.nModified == 0) {
+        res.status(404).json({
+          message: "No tshirt with given id",
+        });
+      } else {
+        // console.log(result);
+        res.status(200).json({
+          message: "Rating added",
+          check: {
+            type: "GET",
+            url: "http://localhost:3000/tshirts/" + id,
+          },
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
 module.exports.tshirtsPostComment = (req, res, next) => {
   const name = req.params.tshirtName;
   const comment = req.body.comment;

@@ -31,6 +31,12 @@ router.post(
 );
 
 router.post(
+  "/:tshirtId/addRating",
+  checkAuth,
+  tshirtsController.tshirtsAddRating
+);
+
+router.post(
   "/:tshirtName",
   checkAuth,
   tshirtsController.tshirtsPostComment
