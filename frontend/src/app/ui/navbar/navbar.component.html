@@ -19,7 +19,12 @@
         "
       >
         <li>
-          <a href="#" class="nav-link px-2 text-white" [routerLink]="['/']"
+          <a
+            href="#"
+            class="nav-link px-2 text-white"
+            [routerLink]="['/']"
+            routerLinkActive="fw-bolder"
+            [routerLinkActiveOptions]="{ exact: true }"
             >Home</a
           >
         </li>
@@ -28,6 +33,7 @@
             href="#"
             class="nav-link px-2 text-warning"
             [routerLink]="['/store']"
+            routerLinkActive="fw-bolder"
             >Store</a
           >
         </li>
@@ -36,11 +42,16 @@
             href="#"
             class="nav-link px-2 text-white"
             [routerLink]="['/contact']"
+            routerLinkActive="fw-bolder"
             >Contact</a
           >
         </li>
         <li>
-          <a href="#" class="nav-link px-2 text-white" [routerLink]="['/about']"
+          <a
+            href="#"
+            class="nav-link px-2 text-white"
+            [routerLink]="['/about']"
+            routerLinkActive="fw-bolder"
             >About</a
           >
         </li>

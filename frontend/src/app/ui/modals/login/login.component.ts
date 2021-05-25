@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  @ViewChild('closeModal') closeModal: ElementRef
+  @ViewChild('closeModal') closeModal: ElementRef;
   loginForm: FormGroup;
   loginSub: Subscription;
 
