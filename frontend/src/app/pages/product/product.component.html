@@ -19,31 +19,31 @@
           <div class="d-flex align-items-center mb-3">
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 1 ? 'rated': 'unrated' "
+              [ngClass]="(tshirt.ratingSum / tshirt.numberOfRatings) >= 1 ? 'rated': 'unrated' "
               (click)="changeRating(1)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 2 ? 'rated': 'unrated' "
+              [ngClass]="(tshirt.ratingSum / tshirt.numberOfRatings) >= 2 ? 'rated': 'unrated' "
               (click)="changeRating(2)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 3 ? 'rated': 'unrated' "
+              [ngClass]="(tshirt.ratingSum / tshirt.numberOfRatings) >= 3 ? 'rated': 'unrated' "
               (click)="changeRating(3)"
             ></span>
             <span
               class="fa fa-star fa-2x me-1"
-              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 4 ? 'rated': 'unrated' "
+              [ngClass]="(tshirt.ratingSum / tshirt.numberOfRatings) >= 4 ? 'rated': 'unrated' "
               (click)="changeRating(4)"
             ></span>
             <span
               class="fa fa-star fa-2x me-3"
-              [ngClass]="(p.tshirt.ratingSum / p.tshirt.numberOfRatings) >= 5 ? 'rated': 'unrated' "
+              [ngClass]="(tshirt.ratingSum / tshirt.numberOfRatings) >= 5 ? 'rated': 'unrated' "
               (click)="changeRating(5)"
             ></span>
             <span class="align-middle">
-              {{ p.tshirt.numberOfRatings }} {{p.tshirt.numberOfRatings == 1 ? "person" : "people"}} rated this product.
+              {{ tshirt.numberOfRatings }} {{tshirt.numberOfRatings == 1 ? "person" : "people"}} rated this product.
             </span>
           </div>
 
@@ -141,21 +141,21 @@
   </div>
 </div>
 <!-- PRODUCT DISPLAY SECTION END -------------------------- ----------------------------- -------------------- -->
-
 <!-- COMMENT SECTION -------------------------- ----------------------------- ----------------------------- -->
   <div class="col-md-6 mx-auto mt-5">
     <div class="row">
-      <app-comment *ngFor="let comment of p.tshirt.comments; let i = index" [commentText]="comment" [alignRight]="i%2"></app-comment>
+      <app-comment *ngFor="let comment of tshirt.comments; let i = index" [commentText]="comment" [alignRight]="i%2"></app-comment>
     </div>
 
     <div class="p-3">
-      <textarea class="form-control ml-1 textarea" #commentText></textarea>
+      <textarea class="form-control ml-1 textarea" type="text" [(ngModel)]="commentTextArea"></textarea>
       <div class="col-xs text-right p-2">
-        <button class="btn btn-outline-secondary btn-sm mr-2" type="button" (click)="simpleFunction(p.tshirt.tshirtName, commentText.value)">Post comment</button>
+        <button class="btn btn-outline-secondary btn-sm mr-2" type="button" (click)="newComment(p.tshirt.tshirtName, commentTextArea)">Post comment</button>
       </div>
     </div>
   </div>
 <!-- COMMENT SECTION END -------------------------- ----------------------------- -------------------- -->
+
 
 
 </ng-container>

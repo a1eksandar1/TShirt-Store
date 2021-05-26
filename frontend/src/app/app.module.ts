@@ -8,6 +8,7 @@ import { CardComponent } from './pages/store/card/card.component';
 import { FilterComponent } from './pages/store/filter/filter.component';
 import { AboutComponent } from './pages/about/about.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { CartItemComponent } from './pages/cart/cart-item/cart-item.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductComponent } from './pages/product/product.component';
@@ -21,6 +22,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { CommentComponent } from './pages/product/comment/comment.component';
 import { CarouselComponent } from './pages/home/carousel/carousel.component';
 import { DesignComponent } from './pages/design/design.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastComponent } from './ui/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { DesignComponent } from './pages/design/design.component';
     FilterComponent,
     AboutComponent,
     CartComponent,
+    CartItemComponent,
     ContactComponent,
     HomeComponent,
     ProductComponent,
@@ -40,14 +44,16 @@ import { DesignComponent } from './pages/design/design.component';
     RegisterComponent,
     CommentComponent,
     CarouselComponent,
-    DesignComponent
+    DesignComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

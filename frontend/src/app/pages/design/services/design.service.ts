@@ -20,9 +20,9 @@ export class DesignService {
     const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
 
     const req: HttpRequest<FormData> = new HttpRequest<FormData>(
-      "POST", 
-      this.urls.postTShirt, 
-      formData, 
+      "POST",
+      this.urls.postTShirt,
+      formData,
       {
         headers,
         reportProgress: false

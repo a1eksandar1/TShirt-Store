@@ -4,6 +4,8 @@ export class TShirt {
     public tshirtName: string = "Majica",
     public price: number = 1,
     public image: string = "",
-    public comments: string[] = []
+    public comments: string[] = [],
+    public ratingSum: number,
+    public numberOfRatings: number
     ){}
 }
