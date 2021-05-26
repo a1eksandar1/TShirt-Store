@@ -1,11 +1,5 @@
-import { Order } from './../../../models/order.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ProductService } from '../../product/services/product.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { TShirt } from 'src/app/models/tshirt.model';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: '[app-cart-item]',
@@ -14,30 +8,42 @@ import { switchMap } from 'rxjs/operators';
 })
 export class CartItemComponent implements OnInit {
 
-  @Input()
-  public order: Order;
+  @Output() delete: EventEmitter<number> = new EventEmitter();
 
-  public product : Observable<{tshirt : TShirt}>;
-  private productId : string;
+  @Input()
+  public product: any;
+  @Input()
+  public index : number;
+
+  public imgSrc: string;
+  public price: number;
+  public tshirtName: string;
 
   constructor(
     private productService : ProductService,
-    private authService : AuthService,
-    private activatedRoute : ActivatedRoute,) {
-      // this.product = this.activatedRoute.paramMap.pipe(
-      //   switchMap((params : ParamMap) => {
-      //     this.productId = params.get('_id');
-      //     console.log(this.productId);
-      //     return this.productService.getProductById(this.productId);
-      //   })
-      // );
-    }
+  ) {}
 
   ngOnInit(): void {
+    this.productService.getProductById(this.product["tshirtId"]).subscribe(
+      (val) => {
+        console.log(val);
+        this.imgSrc = val.tshirt.image; // .substr(5);
+        this.price = val.tshirt.price;
+        this.tshirtName = val.tshirt.tshirtName;
+
+      },
+      (error) => {console.log(error)}
+    );
   }
 
   test(){
     console.log("ok");
+    console.log(this.product);
+  }
+
+  deleteMe() {
+    console.log("here should be the action");
+    this.delete.emit(this.index);
   }
 
 }

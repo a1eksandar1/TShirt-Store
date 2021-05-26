@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
   public addProductToCart(){
 
     if(!this.authService.isLoggedIn()){
-      this.errorToast("You must be logged in to use this feature.");
+      this.toastService.errorToast("You must be logged in to use this feature.");
       return;
     }
 
@@ -56,13 +56,14 @@ export class ProductComponent implements OnInit {
 
     if(this.localStorageService.getItem(userID) == null){
       console.log("nema ordere");
+      console.log(JSON.stringify(cartItem));
       this.localStorageService.setItem(userID, JSON.stringify(cartItem));
     }else{
       console.log("puna korpa");
       let previousItems = this.localStorageService.getItem(userID);
       this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
     }
-    this.successToast("Item added to cart!");
+    this.toastService.successToast("Item added to cart!");
   }
 
   changeRating(userRating : number){
@@ -72,10 +73,10 @@ export class ProductComponent implements OnInit {
       (val)=>{
         this.tshirt.numberOfRatings++;
         this.tshirt.ratingSum += userRating;
-        this.successToast('Your rating has been submitted!');
+        this.toastService.successToast('Your rating has been submitted!');
       },
       (error) => {
-        this.errorToast('You must be logged in to leave a rating.');
+        this.toastService.errorToast('You must be logged in to leave a rating.');
       }
     );
   }
@@ -88,29 +89,13 @@ export class ProductComponent implements OnInit {
     obs.subscribe(
       (val)=>{
         this.tshirt.comments.push(comment);
-        this.successToast('Posted!');
+        this.toastService.successToast('Posted!');
         this.commentTextArea = " ";
       },
       (error) => {
-        this.errorToast('You must be logged in to comment');
+        this.toastService.errorToast('You must be logged in to comment');
       }
     );
-  }
-
-  successToast(message : string){
-    this.toastService.show(message, {
-      classname: 'bg-success text-light',
-      delay: 2000 ,
-      autohide: true,
-    });
-  }
-
-  errorToast(message : string){
-    this.toastService.show(message, {
-      classname: 'bg-danger text-light',
-      delay: 2000 ,
-      autohide: true,
-    });
   }
 
   setTShirtSize(size : number){
