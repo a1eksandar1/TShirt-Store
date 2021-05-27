@@ -39,15 +39,18 @@ module.exports.tshirtsGetById = (req, res, next) => {
       console.log(tshirt);
 
       if (tshirt) {
+        tshirt.update(
+          {$inc: {popularity}}
+        );
         res.status(200).json({
           tshirt: {
             _id: tshirt._id,
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
-            ratingSum: tshirt.ratingSum,
+            popularity: tshirt.popularity,
             numberOfRatings: tshirt.numberOfRatings,
-            popularity: tshirt.popularity + 1,
+            ratingSum: tshirt.ratingSum,
             comments: tshirt.comments
           },
         });
