@@ -16,6 +16,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
   public canvasSize: number = 1000;
   public context: CanvasRenderingContext2D;
 
+  private selectedColor: string = "/assets/defaultTshirts/tshirtDefault.png";
+  
   private selectedFile: File;
   private selectedImageSource;
   private doneImage: Blob;
@@ -46,11 +48,14 @@ export class DesignComponent implements OnInit, AfterViewInit {
   startCanvas(): void {
     this.context = this.myCanvas.nativeElement.getContext('2d');
     let shirtImg = new Image();
-    shirtImg.src = "assets/tshirtDefault.png";
+    shirtImg.src = this.selectedColor;
     shirtImg.onload = () => {
       this.myCanvas.nativeElement.width = this.canvasSize;
       this.myCanvas.nativeElement.height = this.canvasSize;
       this.context.drawImage(shirtImg,0,0,this.canvasSize,this.canvasSize);
+      if(typeof this.selectedImageSource == "undefined") {
+        return;
+      }
       let customImg = new Image();
       customImg.crossOrigin = "anonymous";
       customImg.src = this.selectedImageSource;
@@ -95,6 +100,11 @@ export class DesignComponent implements OnInit, AfterViewInit {
 
   isAdmin(): boolean {
     return this.auth.isAdmin();
+  }
+
+  pickColor(event: Event) {
+    this.selectedColor = (event.target as HTMLImageElement).src;
+    this.startCanvas();
   }
 
 }

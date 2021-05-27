@@ -41,7 +41,7 @@ export class DesignService {
       {
         let id = response.body["addedTshirt"]["_id"];
         this.cart.addProductToCart(id,1,1);
-        console.log(id);
+        //console.log(id);
         this.router.navigateByUrl("/cart");
       }
     });

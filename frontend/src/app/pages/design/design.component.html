@@ -4,6 +4,44 @@
   </div>
   <div *ngIf="loggedIn(); else mustlogin">
     <form class="mt-5" [formGroup]="designForm" (ngSubmit)="createTShirt()">
+      <div class="row">
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefault.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefaultBlack.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefaultBlue.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefaultGreen.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefaultRed.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+        <img
+          class="col-2"
+          src="assets/defaultTshirts/tshirtDefaultYellow.png"
+          alt=""
+          (click)="pickColor($event)"
+        />
+      </div>
       <label for="formFileLg" class="form-label"
         >Choose an image for your shirt.
       </label>
