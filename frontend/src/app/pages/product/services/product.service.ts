@@ -1,5 +1,5 @@
 import { TShirt } from './../../../models/tshirt.model';
-import { Observable, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
@@ -18,6 +18,7 @@ export class ProductService {
     postComment: "http://localhost:3000/tshirts",
     rateProduct: "http://localhost:3000/tshirts",
     backend: "http://localhost:3000/",
+    postOrder: "http://localhost:3000/orders/"
   }
 
   constructor(
@@ -60,6 +61,38 @@ export class ProductService {
       this.getRequestOptionsWithAuth()
     ).pipe(
       catchError((error: HttpErrorResponse) => {return null;}),
+    );
+  }
+
+  public placeAnOrder(
+    tshirtId : string,
+    userId : string,
+    isCustomMade : boolean,
+    size : number,
+    quantity : number ,
+    address : string,
+    phone : string
+  ){
+    const sizeToStr = ['S', 'M', 'L', 'XL'];
+
+    const myFormData = {
+      tshirtId : tshirtId,
+      userId : userId,
+      isCustomMade : isCustomMade,
+      size : sizeToStr[size],
+      quantity : quantity,
+      address : address,
+      phone : phone
+    };
+
+    console.log(myFormData);
+
+    return this.http.post(
+      `${this.urls.postOrder}`,
+      myFormData,
+      this.getRequestOptionsWithAuth()
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {return null}),
     );
   }
 
