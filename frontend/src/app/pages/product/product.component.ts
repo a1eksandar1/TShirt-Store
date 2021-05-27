@@ -2,7 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { TShirt } from 'src/app/models/tshirt.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, share } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/ui/toast/service/toast.service';
 import { ProductService } from './services/product.service';
@@ -37,7 +37,8 @@ export class ProductComponent implements OnInit {
       switchMap((params : ParamMap) => {
         this.productId = params.get('_id');
         return this.productService.getProductById(this.productId);
-      })
+      }),
+      share()
     )
     this.product.subscribe((val) => {
       this.tshirt = val.tshirt;
