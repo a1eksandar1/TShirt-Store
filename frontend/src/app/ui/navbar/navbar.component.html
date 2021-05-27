@@ -8,7 +8,7 @@
         justify-content-center justify-content-lg-start
       "
     >
-      <h1 class="logo pe-4">21-ProdavnicaMajica</h1>
+      <h1 class="logo pe-4" [routerLink]="['/']">21-ProdavnicaMajica</h1>
       <ul
         class="
           nav
@@ -73,7 +73,9 @@
           class="form-control form-control-dark"
           placeholder="Search..."
           aria-label="Search"
+          #searchBar
         />
+        <button hidden (click)="search()"></button>
       </form>
 
       <div class="row text-end" *ngIf="isLoggedIn; else loginAndRegistration">

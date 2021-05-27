@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { SearchService } from 'src/app/services/search.service';
 import { TShirt } from '../../models/tshirt.model';
 import { SortBy } from './models/store.model';
 import { tshirtsResponse } from './services/models/tshirtsResponse.model';
@@ -81,16 +82,13 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.sortBy = this.sortBy;
   }
 
-  constructor( private store: StoreService) { }
+  constructor( private store: StoreService, private searchService: SearchService) { }
 
   ngOnInit(): void {
-
     this.tshirtsSub = this.store.getShirts().subscribe((payload: tshirtsResponse) => {
       this.tshirts = [...payload.tshirtsAvailable];
       this.setupStore();
     });
-
-
   }
 
   setupStore(): void {
@@ -98,7 +96,14 @@ export class StoreComponent implements OnInit, OnDestroy {
     //   this.tshirts.push(new TShirt(this.makeid(20),this.makeid(10),Math.round(Math.random()*100)));
     // }
 
-    this.tshirtsAlphAtZ = [...this.tshirts];
+    this.tshirtsAlphAtZ = [...this.tshirts].filter((value: TShirt) => {
+      if(value.tshirtName.includes(this.searchService.keyword)) {
+        console.log(value.tshirtName);
+        return true;
+      }
+      return false;
+    });
+    
     this.tshirtsAlphAtZ.sort((a: TShirt, b: TShirt) => {
       let nameA: string = a.tshirtName.toUpperCase(); // ignore upper and lowercase
       let nameB: string = b.tshirtName.toUpperCase(); // ignore upper and lowercase
