@@ -84,13 +84,4 @@ export class ProductComponent implements OnInit {
     this.size = size;
   }
 
-  private readonly urls = {
-    backend: "http://localhost:3000/"
-  }
-  getImageSrc(): string {
-    //console.log(this.urls.backend + this.tshirt.image);
-    return this.urls.backend + this.tshirt.image;
-  }
-
-
 }

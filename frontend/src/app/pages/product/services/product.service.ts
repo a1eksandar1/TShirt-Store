@@ -17,6 +17,7 @@ export class ProductService {
     getProductById: "http://localhost:3000/tshirts",
     postComment: "http://localhost:3000/tshirts",
     rateProduct: "http://localhost:3000/tshirts",
+    backend: "http://localhost:3000/",
   }
 
   constructor(
@@ -89,6 +90,10 @@ export class ProductService {
       this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
     }
     this.toastService.successToast("Item added to cart!");
+  }
+
+  getImageSrc(imgSrc : string): string {
+    return this.urls.backend + imgSrc;
   }
 
 }

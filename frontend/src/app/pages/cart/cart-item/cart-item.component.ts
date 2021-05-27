@@ -15,21 +15,20 @@ export class CartItemComponent implements OnInit {
   @Input()
   public index : number;
 
-  public imgSrc: string;
+  public imgSrc: string = "/assets/tshirtDefault.png";
   public price: number;
   public tshirtName: string;
 
   constructor(
-    private productService : ProductService,
+    public productService : ProductService,
   ) {}
 
   ngOnInit(): void {
     this.productService.getProductById(this.product["tshirtId"]).subscribe(
       (val) => {
-        this.imgSrc = val.tshirt.image; // .substr(5);
+        this.imgSrc = this.productService.getImageSrc(val.tshirt.image)
         this.price = val.tshirt.price;
         this.tshirtName = val.tshirt.tshirtName;
-
       },
       (error) => {console.log(error)}
     );
