@@ -26,7 +26,6 @@ export class CartItemComponent implements OnInit {
   ngOnInit(): void {
     this.productService.getProductById(this.product["tshirtId"]).subscribe(
       (val) => {
-        console.log(val);
         this.imgSrc = val.tshirt.image; // .substr(5);
         this.price = val.tshirt.price;
         this.tshirtName = val.tshirt.tshirtName;
@@ -36,13 +35,16 @@ export class CartItemComponent implements OnInit {
     );
   }
 
-  test(){
-    console.log("ok");
-    console.log(this.product);
+  getSize(){
+    switch(this.product.size){
+      case 0 : return "Small";
+      case 1 : return "Medium";
+      case 2 : return "Large";
+      case 3 : return "Extra large";
+    }
   }
 
   deleteMe() {
-    console.log("here should be the action");
     this.delete.emit(this.index);
   }
 
