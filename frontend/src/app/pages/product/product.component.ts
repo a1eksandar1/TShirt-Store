@@ -27,7 +27,6 @@ export class ProductComponent implements OnInit {
     private authService : AuthService,
     private activatedRoute : ActivatedRoute,
     public toastService: ToastService,
-    private localStorageService: LocalStorageService
   ) {
     this.product = this.activatedRoute.paramMap.pipe(
       switchMap((params : ParamMap) => {
@@ -43,31 +42,11 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public addProductToCart(){
-
+  changeRating(userRating : number){
     if(!this.authService.isLoggedIn()){
-      this.toastService.errorToast("You must be logged in to use this feature.");
+      this.toastService.errorToast('You must be logged in to leave a rating.');
       return;
     }
-
-    // quantity uvek 1 jer sam to zaboravio da dodam i UI
-    let userID = this.authService.sendUserDataIfExists()._id;
-    let cartItem = { tshirtId: this.productId, size: this.size, quantity: 1 }
-
-    if(this.localStorageService.getItem(userID) == null){
-      console.log("nema ordere");
-      console.log(JSON.stringify(cartItem));
-      this.localStorageService.setItem(userID, JSON.stringify(cartItem));
-    }else{
-      console.log("puna korpa");
-      let previousItems = this.localStorageService.getItem(userID);
-      this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
-    }
-    this.toastService.successToast("Item added to cart!");
-  }
-
-  changeRating(userRating : number){
-    // check if logged in
     const obs = this.productService.rateProduct(userRating, this.productId);
 
     obs.subscribe(
@@ -77,13 +56,17 @@ export class ProductComponent implements OnInit {
         this.toastService.successToast('Your rating has been submitted!');
       },
       (error) => {
-        this.toastService.errorToast('You must be logged in to leave a rating.');
+        console.log(error);
       }
     );
   }
 
   newComment(tshirtName: string, comment: string){
     if(comment.trim().length == 0){
+      return;
+    }
+    if(!this.authService.isLoggedIn()){
+      this.toastService.errorToast('You must be logged in to comment');
       return;
     }
     const obs = this.productService.postComment(tshirtName, comment);
@@ -93,9 +76,7 @@ export class ProductComponent implements OnInit {
         this.toastService.successToast('Posted!');
         this.commentTextArea = " ";
       },
-      (error) => {
-        this.toastService.errorToast('You must be logged in to comment');
-      }
+      (error) => {console.log(error);}
     );
   }
 
