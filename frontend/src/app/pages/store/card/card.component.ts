@@ -8,7 +8,7 @@ import { TShirt } from '../../../models/tshirt.model';
 })
 export class CardComponent implements OnInit {
 
-  @Input() 
+  @Input()
   tshirt: TShirt;
 
   private readonly urls = {
