@@ -1,15 +1,13 @@
-<ng-container *ngIf="(product | async) as p">
-
 <th>
   <div class="p-2">
     <img src="\assets\tshirtDefault.png" alt="" width="70" class="img-fluid rounded shadow-sm">
+    <!-- [src]="imgSrc" -->
     <div class="ml-3 d-inline-block align-middle ms-4">
-      <h5> <a href="#" class="text-dark d-inline-block">Timex Unisex Originals</a></h5>
+      <h5> <a href="#" class="text-dark d-inline-block">{{tshirtName}}</a></h5>
     </div>
   </div>
 </th>
-<td class="align-middle"><strong>$79.00</strong></td>
-<td class="align-middle"><strong>3</strong></td>
-<td class="align-middle"><a href="#" class="text-dark" (click)="test()"><i class="fa fa-trash"></i></a></td>
+<td class="align-middle"><strong>${{price}}</strong></td>
+<td class="align-middle"><strong>{{product["quantity"]}}</strong></td>
+<td class="align-middle"><i class="fa fa-trash" (click)="deleteMe()"></i></td>
 
-</ng-container>
