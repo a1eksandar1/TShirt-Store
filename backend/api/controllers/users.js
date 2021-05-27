@@ -86,11 +86,13 @@ module.exports.usersPostLogin = (req, res, next) => {
                 expiresIn: "1d",
               }
             );
+            let isAdmin=user.level=="admin"?true:false;
             return res.status(200).json({
               message: "Login successful",
               userId: user._id,
               username: user.username,
               wishlist: user.wishlist,
+              isAdmin: isAdmin,
               token: token
             });
             // incorrect password
@@ -139,11 +141,13 @@ module.exports.usersGetAll = (req, res, next) => {
       const response = {
         numberOfUsers: users.length,
         usersSignedUp: users.map((user) => {
+          let isAdmin=user.level=="admin"?true:false;
           return {
             _id: user._id,
             email: user.email,
             username: user.username,
-            wishlist: user.wishlist
+            wishlist: user.wishlist,
+            isAdmin: isAdmin
           };
         }),
       };
