@@ -4,6 +4,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { JwtService } from 'src/app/services/common/jwt.service';
+import { ToastService } from 'src/app/ui/toast/service/toast.service';
+import { LocalStorageService } from 'src/app/services/localstorage/local-storage.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +21,10 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    public toastService: ToastService,
+    private localStorageService: LocalStorageService,
+    private authService : AuthService
   ) { }
 
   public getProductById(productId : string) : Observable<{tshirt : TShirt}>{
@@ -62,26 +68,27 @@ export class ProductService {
     };
   }
 
+  public addProductToCart(productId : string, size : number, quantity : number){
 
+    if(!this.authService.isLoggedIn()){
+      this.toastService.errorToast("You must be logged in to use this feature.");
+      return;
+    }
 
-  // getAllOrders(){
-  //   // const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
+    // quantity uvek 1 jer sam to zaboravio da dodam i UI
+    let userID = this.authService.sendUserDataIfExists()._id;
+    let cartItem = { tshirtId: productId, size: size, quantity: quantity }
 
-  //   const requestOptions = {
-  //     headers: new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`),
-  //   };
-
-  //   return this.http.get(this.urls.getAllOrders, requestOptions).pipe(
-  //     catchError((error: HttpErrorResponse) => {
-  //       const serverError: { message: string; status: number; stack: string } = error.error;
-  //       window.alert(`There was an error: ${serverError.message}. Server returned code: ${serverError.status}`);
-  //       return null;
-  //     }),
-  //     map((response: any) => {
-  //       // console.log(response);
-  //     return response;
-  //   }));
-  // }
-
+    if(this.localStorageService.getItem(userID) == null){
+      console.log("nema ordere");
+      console.log(JSON.stringify(cartItem));
+      this.localStorageService.setItem(userID, JSON.stringify(cartItem));
+    }else{
+      console.log("puna korpa");
+      let previousItems = this.localStorageService.getItem(userID);
+      this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
+    }
+    this.toastService.successToast("Item added to cart!");
+  }
 
 }
