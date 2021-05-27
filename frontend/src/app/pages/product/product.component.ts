@@ -19,9 +19,12 @@ export class ProductComponent implements OnInit {
   public tshirt : TShirt;
 
   private productId : string;
+  public hoverRating : number = 0;
   private size : number;
   private commentTextArea : string = " ";
-  public quantityInput : string = "1"; // this.quantityInput
+  public quantityInput : string = "1";
+
+  public isHover: boolean =  false;
 
   constructor(
     private productService : ProductService,

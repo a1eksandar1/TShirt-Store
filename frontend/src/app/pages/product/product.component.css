@@ -18,4 +18,8 @@
   color: #f0ad4e;
 }
 
+.full-star:before {
+  content: "\2605";
+  position: absolute;
+}
 
