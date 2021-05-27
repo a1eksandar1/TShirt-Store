@@ -90,6 +90,7 @@ module.exports.usersPostLogin = (req, res, next) => {
               message: "Login successful",
               userId: user._id,
               username: user.username,
+              wishlist: user.wishlist,
               token: token
             });
             // incorrect password
@@ -142,6 +143,7 @@ module.exports.usersGetAll = (req, res, next) => {
             _id: user._id,
             email: user.email,
             username: user.username,
+            wishlist: user.wishlist
           };
         }),
       };
@@ -154,6 +156,40 @@ module.exports.usersGetAll = (req, res, next) => {
       });
     });
 };
+
+
+// we dont check if tshirt with given id exists
+// we dont check (on backend) if the given shirt is already in wishlist
+module.exports.usersAddToWishlist=(req,res,next)=>{
+  const id=req.params.userId;
+  const tshirtId=req.body.tshirtId;
+  User.updateOne(
+    { _id: id },
+    { $push: { wishlist: tshirtId } }
+  )
+    .exec()
+    .then((result) => {
+        console.log(result);
+      if (result.nModified == 0) {
+        res.status(404).json({
+          message: "No user with given id",
+        });
+      } else {
+        // console.log(result);
+        res.status(200).json({
+          message: "Added tshirt to wishlist",
+          userId: id,
+          tshirtId: tshirtId
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+}
 
 // we get email currentPassword and newPassword
 module.exports.usersPatch = (req, res, next) => {
