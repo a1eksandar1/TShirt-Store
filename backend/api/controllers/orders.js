@@ -52,6 +52,31 @@ module.exports.ordersGetById = (req, res, next) => {
     });
 };
 
+
+module.exports.ordersGetByUserId = (req, res, next) => {
+  const id = req.params.userId;
+  Order.find({userId: id})
+    .exec()
+    .then((orders) => {
+      console.log(orders);
+      // if exists order with given user id
+      if (orders) {
+        res.status(200).json({
+          numOfOrders:orders.length,
+          allOrders: orders,
+        });
+      } else {
+        res.status(404).json({
+          message: "No order with given user id",
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
+
 module.exports.ordersPost = (req, res, next) => {
   User.findById(req.body.userId)
     .exec()

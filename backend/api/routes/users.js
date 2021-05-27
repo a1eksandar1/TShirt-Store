@@ -21,4 +21,6 @@ router.get("/", checkAuth, checkAdminAuth, usersController.usersGetAll);
 
 router.patch("/", checkAuth, usersController.usersPatch);
 
+router.post("/:userId/addToWishlist", usersController.usersAddToWishlist);
+
 module.exports = router;

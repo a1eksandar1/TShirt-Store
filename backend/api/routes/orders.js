@@ -11,8 +11,13 @@ router.get("/", checkAuth, checkAdminAuth, ordersController.ordersGetAll);
 router.get(
   "/:orderId",
   checkAuth,
-  checkAdminAuth,
   ordersController.ordersGetById
+);
+
+router.get(
+  "/user/:userId",
+  checkAuth,
+  ordersController.ordersGetByUserId
 );
 
 router.post("/", checkAuth, ordersController.ordersPost);
