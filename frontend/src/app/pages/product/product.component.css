@@ -1,5 +1,9 @@
-.rate{
+.rated{
   color: orange;
+}
+
+.unrated{
+  color: gray;
 }
 
 /* * { border: 1px solid black; } */
@@ -8,13 +12,6 @@
 {
   background-color:orange;
 }
-
-.secondaryButton
-{
-  border-color:black;
-  color:black;
-}
-
 
 .btn-outline-warning:hover {
   background-color: black;

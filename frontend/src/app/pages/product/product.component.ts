@@ -1,12 +1,11 @@
+import { AuthService } from './../../services/auth.service';
+import { ProductService } from './services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { TShirt } from 'src/app/models/tshirt.model';
-
-enum TShirtSize {
-  SMALL = 0,
-  MEDIUM = 1,
-  LARGE = 2,
-  EXTRALARGE = 3,
-}
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ToastService } from 'src/app/ui/toast/service/toast.service';
 
 @Component({
   selector: 'app-product',
@@ -15,39 +14,80 @@ enum TShirtSize {
 })
 export class ProductComponent implements OnInit {
 
-  // public _id: number = 1,
-  // public name: string = "Majica",
-  // public price: number = 1,
-  // public image: string = "",
-  // public comments: string = ""  koments trenutno je samo jedan jedini string? Treba da bude niz comment modela
-
-  TShirtSizeEnum = TShirtSize;
-
+  public product : Observable<{tshirt : TShirt}>;
   public tshirt : TShirt;
-  // necemo avalible sizes da dodajemo u model nek bude da su uvek sve velicine dostupne, ali treba dodati u order model
-  public tshirtSize : TShirtSize;
-  //treba dodati rating i numberOfRatings u model
-  public rating : number;
-  public numberOfRatings : number;
+  private productId : string;
+  private commentTextArea : string = " ";
 
-  //keep in mind primam tshirt id kroz url
-  constructor() {
-    this.tshirt = new TShirt();
-    this.tshirtSize = TShirtSize.SMALL;
-    this.rating = 4.5;
-    this.numberOfRatings = 20;
-   }
+  constructor(
+    private productService : ProductService,
+    private authService : AuthService,
+    private activatedRoute : ActivatedRoute,
+    public toastService: ToastService
+  ) {
+    this.product = this.activatedRoute.paramMap.pipe(
+      switchMap((params : ParamMap) => {
+        this.productId = params.get('_id');
+        return this.productService.getProductById(this.productId);
+      })
+    )
+    this.product.subscribe((val) => {
+      this.tshirt = val.tshirt;
+    });
+  }
 
   ngOnInit(): void {
   }
 
+  changeRating(userRating : number){
+    const obs = this.productService.rateProduct(userRating, this.productId);
 
-  setTShirtSize(size : number){
-    this.tshirtSize = TShirtSize[TShirtSize[size]];
+    obs.subscribe(
+      (val)=>{
+        this.tshirt.numberOfRatings++;
+        this.tshirt.ratingSum += userRating;
+        this.successToast('Your rating has been submitted!');
+      },
+      (error) => {
+        this.errorToast('You must be logged in to leave a rating.');
+      }
+    );
   }
 
-  changeRating(newRating : number){
-    this.rating = newRating;
+  newComment(tshirtName: string, comment: string){
+    if(comment.trim().length == 0){
+      return;
+    }
+    const obs = this.productService.postComment(tshirtName, comment);
+    obs.subscribe(
+      (val)=>{
+        this.tshirt.comments.push(comment);
+        this.successToast('Posted!');
+        this.commentTextArea = " ";
+      },
+      (error) => {
+        this.errorToast('You must be logged in to comment');
+      }
+    );
+  }
+
+  successToast(message : string){
+    this.toastService.show(message, {
+      classname: 'bg-success text-light',
+      delay: 2000 ,
+      autohide: true,
+    });
+  }
+
+  errorToast(message : string){
+    this.toastService.show(message, {
+      classname: 'bg-danger text-light',
+      delay: 2000 ,
+      autohide: true,
+    });
+  }
+
+  setTShirtSize(size : number){
   }
 
 }

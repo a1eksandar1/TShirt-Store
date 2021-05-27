@@ -81,7 +81,7 @@ export class StoreComponent implements OnInit, OnDestroy {
       this.setupStore();
     });
 
-    
+
   }
 
   setupStore(): void {
