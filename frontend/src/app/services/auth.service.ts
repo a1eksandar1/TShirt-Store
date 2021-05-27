@@ -63,7 +63,8 @@ export class AuthService {
 
   private mapResponseToUser(response: { token: string }): User {
     console.log(response);
-    this.jwtService.setToken(response.token);
+    if(response.token != null)
+      this.jwtService.setToken(response.token);
     return this.sendUserDataIfExists();
   }
 
