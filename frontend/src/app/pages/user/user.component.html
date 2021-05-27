@@ -1,1 +1,7 @@
-<p>user works!</p>
+<ng-container *ngIf="user | async as u">
+  <div class="container">
+    test
+    <h1>korisnik : {{ u.username }}</h1>
+    <h1>e-mail : {{ u.email }}</h1>
+  </div>
+</ng-container>

@@ -22,7 +22,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
   constructor(private design: DesignService) { 
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required]),
-      price: new FormControl("", [Validators.required])
+      // price: new FormControl("", [Validators.required])
     });
   }
 
@@ -83,7 +83,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
     this.design.createTShirt(
       new File([this.doneImage], this.designForm.value.tshirtName + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      this.designForm.value.price
+      //this.designForm.value.price
+      15
     );
 
   }

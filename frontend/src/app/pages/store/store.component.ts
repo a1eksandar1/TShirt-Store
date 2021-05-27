@@ -51,6 +51,8 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.tshirts = this.tshirts.slice((this.page-1)*this.showPerPage, this.page * this.showPerPage);
   }
 
+  public minimumPerPage: number = 4;
+  public maximumPerPage: number = 100;
   private _showPerPage: number = 12;
   public get showPerPage(): number {
     return this._showPerPage;
@@ -58,6 +60,10 @@ export class StoreComponent implements OnInit, OnDestroy {
   public set showPerPage(value: number){
     if(value != this._showPerPage)
       this.page = 1;
+    if(value < this.minimumPerPage)
+      value = this.minimumPerPage;
+    if(value > this.maximumPerPage)
+      value = this.maximumPerPage;
     this._showPerPage = value;
     this.sortBy = this.sortBy;
   }
@@ -67,7 +73,10 @@ export class StoreComponent implements OnInit, OnDestroy {
     return this._page;
   }
   public set page(value: number) {
-    console.log(value);
+    if(value > this.tshirtsAlphAtZ.length/this.showPerPage){
+      return;
+    }
+    //console.log(value);
     this._page = value;
     this.sortBy = this.sortBy;
   }
