@@ -15,6 +15,8 @@ module.exports.tshirtsGetAll = (req, res, next) => {
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
+            ratingSum: tshirt.ratingSum,
+            numberOfRatings: tshirt.numberOfRatings,
             comments: tshirt.comments
           };
         }),
@@ -43,6 +45,8 @@ module.exports.tshirtsGetById = (req, res, next) => {
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
+            ratingSum: tshirt.ratingSum,
+            numberOfRatings: tshirt.numberOfRatings,
             popularity: tshirt.popularity + 1,
             comments: tshirt.comments
           },
@@ -100,6 +104,43 @@ module.exports.tshirtsPost = (req, res, next) => {
               error: err,
             });
           });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+
+
+module.exports.tshirtsAddRating = (req, res, next) => {
+  const id = req.params.tshirtId;
+  const rating= req.body.rating;
+
+
+  Tshirt.updateOne(
+    { _id: id },
+    { $inc: { ratingSum: rating, numberOfRatings: 1 } }
+  )
+    .exec()
+    .then((result) => {
+        console.log(result);
+      if (result.nModified == 0) {
+        res.status(404).json({
+          message: "No tshirt with given id",
+        });
+      } else {
+        // console.log(result);
+        res.status(200).json({
+          message: "Rating added",
+          check: {
+            type: "GET",
+            url: "http://localhost:3000/tshirts/" + id,
+          },
+        });
       }
     })
     .catch((err) => {

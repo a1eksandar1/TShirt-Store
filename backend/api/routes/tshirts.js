@@ -26,9 +26,14 @@ router.get("/:tshirtId", tshirtsController.tshirtsGetById);
 router.post(
   "/",
   checkAuth,
-  checkAdminAuth,
   upload.single("image"),
   tshirtsController.tshirtsPost
+);
+
+router.post(
+  "/:tshirtId/addRating",
+  checkAuth,
+  tshirtsController.tshirtsAddRating
 );
 
 router.post(

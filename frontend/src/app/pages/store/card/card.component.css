@@ -1,0 +1,6 @@
+.myCard {
+  cursor: pointer
+}
+.myCard:hover {
+  opacity: 0.5;
+}

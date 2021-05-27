@@ -1,0 +1,63 @@
+<div class="container bg-dark text-white my-3 p-1">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <div class="input-group input-group-sm">
+        <span
+          class="input-group-text text-white bg-dark"
+          id="inputGroup-sizing-sm"
+          >Sort by:
+        </span>
+        <select
+          name=""
+          id=""
+          class="form-select"
+          (change)="onChangeSort($event)"
+          [value]="sortBy"
+        >
+          <option value="0" selected>Name (A-Z)</option>
+          <option value="1">Price (lowest first)</option>
+          <option value="2">Price (highest first)</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="input-group input-group-sm">
+        <button
+          type="button"
+          class="input-group-text text-white bg-dark"
+          (click)="onChangePageDown()"
+        >
+          &#60;
+        </button>
+        <input
+          type="text"
+          class="form-control text-center"
+          [placeholder]="page"
+          disabled
+        />
+        <button
+          type="button"
+          class="input-group-text text-white bg-dark"
+          (click)="onChangePageUp()"
+        >
+          &#62;
+        </button>
+      </div>
+    </div>
+    <div class="col-auto">
+      <div class="input-group input-group-sm">
+        <span
+          class="input-group-text text-white bg-dark"
+          id="inputGroup-sizing-sm"
+          >Show per page:
+        </span>
+        <input
+          type="number"
+          class="form-control"
+          (change)="onChangeShowPerPage($event)"
+          [value]="showPerPage"
+        />
+      </div>
+    </div>
+  </div>
+</div>

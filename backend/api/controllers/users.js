@@ -89,6 +89,7 @@ module.exports.usersPostLogin = (req, res, next) => {
             return res.status(200).json({
               message: "Login successful",
               userId: user._id,
+              username: user.username,
               token: token
             });
             // incorrect password

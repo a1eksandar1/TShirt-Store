@@ -1,0 +1,83 @@
+<div
+  class="modal fade"
+  id="registerModal"
+  tabindex="-1"
+  aria-labelledby="registerModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="registerModalLabel">Register</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="usernameReg">Username</label>
+            <input
+              class="form-control"
+              type="text"
+              id="usernameReg"
+              name="username"
+              formControlName="username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="emailReg">E-mail</label>
+            <input
+              class="form-control"
+              type="text"
+              id="emailReg"
+              name="email"
+              formControlName="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="passwordReg">Password</label>
+            <input
+              class="form-control"
+              type="password"
+              id="passwordReg"
+              name="password"
+              formControlName="password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password2Reg">Password</label>
+            <input
+              class="form-control"
+              type="password"
+              id="password2Reg"
+              name="password2"
+              formControlName="password2"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer bg-dark text-white">
+          <button
+            type="button"
+            class="btn btn-outline-light"
+            data-bs-dismiss="modal"
+            #closeModal
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-warning" type="submit">
+            Register
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
