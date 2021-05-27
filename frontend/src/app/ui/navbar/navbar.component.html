@@ -8,6 +8,7 @@
         justify-content-center justify-content-lg-start
       "
     >
+      <h1 class="logo pe-4" [routerLink]="['/']">21-ProdavnicaMajica</h1>
       <ul
         class="
           nav
@@ -72,17 +73,26 @@
           class="form-control form-control-dark"
           placeholder="Search..."
           aria-label="Search"
+          #searchBar
         />
+        <button hidden (click)="search()"></button>
       </form>
 
-      <div class="text-end" *ngIf="isLoggedIn; else loginAndRegistration">
-        <button
-          type="button"
-          class="btn btn-outline-light me-2"
-          (click)="logout()"
-        >
-          Logout
-        </button>
+      <div class="row text-end" *ngIf="isLoggedIn; else loginAndRegistration">
+        <div class="col me-2">
+          <a href="#" class="nav-link px-2 text-white" [routerLink]="['/user']"
+            >User</a
+          >
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-outline-light me-2"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </div>
       </div>
       <ng-template #loginAndRegistration>
         <div class="text-end">

@@ -15,10 +15,10 @@ const routes: Routes = [
   { path: 'store', component: StoreComponent},
   { path: 'about', component: AboutComponent},
   { path: 'contact', component: ContactComponent},
-  { path: 'cart', component: CartComponent},
+  { path: 'cart', component: CartComponent, canActivate: [UserAuthenticatedGuard]},
   { path: 'user', component: UserComponent, canActivate: [UserAuthenticatedGuard]},
   { path: 'product/:_id', component: ProductComponent},
-  { path: 'design', component: DesignComponent, canActivate: [UserAuthenticatedGuard]},
+  { path: 'design', component: DesignComponent},
 ];
 
 @NgModule({

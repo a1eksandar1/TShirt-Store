@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,10 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  @ViewChild('searchBar') searchBar: ElementRef;
   public isLoggedIn: boolean = false;
   private userSub: Subscription;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router, private searchService: SearchService) {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.userSub = this.authService.user.subscribe((user: User) => {
       if(user==null) {
@@ -33,6 +36,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.authService.logoutUser();
+    this.router.navigateByUrl("/");
   }
 
+  search(): void {
+    const value: string = this.searchBar.nativeElement.value;
+    console.log("searching: ", value);
+    this.searchService.search(value);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigateByUrl("/store"));
+  }
 }

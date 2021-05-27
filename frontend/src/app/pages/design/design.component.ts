@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { DesignService } from './services/design.service';
 
 @Component({
@@ -15,14 +16,16 @@ export class DesignComponent implements OnInit, AfterViewInit {
   public canvasSize: number = 1000;
   public context: CanvasRenderingContext2D;
 
+  private selectedColor: string = "/assets/defaultTshirts/tshirtDefault.png";
+  
   private selectedFile: File;
   private selectedImageSource;
   private doneImage: Blob;
 
-  constructor(private design: DesignService) {
+  constructor(private design: DesignService, private auth: AuthService) {
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required]),
-      // price: new FormControl("", [Validators.required])
+      price: new FormControl("15", [Validators.required])
     });
   }
 
@@ -45,11 +48,14 @@ export class DesignComponent implements OnInit, AfterViewInit {
   startCanvas(): void {
     this.context = this.myCanvas.nativeElement.getContext('2d');
     let shirtImg = new Image();
-    shirtImg.src = "assets/tshirtDefault.png";
+    shirtImg.src = this.selectedColor;
     shirtImg.onload = () => {
       this.myCanvas.nativeElement.width = this.canvasSize;
       this.myCanvas.nativeElement.height = this.canvasSize;
       this.context.drawImage(shirtImg,0,0,this.canvasSize,this.canvasSize);
+      if(typeof this.selectedImageSource == "undefined") {
+        return;
+      }
       let customImg = new Image();
       customImg.crossOrigin = "anonymous";
       customImg.src = this.selectedImageSource;
@@ -79,13 +85,24 @@ export class DesignComponent implements OnInit, AfterViewInit {
       window.alert("Must select a file!");
       return;
     }
-
     this.design.createTShirt(
-      new File([this.doneImage], this.designForm.value.tshirtName + ".png", {type: 'image/png'})
+      new File([this.doneImage], this.designForm.value.tshirtName + Date.now() + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      //this.designForm.value.price
-      15
+      this.designForm.value.price
     );
-
   }
+
+  loggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
+  }
+
+  pickColor(event: Event) {
+    this.selectedColor = (event.target as HTMLImageElement).src;
+    this.startCanvas();
+  }
+
 }

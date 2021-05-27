@@ -26,6 +26,8 @@ export class JwtService {
     const payloadString = token.split(".")[1];
     const userDataJSON = window.atob(payloadString);
     const payload: IJWTTokenData = JSON.parse(userDataJSON);
+    
+    //console.log(userDataJSON);
     return payload;
   }
 
