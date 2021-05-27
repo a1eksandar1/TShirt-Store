@@ -85,13 +85,11 @@ export class DesignComponent implements OnInit, AfterViewInit {
       window.alert("Must select a file!");
       return;
     }
-
     this.design.createTShirt(
-      new File([this.doneImage], this.designForm.value.tshirtName + ".png", {type: 'image/png'})
+      new File([this.doneImage], this.designForm.value.tshirtName + Date.now() + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
       this.designForm.value.price
     );
-
   }
 
   loggedIn(): boolean {
