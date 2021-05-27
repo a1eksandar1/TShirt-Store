@@ -33,28 +33,24 @@ module.exports.tshirtsGetAll = (req, res, next) => {
 
 module.exports.tshirtsGetById = (req, res, next) => {
   const id = req.params.tshirtId;
-  Tshirt.findByIdandUpdate(id)
+  Tshirt.findById(id)
     .exec()
     .then((tshirt) => {
       console.log(tshirt);
 
       if (tshirt) {
-        // tshirt.update(
-        //   {$inc: {popularity}}
-        // );
         res.status(200).json({
           tshirt: {
             _id: tshirt._id,
             tshirtName: tshirt.tshirtName,
             price: tshirt.price,
             image: tshirt.image,
-            popularity: tshirt.popularity,
-            numberOfRatings: tshirt.numberOfRatings,
             ratingSum: tshirt.ratingSum,
+            numberOfRatings: tshirt.numberOfRatings,
+            popularity: tshirt.popularity + 1,
             comments: tshirt.comments
           },
         });
-        tshirt.save();
       } else {
         res.status(404).json({
           message: "No tshirt with given id",
