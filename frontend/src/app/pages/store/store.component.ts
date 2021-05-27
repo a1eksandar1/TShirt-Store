@@ -73,7 +73,7 @@ export class StoreComponent implements OnInit, OnDestroy {
     return this._page;
   }
   public set page(value: number) {
-    if(value > this.tshirtsAlphAtZ.length/this.showPerPage){
+    if(value > Math.ceil(this.tshirtsAlphAtZ.length/this.showPerPage)){
       return;
     }
     //console.log(value);
