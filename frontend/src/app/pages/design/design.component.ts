@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 import { DesignService } from './services/design.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
   private selectedImageSource;
   private doneImage: Blob;
 
-  constructor(private design: DesignService) {
+  constructor(private design: DesignService, private auth: AuthService) {
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required]),
       // price: new FormControl("", [Validators.required])
@@ -88,4 +89,9 @@ export class DesignComponent implements OnInit, AfterViewInit {
     );
 
   }
+
+  loggedIn(): boolean {
+    return this.auth.isLoggedIn();
+  }
+
 }

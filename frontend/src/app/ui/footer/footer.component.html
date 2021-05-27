@@ -52,12 +52,12 @@
             >About</a
           >
         </li>
-        <li>
+        <li *ngIf="loggedIn()">
           <a href="#" class="nav-link px-2 text-white" [routerLink]="['/cart']"
             >Cart</a
           >
         </li>
-        <li>
+        <li *ngIf="loggedIn()">
           <a href="#" class="nav-link px-2 text-white" [routerLink]="['/user']"
             >User</a
           >
