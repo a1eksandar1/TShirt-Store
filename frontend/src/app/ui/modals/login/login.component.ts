@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   loginSub: Subscription;
 
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService) {
     this.loginForm = new FormGroup({
       email: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required])
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.loginSub = this.authService.loginUser(formData.email, formData.password).subscribe();
 
-    this.closeModal.nativeElement.click() 
+    this.closeModal.nativeElement.click()
   }
 
 
