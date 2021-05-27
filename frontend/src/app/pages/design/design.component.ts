@@ -23,7 +23,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
   constructor(private design: DesignService, private auth: AuthService) {
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required]),
-      // price: new FormControl("", [Validators.required])
+      price: new FormControl("15", [Validators.required])
     });
   }
 
@@ -84,14 +84,17 @@ export class DesignComponent implements OnInit, AfterViewInit {
     this.design.createTShirt(
       new File([this.doneImage], this.designForm.value.tshirtName + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      //this.designForm.value.price
-      15
+      this.designForm.value.price
     );
 
   }
 
   loggedIn(): boolean {
     return this.auth.isLoggedIn();
+  }
+
+  isAdmin(): boolean {
+    return this.auth.isAdmin();
   }
 
 }

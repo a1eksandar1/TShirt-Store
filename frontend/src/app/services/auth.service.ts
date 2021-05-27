@@ -25,12 +25,17 @@ export class AuthService {
     return (this.jwtService.getToken() != null);
   }
 
+  public isAdmin(): boolean {
+    return this.jwtService.getDataFromToken().isAdmin;
+  }
+
   public sendUserDataIfExists(): User {
     const payloadData: IJWTTokenData = this.jwtService.getDataFromToken();
     const user: User = payloadData
-      ? new User(payloadData.id, payloadData.email, payloadData.username)
+      ? new User(payloadData._id, payloadData.email, payloadData.username,payloadData.isAdmin)
       : null;
     this.userSubject.next(user);
+    //console.log(user);
     return user;
   }
 
@@ -62,7 +67,7 @@ export class AuthService {
   }
 
   private mapResponseToUser(response: { token: string }): User {
-    console.log(response);
+    //console.log(response);
     if(response.token != null)
       this.jwtService.setToken(response.token);
     return this.sendUserDataIfExists();

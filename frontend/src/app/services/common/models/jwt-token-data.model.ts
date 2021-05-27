@@ -1,6 +1,7 @@
 export interface IJWTTokenData {
-  id: string;
+  _id: string;
   username: string;
   email: string;
   name: string;
+  isAdmin: boolean;
 }

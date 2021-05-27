@@ -34,9 +34,9 @@ export class DesignService {
     );
     this.http.request<FormData>(req).subscribe((response: HttpResponse<FormData>) => {
       //console.log("subscribed");
-      console.warn("response from", req)
-      console.log(response);
-      console.log(response.body);
+      // console.warn("response from", req)
+      // console.log(response);
+      // console.log(response.body);
       if(typeof response.body != "undefined")
       {
         let id = response.body["addedTshirt"]["_id"];
