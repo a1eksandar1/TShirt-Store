@@ -8,8 +8,6 @@
       <div class="col-md">
         <div class="p-3 border">
           <img [src]="productService.getImageSrc(tshirt.image)" class="img-fluid" />
-          <!-- assets/tshirtDefault.png -->
-
         </div>
       </div>
 
@@ -60,6 +58,11 @@
           <div>
             <span class="label-rating text-muted">Price:</span>
             <strong class="label-rating ps-2" style="font-size: 25px">{{p.tshirt.price}}$</strong>
+          </div>
+
+          <div>
+            <span class="label-rating text-muted">Quantity: </span>
+            <input class="col-2" type="number" [(ngModel)]="quantityInput" value="1" min="1" onkeydown="return false"/>
           </div>
 
           <div>
@@ -126,16 +129,19 @@
             </div>
           </div>
 
-
-
           <div class="d-flex justify-content-start mb-3">
             <button type="button" class="btn primaryButton me-2">
               Buy now
             </button>
-            <button type="button" class="btn btn-outline-secondary" (click)="productService.addProductToCart(productId, size, 1)">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="productService.addProductToCart(productId, size, quantityInput)"
+            >
               Add to cart
             </button>
           </div>
+
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ import { ProductService } from '../../product/services/product.service';
 export class CartItemComponent implements OnInit {
 
   @Output() delete: EventEmitter<number> = new EventEmitter();
+  @Output() totalCost: EventEmitter<number> = new EventEmitter();
 
   @Input()
   public product: any;
@@ -29,6 +30,7 @@ export class CartItemComponent implements OnInit {
         this.imgSrc = this.productService.getImageSrc(val.tshirt.image)
         this.price = val.tshirt.price;
         this.tshirtName = val.tshirt.tshirtName;
+        this.calculateCost();
       },
       (error) => {console.log(error)}
     );
@@ -44,7 +46,12 @@ export class CartItemComponent implements OnInit {
   }
 
   deleteMe() {
+    this.totalCost.emit(-this.product["quantity"] * this.price);
     this.delete.emit(this.index);
+  }
+
+  calculateCost() {
+    this.totalCost.emit(this.product["quantity"] * this.price);
   }
 
 }

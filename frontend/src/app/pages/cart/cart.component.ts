@@ -13,6 +13,7 @@ export class CartComponent implements OnInit {
   public cartIsEmpty : boolean;
   public cartItemsArray: any[];
   public userID: string;
+  public totalCost : number = 0;
 
   constructor(
     private authService : AuthService,
@@ -36,7 +37,6 @@ export class CartComponent implements OnInit {
   }
 
   fixQuantity(){
-    console.log(this.cartItemsArray);
     this.cartItemsArray.sort(
       (a, b) => {
         if (a["tshirtId"] < b["tshirtId"]) return -1;
@@ -54,8 +54,6 @@ export class CartComponent implements OnInit {
         i--;
       }
     }
-    console.log(this.cartItemsArray);
-
   }
 
   ngOnInit(): void {
@@ -67,6 +65,10 @@ export class CartComponent implements OnInit {
     this.updateLocalStorage(this.cartItemsArray);
   }
 
+  totalCosthandler(cartItemCost: number){
+    this.totalCost += cartItemCost;
+  }
+
   updateLocalStorage(newStorageData : any){
     if(this.cartItemsArray.length == 0){
       this.localStorageService.removeItem(this.userID);
@@ -74,6 +76,11 @@ export class CartComponent implements OnInit {
       newStorageData = JSON.stringify(newStorageData).split(`},`).join(`}\n`).slice(1, -1);
       this.localStorageService.setItem(this.userID, newStorageData);
     }
+  }
+
+  test(){
+    console.log("imal produkta");
+    console.log(this.cartItemsArray);
   }
 
 }

@@ -21,6 +21,7 @@ export class ProductComponent implements OnInit {
   private productId : string;
   private size : number;
   private commentTextArea : string = " ";
+  public quantityInput : string = "1"; // this.quantityInput
 
   constructor(
     private productService : ProductService,

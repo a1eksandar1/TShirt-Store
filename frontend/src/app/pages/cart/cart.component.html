@@ -25,8 +25,13 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr app-cart-item [cartItem]="cartItemsArray[0]"></tr> -->
-            <tr app-cart-item *ngFor="let item of cartItemsArray; let i = index" [product]="item" [index]="i" (delete)="deleteItem($event)"></tr>
+            <tr app-cart-item
+              *ngFor="let item of cartItemsArray; let i = index"
+              [product]="item"
+              [index]="i"
+              (delete)="deleteItem($event)"
+              (totalCost)="totalCosthandler($event)"
+            ></tr>
           </tbody>
         </table>
       </div>
@@ -45,12 +50,11 @@
       <div class="bg-light  px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
       <div class="p-4">
         <ul class="list-unstyled mb-4">
-          <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Number of Items </strong><strong>4</strong></li>
           <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Total</strong>
-            <h5 class="font-weight-bold">$400.00</h5>
+            <h5 class="font-weight-bold">${{totalCost}}.00</h5>
           </li>
         </ul>
-        <div class="btn btn-dark  py-2 btn-block" (click)="fixQuantity()">Procceed to checkout</div>
+        <div class="btn btn-dark  py-2 btn-block" (click)="test()">Procceed to checkout</div>
       </div>
     </div>
   </div>
