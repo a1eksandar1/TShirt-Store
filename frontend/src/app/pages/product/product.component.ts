@@ -6,7 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/ui/toast/service/toast.service';
 import { ProductService } from './services/product.service';
-import { LocalStorageService } from 'src/app/services/localstorage/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -20,9 +20,9 @@ export class ProductComponent implements OnInit {
 
   private productId : string;
   public hoverRating : number = 0;
-  private size : number;
+  private size : number = 0;
   private commentTextArea : string = " ";
-  public quantityInput : string = "1";
+  public quantityInput : number = 1;
 
   public isHover: boolean =  false;
 
@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit {
     private authService : AuthService,
     private activatedRoute : ActivatedRoute,
     public toastService: ToastService,
+    public _router : Router
   ) {
     this.product = this.activatedRoute.paramMap.pipe(
       switchMap((params : ParamMap) => {
@@ -86,6 +87,20 @@ export class ProductComponent implements OnInit {
 
   setTShirtSize(size : number){
     this.size = size;
+  }
+
+  addItemToCartAndGoToCart(){
+    this.productService.addProductToCart(this.productId, this.size, this.quantityInput);
+    this._router.navigate(['/cart']);
+  }
+
+  tellUserToLogIn(){
+    this.toastService.show("You must be logged in to make an order.", {
+      classname: 'bg-warning text-dark',
+      delay: 3000 ,
+      autohide: true,
+    });
+    document.getElementById("openLoginModalButton").click();
   }
 
 }

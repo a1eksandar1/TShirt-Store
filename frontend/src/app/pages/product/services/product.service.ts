@@ -70,22 +70,15 @@ export class ProductService {
   }
 
   public addProductToCart(productId : string, size : number, quantity : number){
-
     if(!this.authService.isLoggedIn()){
       this.toastService.errorToast("You must be logged in to use this feature.");
       return;
     }
-
-    // quantity uvek 1 jer sam to zaboravio da dodam i UI
     let userID = this.authService.sendUserDataIfExists()._id;
     let cartItem = { tshirtId: productId, size: size, quantity: quantity }
-
     if(this.localStorageService.getItem(userID) == null){
-      console.log("nema ordere");
-      console.log(JSON.stringify(cartItem));
       this.localStorageService.setItem(userID, JSON.stringify(cartItem));
     }else{
-      console.log("puna korpa");
       let previousItems = this.localStorageService.getItem(userID);
       this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
     }
