@@ -26,22 +26,34 @@
     ></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="/assets/Carousel.png" class="d-block w-100" alt="..." />
+    <div class="carousel-item active" [routerLink]="['/store']">
+      <img
+        src="/assets/Carousel.png"
+        class="d-block w-100 carouselClickable"
+        alt="..."
+      />
       <div class="carousel-caption d-none d-md-block">
         <h5>Majice visokog kvaliteta</h5>
         <p>Kupite majice sa najboljim printovima koje ste ikada videli.</p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="/assets/Carousel.png" class="d-block w-100" alt="..." />
+    <div class="carousel-item" [routerLink]="['/design']">
+      <img
+        src="/assets/Carousel.png"
+        class="d-block w-100 carouselClickable"
+        alt="..."
+      />
       <div class="carousel-caption d-none d-md-block">
         <h5>Dizajniraj svoju majicu</h5>
         <p>Posalji nam svoju sliku i mi cemo da je odstampamo na majicu.</p>
       </div>
     </div>
-    <div class="carousel-item">
-      <img src="/assets/Carousel.png" class="d-block w-100" alt="..." />
+    <div class="carousel-item" [routerLink]="['/contact']">
+      <img
+        src="/assets/Carousel.png"
+        class="d-block w-100 carouselClickable"
+        alt="..."
+      />
       <div class="carousel-caption d-none d-md-block">
         <h5>Nadjite nas</h5>
         <p>

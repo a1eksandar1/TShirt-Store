@@ -67,6 +67,7 @@ export class ProductComponent implements OnInit {
   }
 
   changeRating(userRating : number){
+    // check if logged in
     const obs = this.productService.rateProduct(userRating, this.productId);
 
     obs.subscribe(
@@ -101,5 +102,14 @@ export class ProductComponent implements OnInit {
   setTShirtSize(size : number){
     this.size = size;
   }
+
+  private readonly urls = {
+    backend: "http://localhost:3000/"
+  }
+  getImageSrc(): string {
+    //console.log(this.urls.backend + this.tshirt.image);
+    return this.urls.backend + this.tshirt.image;
+  }
+
 
 }

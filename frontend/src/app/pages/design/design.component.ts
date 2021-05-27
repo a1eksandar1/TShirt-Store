@@ -19,10 +19,10 @@ export class DesignComponent implements OnInit, AfterViewInit {
   private selectedImageSource;
   private doneImage: Blob;
 
-  constructor(private design: DesignService) { 
+  constructor(private design: DesignService) {
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required]),
-      price: new FormControl("", [Validators.required])
+      // price: new FormControl("", [Validators.required])
     });
   }
 
@@ -70,7 +70,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
   }
 
   createTShirt() {
-    
+
     if (this.designForm.invalid) {
       window.alert("The form is not valid!");
       return;
@@ -83,7 +83,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
     this.design.createTShirt(
       new File([this.doneImage], this.designForm.value.tshirtName + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      this.designForm.value.price
+      //this.designForm.value.price
+      15
     );
 
   }
