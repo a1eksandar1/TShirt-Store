@@ -1,3 +1,4 @@
+import { OrderService } from './../user/services/order.service';
 import { ProductService } from './../product/services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -23,7 +24,8 @@ export class CartComponent implements OnInit {
     private authService : AuthService,
     public toastService: ToastService,
     private localStorageService: LocalStorageService,
-    private productService : ProductService
+    private productService : ProductService,
+    private orderService : OrderService
   ){
     this.initForm();
     if(!this.authService.isLoggedIn()){
@@ -78,7 +80,8 @@ export class CartComponent implements OnInit {
   finalize(){
     const formData = this.shippingInfoForm.value;
 
-    let userId = this.authService.sendUserDataIfExists()["_id"];
+    let currUser = this.authService.sendUserDataIfExists();
+    let userId = currUser["_id"];
     if(userId == null){
       this.toastService.errorToast("You must be logged in to place an order.");
       return;
@@ -105,6 +108,12 @@ export class CartComponent implements OnInit {
       this.cartItemsArray.pop();
     }
     this.localStorageService.removeItem("CART"); // ovde treba promeniti
+
+    this.orderService.sendEmail(currUser["email"]).subscribe(
+      (val) => {console.log(val)},
+      (error) => {console.log(error)}
+    );
+
     this.toastService.successToast("All orders sent successfully");
   }
 

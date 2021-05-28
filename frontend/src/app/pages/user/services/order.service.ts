@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   private readonly urls = {
-    userOrders: "http://localhost:3000/orders/user"
+    userOrders: "http://localhost:3000/orders/user",
+    sendEmail: "http://localhost:3000/orders/sendEmail"
   }
 
   constructor(
@@ -33,5 +34,16 @@ export class OrderService {
       map((response : {numOfOrders: number, allOrders: Order[]}) => {
         return response;
     }));
+  }
+
+  public sendEmail(email : string){
+    const myFormData = { "userEmail" : email };
+    return this.http.post(
+      this.urls.sendEmail,
+      myFormData,
+      this.productService.getRequestOptionsWithAuth()
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {console.log(error); return null;}),
+    );
   }
 }
