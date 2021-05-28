@@ -12,7 +12,13 @@
       </div>
 
       <div class="col d-flex flex-column justify-content-between">
-        <h2> {{p.tshirt.tshirtName}} </h2>
+
+        <div class="well inline-headers">
+          <h2> {{p.tshirt.tshirtName}} </h2>
+          <i class="fa fa-heart" *ngIf="isFavorited" (click)="toggleSelected()"></i>
+          <i class="fa fa-heart-o" *ngIf="!isFavorited" (click)="toggleSelected()"></i>
+        </div>
+
         <hr />
         <div class="col d-flex flex-column justify-content-between">
           <div class="d-flex align-items-center mb-3">

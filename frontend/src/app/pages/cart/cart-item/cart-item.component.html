@@ -2,7 +2,7 @@
   <div class="p-2">
     <img [src]="imgSrc" alt="" width="70" class="img-fluid rounded shadow-sm">
     <div class="ml-3 d-inline-block align-middle ms-4">
-      <h5> <a href="#" class="text-dark d-inline-block">{{tshirtName}}</a></h5>
+      <h5> <a class="text-dark d-inline-block" [routerLink]="['/product', product['tshirtId']]">{{tshirtName}}</a></h5>
     </div>
   </div>
 </th>

@@ -13,13 +13,19 @@
   background-color:orange;
 }
 
-.btn-outline-warning:hover {
-  background-color: black;
-  color: #f0ad4e;
+.fa-heart {
+  color: red;
+  float: right;
+  margin-right: 10px;
 }
 
-.full-star:before {
-  content: "\2605";
-  position: absolute;
+.fa-heart-o {
+  float: right;
+  margin-right: 10px;
+}
+
+.inline-headers h2{
+  display: inline-block;
+  vertical-align: baseline;
 }
 
