@@ -54,7 +54,6 @@ export class UserComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
     }else{
       wishlist = JSON.parse(userWishlistStr);
     }
-    this.localStorageService.setItem("WISHLIST", JSON.stringify(wishlist));
 
     console.log(wishlist);
     for(let i = 0; i < wishlist.length; i++){

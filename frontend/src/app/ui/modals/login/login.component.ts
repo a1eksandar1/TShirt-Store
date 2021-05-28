@@ -1,3 +1,4 @@
+import { LocalStorageService } from 'src/app/services/localstorage/local-storage.service';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -13,13 +14,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild('closeModal') closeModal: ElementRef;
   loginForm: FormGroup;
   loginSub: Subscription;
-  
+
   @ViewChild('email') emailInput: ElementRef;
   @ViewChild('password') passwordInput: ElementRef;
 
   @ViewChild('alert') alert: ElementRef;
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private localStorageService: LocalStorageService
+  ) {
     this.loginForm = new FormGroup({
       email: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required])
@@ -36,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public login(): void {
     (this.alert.nativeElement as HTMLDivElement).hidden = true;
-    
+
     if (this.loginForm.invalid) {
       this.checkErrors("email",this.emailInput);
       this.checkErrors("password",this.passwordInput);
@@ -49,6 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       console.log(value);
       if(value != null) {
         this.closeModal.nativeElement.click();
+        this.localStorageService.setItem("WISHLIST", JSON.stringify(value.wishlist));
+        console.log(this.localStorageService.getItem("WISHLIST"));
       } else {
         (this.alert.nativeElement as HTMLDivElement).hidden = false;
         (this.alert.nativeElement as HTMLDivElement).innerText = "E-mail or password incorrect!";

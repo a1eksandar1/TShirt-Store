@@ -68,7 +68,6 @@ export class ProductComponent implements OnInit, OnDestroy {
       (u) => {
         this.user = u;
         if(this.user != null){
-          this.productService.initWishlistLocally(this.user);
           this.isFavorited = this.checkIfProductInUserWishlist();
         }
       }

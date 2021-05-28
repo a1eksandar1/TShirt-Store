@@ -142,9 +142,6 @@ export class ProductService {
     this.toastService.successToast("Item added to cart!");
   }
 
-  initWishlistLocally(currUser : User){
-    this.localStorageService.setItem("WISHLIST", JSON.stringify(currUser.wishlist));
-  }
 
   getImageSrc(imgSrc : string): string {
     return this.urls.backend + imgSrc;
