@@ -1,3 +1,8 @@
+@font-face {
+  font-family: myfont;
+  src: url(/assets/myfont.otf);
+}
+
 .logo {
   /* 21-ProdavnicaMajica */
   font-family: 'Montserrat', sans-serif;
@@ -10,4 +15,16 @@
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
 
   cursor:pointer;
+}
+
+/* @font-face {
+  font-family: myFirstFont;
+  src: url(assets/BordDemo-axaBa.otf);
+} */
+
+div.storeName{
+  font-family: myfont !important;
+  /* -webkit-text-stroke: 2px rgb(240, 173, 78); width and color */
+  color: rgb(255, 193, 7);
+  padding-bottom: 20px;
 }
