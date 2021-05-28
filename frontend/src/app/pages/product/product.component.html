@@ -15,8 +15,8 @@
 
         <div class="well inline-headers">
           <h2> {{p.tshirt.tshirtName}} </h2>
-          <i class="fa fa-heart" *ngIf="isFavorited" (click)="toggleSelected()"></i>
-          <i class="fa fa-heart-o" *ngIf="!isFavorited" (click)="toggleSelected()"></i>
+          <i class="fa fa-heart" *ngIf="isFavorited" (click)="toggleFavorited()"></i>
+          <i class="fa fa-heart-o" *ngIf="!isFavorited" (click)="toggleFavorited()"></i>
         </div>
 
         <hr />
@@ -149,7 +149,7 @@
             <button
             type="button"
             class="btn primaryButton me-2"
-            (click)="authService.isLoggedIn() ? addItemToCartAndGoToCart() : tellUserToLogIn()"
+            (click)="authService.isLoggedIn() ? addItemToCartAndGoToCart() : tellUserToLogIn('Please log in.')"
             >
               Buy now
             </button>

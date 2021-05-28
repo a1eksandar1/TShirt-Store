@@ -27,7 +27,10 @@
               name="email"
               formControlName="email"
               required
+              #email
+              (blur)="checkErrors('email', emailInput)"
             />
+            <div class="invalid-feedback">Please input the e-mail address!</div>
           </div>
 
           <div class="form-group">
@@ -39,9 +42,13 @@
               name="password"
               formControlName="password"
               required
+              #password
+              (blur)="checkErrors('password', passwordInput)"
             />
+            <div class="invalid-feedback">Please input your password!</div>
           </div>
         </div>
+        <div class="alert alert-danger" hidden #alert></div>
         <div class="modal-footer bg-dark text-white">
           <button
             type="button"

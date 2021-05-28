@@ -11,7 +11,7 @@ module.exports.shopsGetAll = (req, res, next) => {
     .then((shops) => {
       const response = {
         numberOfShops: shops.length,
-        shopsSignedUp: shops.map((shop) => {
+        shopsAvailable: shops.map((shop) => {
           return {
             _id: shop._id,
             name: shop.name,

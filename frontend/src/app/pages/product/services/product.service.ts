@@ -1,3 +1,4 @@
+import { User } from './../../../models/user.model';
 import { TShirt } from './../../../models/tshirt.model';
 import { Observable} from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -19,7 +20,7 @@ export class ProductService {
     rateProduct: "http://localhost:3000/tshirts",
     backend: "http://localhost:3000/",
     postOrder: "http://localhost:3000/orders/",
-    addToWishlist: "http://localhost:3000/users",
+    wishlist: "http://localhost:3000/users",
   }
 
   constructor(
@@ -50,7 +51,7 @@ export class ProductService {
       myFormData,
       this.getRequestOptionsWithAuth()
     ).pipe(
-      catchError((error: HttpErrorResponse) => {return null;}),
+      catchError((error: HttpErrorResponse) => {console.log(error); return null;}),
     );
   }
 
@@ -61,7 +62,7 @@ export class ProductService {
       myFormData,
       this.getRequestOptionsWithAuth()
     ).pipe(
-      catchError((error: HttpErrorResponse) => {return null;}),
+      catchError((error: HttpErrorResponse) => {console.log(error); return null;}),
     );
   }
 
@@ -93,18 +94,29 @@ export class ProductService {
       myFormData,
       this.getRequestOptionsWithAuth()
     ).pipe(
-      catchError((error: HttpErrorResponse) => {return null}),
+      catchError((error: HttpErrorResponse) => {console.log(error); return null}),
     );
   }
 
   addToWishlist(userId : string, tshirtId : string){
     const myFormData = { userId: userId, tshirtId: tshirtId };
     return this.http.post(
-      `${this.urls.addToWishlist}/${userId}/addToWishlist`,
+      `${this.urls.wishlist}/${userId}/addToWishlist`,
       myFormData,
       this.getRequestOptionsWithAuth()
     ).pipe(
-      catchError((error: HttpErrorResponse) => {return null;}),
+      catchError((error: HttpErrorResponse) => {console.log(error); return null;}),
+    );
+  }
+
+  removeFromWishlist(userId : string, tshirtId : string){
+    const myFormData = { userId: userId, tshirtId: tshirtId };
+    return this.http.post(
+      `${this.urls.wishlist}/${userId}/removeFromWishlist`,
+      myFormData,
+      this.getRequestOptionsWithAuth()
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {console.log(error); return null;}),
     );
   }
 
@@ -128,6 +140,10 @@ export class ProductService {
       this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
     }
     this.toastService.successToast("Item added to cart!");
+  }
+
+  initWishlistLocally(currUser : User){
+    this.localStorageService.setItem("WISHLIST", JSON.stringify(currUser.wishlist));
   }
 
   getImageSrc(imgSrc : string): string {
