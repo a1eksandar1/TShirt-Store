@@ -48,7 +48,7 @@ import { LoadingComponent } from './pages/loading/loading.component';
     CommentComponent,
     CarouselComponent,
     DesignComponent,
-    MapsComponent
+    MapsComponent,
     ToastComponent,
     LoadingComponent
   ],
