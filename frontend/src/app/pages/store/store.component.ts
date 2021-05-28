@@ -29,6 +29,8 @@ export class StoreComponent implements OnInit, OnDestroy {
   public tshirtsAlphAtZ: TShirt[];
   public tshirtsPriceLtH: TShirt[];
   public tshirtsPriceHtL: TShirt[];
+  public tshirtsPopularity: TShirt[];
+  public tshirtsRating: TShirt[];
 
   private _sortBy: SortBy = SortBy.NameAtZ;
   public get sortBy() :SortBy {
@@ -45,6 +47,12 @@ export class StoreComponent implements OnInit, OnDestroy {
         break;
       case SortBy.PriceLtH:
         this.tshirts = this.tshirtsPriceLtH;
+        break;
+      case SortBy.Popularity:
+        this.tshirts = this.tshirtsPopularity;
+        break;
+      case SortBy.Rating:
+        this.tshirts = this.tshirtsRating;
         break;
       default:
         break;
@@ -101,7 +109,7 @@ export class StoreComponent implements OnInit, OnDestroy {
         return false;
       }
       if(value.tshirtName.toLowerCase().includes(this.searchService.keyword.toLowerCase())) {
-        console.log(value.tshirtName, value.agreeToShow);
+        console.log(value.tshirtName, value.ratingSum, value.numberOfRatings, this.avgRating(value));
         return true;
       }
       return false;
@@ -128,9 +136,27 @@ export class StoreComponent implements OnInit, OnDestroy {
     this.tshirtsPriceHtL.sort((a: TShirt, b: TShirt) => {
       return b.price - a.price;
     });
+    
+    this.tshirtsPopularity = [...this.tshirts];
+    this.tshirtsPopularity.sort((a: TShirt, b: TShirt) => {
+      return b.popularity - a.popularity;
+    });
+    this.tshirtsRating = [...this.tshirts];
+    this.tshirtsRating.sort((a: TShirt, b: TShirt) => {
+      return this.avgRating(b) - this.avgRating(a);
+    });
 
     this.tshirts = this.tshirtsAlphAtZ;
     this.showPerPage = this.showPerPage;
+  }
+
+  public avgRating(tshirt: TShirt): number {
+    if(tshirt.ratingSum == 0) {
+      return 0;
+    }
+    else {
+      return tshirt.ratingSum/tshirt.numberOfRatings;
+    }
   }
 
   ngOnDestroy(): void {

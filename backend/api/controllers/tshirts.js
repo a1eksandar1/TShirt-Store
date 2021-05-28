@@ -18,7 +18,8 @@ module.exports.tshirtsGetAll = (req, res, next) => {
             ratingSum: tshirt.ratingSum,
             numberOfRatings: tshirt.numberOfRatings,
             agreeToShow: tshirt.agreeToShow,
-            comments: tshirt.comments
+            comments: tshirt.comments,
+            popularity: tshirt.popularity
           };
         }),
       };
