@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { JwtService } from "src/app/services/common/jwt.service";
 import { map, catchError } from "rxjs/operators";
 import { IJWTTokenData } from './common/models/jwt-token-data.model';
+import { ToastService } from '../ui/toast/service/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class AuthService {
     loginUser: "http://localhost:3000/users/login/"
   };
 
-  constructor(private http: HttpClient, private jwtService: JwtService) { }
+  constructor(private http: HttpClient, private jwtService: JwtService, private toast: ToastService) { }
 
   public isLoggedIn(): boolean {
     return (this.jwtService.getToken() != null);
@@ -42,7 +43,7 @@ export class AuthService {
   public registerUser(username: string, password: string, email: string): Observable<string> {
     const body = { email, username, password};
     return this.http.post<{ message: string }>(this.urls.registerUser, body).pipe(
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
+      catchError((error: HttpErrorResponse) => this.handleErrorRegistration(error)),
       map((response: { message: string }) => this.checkRegistration(response))
     );
   }
@@ -50,7 +51,7 @@ export class AuthService {
   public loginUser(email: string, password: string): Observable<User> {
     const body = { email, password };
     return this.http.post<{ token: string }>(this.urls.loginUser, body).pipe(
-      catchError((error: HttpErrorResponse) => this.handleError(error)),
+      catchError((error: HttpErrorResponse) => this.handleErrorLogin(error)),
       map((response: { token: string }) => this.mapResponseToUser(response))
     );
   }
@@ -60,10 +61,18 @@ export class AuthService {
     this.userSubject.next(null);
   }
 
-  private handleError(error: HttpErrorResponse): Observable<{ token: string }> {
+  private handleErrorLogin(error: HttpErrorResponse): Observable<{ token: string }> {
     const serverError: { message: string; status: number; stack: string } = error.error;
-    window.alert(`There was an error: ${serverError.message}. Server returned code: ${serverError.status}`);
+    this.toast.errorToast(serverError.message)
+    //window.alert(`There was an error: ${serverError.message}. Server returned code: ${serverError.status}`);
     return of({ token: this.jwtService.getToken() });
+  }
+
+  private handleErrorRegistration(error: HttpErrorResponse): Observable<{ message: string }> {
+    const serverError: { message: string; status: number; stack: string } = error.error;
+    this.toast.errorToast(serverError.message)
+    //window.alert(`There was an error: ${serverError.message}. Server returned code: ${serverError.status}`);
+    return of({ message: serverError.message });
   }
 
   private mapResponseToUser(response: { token: string }): User {

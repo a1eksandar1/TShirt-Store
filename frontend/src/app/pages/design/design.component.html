@@ -108,19 +108,26 @@
           (click)="pickColor($event)"
         />
       </div>
-      <label for="formFileLg" class="form-label"
-        >Choose an image for your shirt.
-      </label>
-      <input
-        class="form-control form-control-lg"
-        id="formFileLg"
-        type="file"
-        (change)="selectFiles($event)"
-      />
+
+      <div class="form-group has-validation">
+        <label for="formFileLg" class="form-label"
+          >Choose an image for your shirt.
+        </label>
+        <input
+          class="form-control form-control-lg"
+          id="formFileLg"
+          type="file"
+          (change)="selectFiles($event)"
+          required
+          #file
+          (blur)="fileHasErrors()"
+        />
+        <div class="invalid-feedback">Must select an image file!</div>
+      </div>
       <div class="d-flex justify-content-center">
         <canvas #canvas></canvas>
       </div>
-      <div class="form-group">
+      <div class="form-group has-validation">
         <label class="form-label" for="name">T-Shirt name</label>
         <input
           class="form-control"
@@ -129,9 +136,14 @@
           name="name"
           formControlName="tshirtName"
           required
+          #tshirtName
+          (blur)="checkErrors('tshirtName', tshirtNameInput)"
         />
+        <div class="invalid-feedback">
+          T-Shirt name needs to be at least 4 characters long!
+        </div>
       </div>
-      <div class="form-group" *ngIf="isAdmin()">
+      <div class="form-group has-validation" *ngIf="isAdmin()">
         <label class="form-label" for="price ">Price</label>
         <input
           class="form-control"
@@ -140,8 +152,12 @@
           name="price"
           formControlName="price"
           required
+          #price
+          (blur)="checkErrors('price', priceInput)"
         />
+        <div class="invalid-feedback">Price needs to be greater than $10!</div>
       </div>
+      <div class="alert alert-danger" hidden #alert></div>
       <div class="form-group">
         <button type="button" class="btn btn-warning mt-3 mb-3" type="submit">
           Create

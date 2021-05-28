@@ -8,6 +8,7 @@
 | POST    | /users/signup                | Sign up                      | email, username, password, level [optional] |                                                    |
 | POST    | /users/login                 | Login                        | email, password                             | token { \_id, email, username, wishlist, isAdmin } |
 | POST    | /users/:userId/addToWishlist | Add tshirt to wishlist       | tshirtId                                    | userId, tshirtId                                   |
+| POST    | /users/:userId/removeFromWishlist | Remove tshirt from wishlist       | tshirtId                                    | userId, tshirtId                                   |
 | DELETE  | /users/{userId}              | Delete user with \_id=userId |                                             |                                                    |
 | PATCH   | /users                       | Change password              | email, currentPassword, newPassword         |                                                    |
 
