@@ -69,7 +69,9 @@ module.exports.shopsGetById = (req, res, next) => {
           const shop = new Shop({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
-            address: req.body.address
+            address: req.body.address,
+            lat:req.body.lat,
+            lng:req.body.lng
           });
   
           shop
@@ -81,7 +83,9 @@ module.exports.shopsGetById = (req, res, next) => {
                 addedShop: {
                   _id: result._id,
                   name: result.name,
-                  address: result.adress
+                  address: result.address,
+                  lat:req.body.lat,
+                  lng:req.body.lng
                 },
               });
             })
