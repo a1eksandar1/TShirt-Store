@@ -82,7 +82,7 @@ U browser-u otvorite *http://localhost:4200/*.
 
 ## Demo
 
-
+https://1drv.ms/v/s!AgGIgCBogcrekN4RRK61mbBgl38ZtQ
 
 ## Dokumentacija
 
