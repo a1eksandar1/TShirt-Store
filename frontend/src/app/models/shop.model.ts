@@ -4,6 +4,7 @@ export class Shop {
     public name: string = "Shop",
     public address: string = "Shop Address",
     public lat: string="1",
-    public lng:string="1"
+    public lng:string="1",
+    public email:string="email"
     ){}
 }

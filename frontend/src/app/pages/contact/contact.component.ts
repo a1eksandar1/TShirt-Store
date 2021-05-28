@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Shop } from 'src/app/models/shop.model';
+import { MapsService } from './maps/service/maps.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  public shops: Observable<Shop[]>;
+
+
+  constructor(private map:MapsService) {
+    this.shops=this.map.shops;
+  }
 
   ngOnInit(): void {
   }
