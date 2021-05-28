@@ -26,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './ui/toast/toast.component';
 import { MapsComponent } from './pages/contact/maps/maps.component';
 import{AgmCoreModule} from '@agm/core';
+import { LoadingComponent } from './pages/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +48,9 @@ import{AgmCoreModule} from '@agm/core';
     CommentComponent,
     CarouselComponent,
     DesignComponent,
-    ToastComponent,
     MapsComponent
+    ToastComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

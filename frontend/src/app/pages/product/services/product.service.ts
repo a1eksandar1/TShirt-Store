@@ -18,7 +18,8 @@ export class ProductService {
     postComment: "http://localhost:3000/tshirts",
     rateProduct: "http://localhost:3000/tshirts",
     backend: "http://localhost:3000/",
-    postOrder: "http://localhost:3000/orders/"
+    postOrder: "http://localhost:3000/orders/",
+    addToWishlist: "http://localhost:3000/users",
   }
 
   constructor(
@@ -93,6 +94,17 @@ export class ProductService {
       this.getRequestOptionsWithAuth()
     ).pipe(
       catchError((error: HttpErrorResponse) => {return null}),
+    );
+  }
+
+  addToWishlist(userId : string, tshirtId : string){
+    const myFormData = { userId: userId, tshirtId: tshirtId };
+    return this.http.post(
+      `${this.urls.addToWishlist}/${userId}/addToWishlist`,
+      myFormData,
+      this.getRequestOptionsWithAuth()
+    ).pipe(
+      catchError((error: HttpErrorResponse) => {return null;}),
     );
   }
 

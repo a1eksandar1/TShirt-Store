@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { JwtService } from "src/app/services/common/jwt.service";
@@ -32,7 +32,7 @@ export class AuthService {
   public sendUserDataIfExists(): User {
     const payloadData: IJWTTokenData = this.jwtService.getDataFromToken();
     const user: User = payloadData
-      ? new User(payloadData._id, payloadData.email, payloadData.username,payloadData.isAdmin)
+      ? new User(payloadData._id, payloadData.email, payloadData.username,payloadData.isAdmin,payloadData.wishlist)
       : null;
     this.userSubject.next(user);
     //console.log(user);
@@ -76,6 +76,19 @@ export class AuthService {
   private checkRegistration(response: { message: string }): string {
     console.log(response);
     return response.message;
+  }
+
+  public addToWishlist(tshirtId: string): void{
+    let user = this.sendUserDataIfExists();
+    user.wishlist.push(tshirtId);
+    this.userSubject.next(user);
+    console.log("Wishlist: ", user.wishlist);
+  }
+  public removeFromWishlist(tshirtId: string): void{
+    let user = this.sendUserDataIfExists();
+    user.wishlist = user.wishlist.filter((value: string) => (value!=tshirtId));
+    this.userSubject.next(user);
+    console.log("Wishlist: ", user.wishlist);
   }
 
 }

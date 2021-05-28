@@ -97,7 +97,7 @@ export class StoreComponent implements OnInit, OnDestroy {
     // }
 
     this.tshirts = this.tshirts.filter((value: TShirt) => {
-      if(value.tshirtName.includes(this.searchService.keyword)) {
+      if(value.tshirtName.toLowerCase().includes(this.searchService.keyword.toLowerCase())) {
         console.log(value.tshirtName);
         return true;
       }

@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
       if(this.cartItemsArray[i]["tshirtId"] === this.cartItemsArray[i+1]["tshirtId"] &&
          this.cartItemsArray[i]["size"] === this.cartItemsArray[i+1]["size"])
       {
-        this.cartItemsArray[i]["quantity"]++;
+        this.cartItemsArray[i]["quantity"] += this.cartItemsArray[i+1]["quantity"];
         this.cartItemsArray.splice(i+1, 1);
         i--;
       }
@@ -94,12 +94,22 @@ export class CartComponent implements OnInit {
         this.cartItemsArray[i]["quantity"],
         [formData.streetAddress, formData.city, formData.country, formData.zipcode].join(", "),
         formData.phone
-      ).subscribe((val) => {console.log(val)});
+      ).subscribe(
+        (val) => {console.log(val)},
+        (error) => {
+          console.log(error);
+        }
+      );
     }
 
-    console.log("sent");
-  }
+    // neki error checking bi mogo da pogledam
 
+    while(this.cartItemsArray.length != 0){
+      this.cartItemsArray.pop();
+    }
+    this.localStorageService.clear();
+    this.toastService.successToast("All orders sent successfully");
+  }
 
 
   deleteItem(index: number) {
