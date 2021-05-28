@@ -79,9 +79,11 @@ module.exports.usersPostLogin = (req, res, next) => {
             let isAdmin=user.level=="admin"?true:false;
             const token = jwt.sign(
               {
-                userId: user._id,
+                _id: user._id,
                 email: user.email,
-
+                username: user.username,
+                wishlist: user.wishlist,
+                isAdmin: isAdmin,
               },
               process.env.JWT_SECRET,
               {
@@ -90,12 +92,6 @@ module.exports.usersPostLogin = (req, res, next) => {
             );
             return res.status(200).json({
               message: "Login successful",
-              user:{
-                userId: user._id,
-                username: user.username,
-                wishlist: user.wishlist,
-                isAdmin: isAdmin
-              },
               token: token
             });
             // incorrect password
@@ -114,6 +110,7 @@ module.exports.usersPostLogin = (req, res, next) => {
       });
     });
 };
+
 
 module.exports.usersDeleteById = (req, res, next) => {
   User.deleteOne({ _id: req.params.userId })
