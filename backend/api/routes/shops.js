@@ -27,3 +27,5 @@ router.delete(
     checkAdminAuth,
     shopsController.shopsDeleteById
 );
+
+module.exports = router;

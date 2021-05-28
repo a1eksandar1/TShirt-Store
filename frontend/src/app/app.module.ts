@@ -24,6 +24,8 @@ import { CarouselComponent } from './pages/home/carousel/carousel.component';
 import { DesignComponent } from './pages/design/design.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './ui/toast/toast.component';
+import { MapsComponent } from './pages/contact/maps/maps.component';
+import{AgmCoreModule} from '@agm/core';
 import { LoadingComponent } from './pages/loading/loading.component';
 
 @NgModule({
@@ -46,6 +48,7 @@ import { LoadingComponent } from './pages/loading/loading.component';
     CommentComponent,
     CarouselComponent,
     DesignComponent,
+    MapsComponent,
     ToastComponent,
     LoadingComponent
   ],
@@ -55,7 +58,10 @@ import { LoadingComponent } from './pages/loading/loading.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyCFUz7BVzViqej2pUXC0VfzOxALiTlHHjA'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

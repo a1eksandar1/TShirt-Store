@@ -6,17 +6,27 @@ const User = require("../models/user");
 const Shop = require("../models/shops");
 
 module.exports.shopsGetAll = (req, res, next) => {
-    Shop.find()
+  Shop.find()
     .exec()
     .then((shops) => {
-      res.status(200).json({
-        numberOfShops: shop.length,
-        shops: shops,
-      });
+      const response = {
+        numberOfShops: shops.length,
+        shopsSignedUp: shops.map((shop) => {
+          return {
+            _id: shop._id,
+            name: shop.name,
+            address: shop.address,
+            lat: shop.lat,
+            lng: shop.lng
+          };
+        }),
+      };
+      res.status(200).json(response);
     })
-    .catch((error) => {
+    .catch((err) => {
+      console.log(err);
       res.status(500).json({
-        error: error,
+        error: err,
       });
     });
 };
@@ -34,6 +44,8 @@ module.exports.shopsGetById = (req, res, next) => {
               _id: shop._id,
               name: shop.name,
               address: shop.address,
+              lat: shop.lat,
+              lng: shop.lng
             },
           });
         } else {
@@ -58,10 +70,12 @@ module.exports.shopsGetById = (req, res, next) => {
               "Shop with that name exists, change name or use patch request",
           });
         } else {
-          const shop = new shop({
+          const shop = new Shop({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
-            address: req.body.address
+            address: req.body.address,
+            lat:req.body.lat,
+            lng:req.body.lng
           });
   
           shop
@@ -73,7 +87,9 @@ module.exports.shopsGetById = (req, res, next) => {
                 addedShop: {
                   _id: result._id,
                   name: result.name,
-                  address: result.adress
+                  address: result.address,
+                  lat:req.body.lat,
+                  lng:req.body.lng
                 },
               });
             })
