@@ -1,14 +1,8 @@
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { TShirt } from 'src/app/models/tshirt.model';
 import { JwtService } from 'src/app/services/common/jwt.service';
-<<<<<<< HEAD
-=======
 import { ToastService } from 'src/app/ui/toast/service/toast.service';
-import { OrderService } from '../../cart/services/order.service';
->>>>>>> 16e0d6f17d8aca16bcd30115b895060a0b8946a7
 import { ProductService } from '../../product/services/product.service';
 
 @Injectable({
