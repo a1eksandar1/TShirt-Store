@@ -20,6 +20,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
   @ViewChild('tshirtName') tshirtNameInput: ElementRef;
   @ViewChild('price') priceInput: ElementRef;
 
+  @ViewChild('checkbox') checkbox: ElementRef;
+
   @ViewChild('alert') alert: ElementRef;
 
   @ViewChild('canvas')
@@ -106,7 +108,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
     let req = this.design.createTShirt(
       new File([this.doneImage], this.designForm.value.tshirtName + Date.now() + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      this.designForm.value.price
+      this.designForm.value.price,
+      (this.checkbox.nativeElement as HTMLInputElement).checked
     )
     this.http.request<Object>(req).pipe(
       catchError((error: HttpErrorResponse) => {

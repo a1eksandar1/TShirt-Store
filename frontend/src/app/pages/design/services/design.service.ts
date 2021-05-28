@@ -18,11 +18,12 @@ export class DesignService {
 
   constructor(private http: HttpClient, private jwtService: JwtService, private cart: ProductService, private router: Router, private toast: ToastService) { }
 
-  createTShirt(selectedFile: File, tshirtName: string, price: number): HttpRequest<FormData> {
+  createTShirt(selectedFile: File, tshirtName: string, price: number, agreeToShow: boolean): HttpRequest<FormData> {
     const formData: FormData = new FormData();
     formData.append("image", selectedFile);
     formData.append("tshirtName", tshirtName);
     formData.append("price", price.toString());
+    formData.append("agreeToShow", agreeToShow.toString());
     const headers: HttpHeaders = new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`);
 
     const req: HttpRequest<FormData> = new HttpRequest<FormData>(

@@ -97,8 +97,11 @@ export class StoreComponent implements OnInit, OnDestroy {
     // }
 
     this.tshirts = this.tshirts.filter((value: TShirt) => {
+      if(value.agreeToShow == false) {
+        return false;
+      }
       if(value.tshirtName.toLowerCase().includes(this.searchService.keyword.toLowerCase())) {
-        console.log(value.tshirtName);
+        console.log(value.tshirtName, value.agreeToShow);
         return true;
       }
       return false;
