@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const tshirtsRoutes=require('./api/routes/tshirts.js');
 const usersRoutes=require('./api/routes/users.js');
 const ordersRoutes=require('./api/routes/orders.js');
+const shopsRoutes=require('./api/routes/shops.js');
 
 mongoose.connect("mongodb+srv://pveb:"+process.env.MONGO_PASSWORD+"@cluster0.hzcc1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
 { 
@@ -39,6 +40,7 @@ app.use((req,res,next)=>{
 app.use('/tshirts',tshirtsRoutes);
 app.use('/users',usersRoutes);
 app.use('/orders',ordersRoutes);
+app.use('/shops',shopsRoutes);
 
 app.use((req,res,next)=>{
     const error=new Error("Not found (wrong endpoint)");

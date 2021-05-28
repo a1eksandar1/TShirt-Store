@@ -40,6 +40,7 @@ module.exports.tshirtsGetById = (req, res, next) => {
       console.log(tshirt);
 
       if (tshirt) {
+        Tshirt.findOneAndUpdate({_id: id}, {$inc: {popularity:1}}, {new: true}, function (err, doc) {});
         res.status(200).json({
           tshirt: {
             _id: tshirt._id,
