@@ -1,3 +1,9 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<div class="container">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+    <agm-marker
+      *ngFor="let shop of shops"
+      [latitude]="shop.lat"
+      [longitude]="shop.lng"
+    ></agm-marker>
+  </agm-map>
+</div>
