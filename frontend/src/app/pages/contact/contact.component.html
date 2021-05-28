@@ -1,3 +1,8 @@
 <app-maps>
 
 </app-maps>
+
+
+<app-shop *ngFor="let shop of shops | async" [shop]="shop"></app-shop>
+
+

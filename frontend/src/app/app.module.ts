@@ -28,6 +28,7 @@ import { MapsComponent } from './pages/contact/maps/maps.component';
 import{AgmCoreModule} from '@agm/core';
 import { LoadingComponent } from './pages/loading/loading.component';
 import { OrderComponent } from './pages/user/order-item/order/order.component';
+import { ShopComponent } from './pages/contact/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { OrderComponent } from './pages/user/order-item/order/order.component';
     MapsComponent,
     ToastComponent,
     LoadingComponent,
-    OrderComponent
+    OrderComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,8 @@ module.exports.shopsGetAll = (req, res, next) => {
             name: shop.name,
             address: shop.address,
             lat: shop.lat,
-            lng: shop.lng
+            lng: shop.lng,
+            email: shop.email
           };
         }),
       };
@@ -45,7 +46,8 @@ module.exports.shopsGetById = (req, res, next) => {
               name: shop.name,
               address: shop.address,
               lat: shop.lat,
-              lng: shop.lng
+              lng: shop.lng,
+              email: shop.email
             },
           });
         } else {
@@ -75,7 +77,8 @@ module.exports.shopsGetById = (req, res, next) => {
             name: req.body.name,
             address: req.body.address,
             lat:req.body.lat,
-            lng:req.body.lng
+            lng:req.body.lng,
+            email: req.body.email
           });
   
           shop
@@ -89,7 +92,8 @@ module.exports.shopsGetById = (req, res, next) => {
                   name: result.name,
                   address: result.address,
                   lat:req.body.lat,
-                  lng:req.body.lng
+                  lng:req.body.lng,
+                  email: result.email
                 },
               });
             })

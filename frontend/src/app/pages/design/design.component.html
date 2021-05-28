@@ -6,104 +6,9 @@
     <form class="mt-5" [formGroup]="designForm" (ngSubmit)="createTShirt()">
       <div class="row">
         <img
+          *ngFor="let color of colors"
           class="col-2"
-          src="assets/defaultTshirts/tshirtDefault.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultBlack.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultBlue.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGreen.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultRed.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultYellow.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient1.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient2.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient3.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient4.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient5.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient6.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient7.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient8.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient9.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient10.png"
-          alt=""
-          (click)="pickColor($event)"
-        />
-        <img
-          class="col-2"
-          src="assets/defaultTshirts/tshirtDefaultGradient11.png"
+          [src]="color"
           alt=""
           (click)="pickColor($event)"
         />
@@ -143,6 +48,19 @@
           T-Shirt name needs to be at least 4 characters long!
         </div>
       </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="checkbox"
+          #checkbox
+          checked
+        />
+        <label class="form-check-label" for="checkbox">
+          I want to upload this design publicly.
+        </label>
+      </div>
       <div class="form-group has-validation" *ngIf="isAdmin()">
         <label class="form-label" for="price ">Price</label>
         <input
@@ -157,7 +75,7 @@
         />
         <div class="invalid-feedback">Price needs to be greater than $10!</div>
       </div>
-      <div class="alert alert-danger" hidden #alert></div>
+      <div class="alert alert-danger mt-3" hidden #alert></div>
       <div class="form-group">
         <button type="button" class="btn btn-warning mt-3 mb-3" type="submit">
           Create

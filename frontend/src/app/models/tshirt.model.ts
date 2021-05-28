@@ -5,7 +5,9 @@ export class TShirt {
     public price: number = 1,
     public image: string = "",
     public comments: string[] = [],
-    public ratingSum: number,
-    public numberOfRatings: number
+    public ratingSum: number = 0,
+    public numberOfRatings: number = 0,
+    public agreeToShow: boolean = true,
+    public popularity: number = 0
     ){}
 }

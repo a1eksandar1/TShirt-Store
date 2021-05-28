@@ -17,6 +17,9 @@ const shopSchema = mongoose.Schema({
     lng:{
         type:String,
         required:true
+    },
+    email:{
+        type: String
     }
 });
 
