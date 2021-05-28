@@ -13,7 +13,18 @@ export class MapsComponent {
 
   location: Object;
 
+  public shops: Shop[] = [];
+
   constructor(private map:MapsService){}
+
+
+  ngOnInit(): void {
+    this.tshirtsSub = this.store.getShirts().subscribe((payload: tshirtsResponse) => {
+      this.tshirts = [...payload.tshirtsAvailable];
+      this.setupStore();
+    });
+  }
+
 
   ngOnInit(){
     this.map.getLocation().subscribe(data=>{
