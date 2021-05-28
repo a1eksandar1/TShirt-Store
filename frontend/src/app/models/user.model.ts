@@ -3,6 +3,7 @@ export class User {
     public _id: string = "1",
     public email: string = "missing email frontend",
     public username: string = "missing username frontend",
-    public isAdmin: boolean = false
+    public isAdmin: boolean = false,
+    public wishlist: string[] = []
     ){}
 }

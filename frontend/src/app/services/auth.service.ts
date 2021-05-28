@@ -32,7 +32,7 @@ export class AuthService {
   public sendUserDataIfExists(): User {
     const payloadData: IJWTTokenData = this.jwtService.getDataFromToken();
     const user: User = payloadData
-      ? new User(payloadData._id, payloadData.email, payloadData.username,payloadData.isAdmin)
+      ? new User(payloadData._id, payloadData.email, payloadData.username,payloadData.isAdmin,payloadData.wishlist)
       : null;
     this.userSubject.next(user);
     //console.log(user);
