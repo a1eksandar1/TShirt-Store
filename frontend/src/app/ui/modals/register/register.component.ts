@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.registerSub = this.authService.registerUser(formData.username, formData.password, formData.email).subscribe((value: string) => {
       console.log(value);
       if(value == "User created") {
+        this.registerForm.reset();
         this.closeModal.nativeElement.click();
       } else {
         (this.alert.nativeElement as HTMLDivElement).hidden = false;
