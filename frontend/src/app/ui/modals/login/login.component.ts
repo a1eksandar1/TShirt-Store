@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.loginSub = this.authService.loginUser(formData.email, formData.password).subscribe((value: User) => {
       console.log(value);
       if(value != null) {
+        this.loginForm.reset();
         this.closeModal.nativeElement.click();
         this.localStorageService.setItem("WISHLIST", JSON.stringify(value.wishlist));
         console.log(this.localStorageService.getItem("WISHLIST"));
