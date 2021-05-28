@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastService } from 'src/app/ui/toast/service/toast.service';
 import { DesignService } from './services/design.service';
 
 @Component({
@@ -10,6 +11,12 @@ import { DesignService } from './services/design.service';
 })
 export class DesignComponent implements OnInit, AfterViewInit {
   designForm: FormGroup;
+  
+  @ViewChild('file') fileInput: ElementRef;
+  @ViewChild('tshirtName') tshirtNameInput: ElementRef;
+  @ViewChild('price') priceInput: ElementRef;
+
+  @ViewChild('alert') alert: ElementRef;
 
   @ViewChild('canvas')
   myCanvas: ElementRef<HTMLCanvasElement>;
@@ -22,10 +29,10 @@ export class DesignComponent implements OnInit, AfterViewInit {
   private selectedImageSource;
   private doneImage: Blob;
 
-  constructor(private design: DesignService, private auth: AuthService) {
+  constructor(private design: DesignService, private auth: AuthService, private toast: ToastService) {
     this.designForm = new FormGroup({
-      tshirtName: new FormControl("", [Validators.required]),
-      price: new FormControl("15", [Validators.required])
+      tshirtName: new FormControl("", [Validators.required, Validators.minLength(4)]),
+      price: new FormControl(15, [Validators.required,Validators.min(10)])
     });
   }
 
@@ -43,6 +50,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
       this.startCanvas();
     }
     reader.readAsDataURL(this.selectedFile);
+    this.fileHasErrors();
   }
 
   startCanvas(): void {
@@ -76,13 +84,12 @@ export class DesignComponent implements OnInit, AfterViewInit {
   }
 
   createTShirt() {
-
-    if (this.designForm.invalid) {
-      window.alert("The form is not valid!");
+    if(this.fileHasErrors()) {
       return;
     }
-    if (this.selectedFile == null) {
-      window.alert("Must select a file!");
+    if (this.designForm.invalid) {
+      this.checkErrors("tshirtName",this.tshirtNameInput);
+      this.checkErrors("price",this.priceInput);
       return;
     }
     this.design.createTShirt(
@@ -103,6 +110,30 @@ export class DesignComponent implements OnInit, AfterViewInit {
   pickColor(event: Event) {
     this.selectedColor = (event.target as HTMLImageElement).src;
     this.startCanvas();
+  }
+  
+  fileHasErrors(): boolean {
+    if (this.selectedFile == null) {
+      (this.fileInput.nativeElement  as HTMLInputElement).classList.add("is-invalid");
+      return true;
+    } else {
+      (this.fileInput.nativeElement  as HTMLInputElement).classList.remove("is-invalid");
+      return false;
+    }
+  }
+
+  checkErrors(fieldName: string, fieldRef: ElementRef): string {
+    let errors: ValidationErrors = this.designForm.errors;
+    if(fieldName != "") {
+      errors = this.designForm.get(fieldName).errors;
+    }
+    const hasError: boolean = (errors != null);
+    if(hasError) {
+      (fieldRef.nativeElement  as HTMLInputElement).classList.add("is-invalid");
+    } else {
+      (fieldRef.nativeElement  as HTMLInputElement).classList.remove("is-invalid");
+    }
+    return hasError ? "is-invalid" : "";
   }
 
 }

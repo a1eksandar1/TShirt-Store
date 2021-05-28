@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { PasswordMatchValidator } from './validators/password-match.validator';
 
 @Component({
   selector: 'app-register',
@@ -9,17 +10,24 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-  @ViewChild('closeModal') closeModal: ElementRef
+  @ViewChild('closeModal') closeModal: ElementRef;
   registerForm: FormGroup;
   registerSub: Subscription;
+
+  @ViewChild('email') emailInput: ElementRef;
+  @ViewChild('username') usernameInput: ElementRef;
+  @ViewChild('password') passwordInput: ElementRef;
+  @ViewChild('password2') password2Input: ElementRef;
+
+  @ViewChild('alert') alert: ElementRef;
 
   constructor(private authService: AuthService) { 
     this.registerForm = new FormGroup({
       email: new FormControl("",[Validators.required, Validators.email]),
-      username: new FormControl("",[Validators.required]),
-      password: new FormControl("",[Validators.required]),
+      username: new FormControl("",[Validators.required, Validators.minLength(4)]),
+      password: new FormControl("",[Validators.required, Validators.minLength(4)]),
       password2: new FormControl("",[Validators.required])
-    });
+    },[PasswordMatchValidator]);
   }
   
   public ngOnDestroy(): void {
@@ -30,16 +38,44 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   public register(): void {
+    (this.alert.nativeElement as HTMLDivElement).hidden = true;
+
     if(this.registerForm.invalid) {
-      window.alert("The form is not valid!");
+      this.checkErrors("username",this.usernameInput);
+      this.checkErrors("email",this.emailInput);
+      this.checkErrors("password",this.passwordInput);
+      this.checkErrors("password2",this.password2Input);
+      this.checkErrors("", this.password2Input);
       return;
     }
 
     const formData = this.registerForm.value;
 
-    this.registerSub = this.authService.registerUser(formData.username, formData.password, formData.email).subscribe();
+    this.registerSub = this.authService.registerUser(formData.username, formData.password, formData.email).subscribe((value: string) => {
+      console.log(value);
+      if(value == "User created") {
+        this.closeModal.nativeElement.click();
+      } else {
+        (this.alert.nativeElement as HTMLDivElement).hidden = false;
+        (this.alert.nativeElement as HTMLDivElement).innerText = value;
+      }
+    });
 
-    this.closeModal.nativeElement.click();
   }
+  
+  checkErrors(fieldName: string, fieldRef: ElementRef): string {
+    let errors: ValidationErrors = this.registerForm.errors;
+    if(fieldName != "") {
+      errors = this.registerForm.get(fieldName).errors;
+    }
+    const hasError: boolean = (errors != null);
+    if(hasError) {
+      (fieldRef.nativeElement  as HTMLInputElement).classList.add("is-invalid");
+    } else {
+      (fieldRef.nativeElement  as HTMLInputElement).classList.remove("is-invalid");
+    }
+    return hasError ? "is-invalid" : "";
+  }
+
 
 }
