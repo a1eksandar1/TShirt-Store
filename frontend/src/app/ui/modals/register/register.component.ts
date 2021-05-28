@@ -14,9 +14,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
   registerSub: Subscription;
 
-  @ViewChild('email') emailInput: ElementRef;
+  @ViewChild('emailReg') emailInput: ElementRef;
   @ViewChild('username') usernameInput: ElementRef;
-  @ViewChild('password') passwordInput: ElementRef;
+  @ViewChild('passwordReg') passwordInput: ElementRef;
   @ViewChild('password2') password2Input: ElementRef;
 
   @ViewChild('alert') alert: ElementRef;
