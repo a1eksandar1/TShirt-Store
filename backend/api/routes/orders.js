@@ -21,6 +21,7 @@ router.get(
 );
 
 router.post("/", checkAuth, ordersController.ordersPost);
+router.post("/sendEmail", checkAuth, ordersController.ordersSendEmail);
 
 router.delete(
   "/:orderId",
