@@ -15,7 +15,9 @@ module.exports.shopsGetAll = (req, res, next) => {
           return {
             _id: shop._id,
             name: shop.name,
-            address: shop.address
+            address: shop.address,
+            lat: shop.lat,
+            lng: shop.lng
           };
         }),
       };
@@ -42,6 +44,8 @@ module.exports.shopsGetById = (req, res, next) => {
               _id: shop._id,
               name: shop.name,
               address: shop.address,
+              lat: shop.lat,
+              lng: shop.lng
             },
           });
         } else {
