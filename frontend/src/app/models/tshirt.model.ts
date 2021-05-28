@@ -6,6 +6,7 @@ export class TShirt {
     public image: string = "",
     public comments: string[] = [],
     public ratingSum: number,
-    public numberOfRatings: number
+    public numberOfRatings: number,
+    public agreeToShow: boolean
     ){}
 }

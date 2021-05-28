@@ -1,5 +1,9 @@
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastService } from 'src/app/ui/toast/service/toast.service';
 import { DesignService } from './services/design.service';
@@ -16,6 +20,8 @@ export class DesignComponent implements OnInit, AfterViewInit {
   @ViewChild('tshirtName') tshirtNameInput: ElementRef;
   @ViewChild('price') priceInput: ElementRef;
 
+  @ViewChild('checkbox') checkbox: ElementRef;
+
   @ViewChild('alert') alert: ElementRef;
 
   @ViewChild('canvas')
@@ -29,7 +35,13 @@ export class DesignComponent implements OnInit, AfterViewInit {
   private selectedImageSource;
   private doneImage: Blob;
 
-  constructor(private design: DesignService, private auth: AuthService, private toast: ToastService) {
+  constructor(
+    private design: DesignService, 
+    private auth: AuthService, 
+    private toast: ToastService, 
+    private router: Router,
+    private http: HttpClient
+    ) {
     this.designForm = new FormGroup({
       tshirtName: new FormControl("", [Validators.required, Validators.minLength(4)]),
       price: new FormControl(15, [Validators.required,Validators.min(10)])
@@ -84,6 +96,7 @@ export class DesignComponent implements OnInit, AfterViewInit {
   }
 
   createTShirt() {
+    (this.alert.nativeElement as HTMLDivElement).hidden = true;
     if(this.fileHasErrors()) {
       return;
     }
@@ -92,11 +105,37 @@ export class DesignComponent implements OnInit, AfterViewInit {
       this.checkErrors("price",this.priceInput);
       return;
     }
-    this.design.createTShirt(
+    let req = this.design.createTShirt(
       new File([this.doneImage], this.designForm.value.tshirtName + Date.now() + ".png", {type: 'image/png'})
       ,this.designForm.value.tshirtName,
-      this.designForm.value.price
-    );
+      this.designForm.value.price,
+      (this.checkbox.nativeElement as HTMLInputElement).checked
+    )
+    this.http.request<Object>(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if(error.status == 409) {
+          //console.log("GRESKA");
+          this.toast.errorToast("GRESKA: A shirt with this name already exists!");
+          (this.alert.nativeElement as HTMLDivElement).hidden = false;
+          (this.alert.nativeElement as HTMLDivElement).innerText = "A shirt with this name already exists!";
+        }
+        return of({response: error});
+      }),
+      map((response: HttpResponse<Object>) => {
+        //console.log("subscribed");
+        // console.warn("response from", req)
+        //console.log("Response: ",response);
+        // console.log(response.body);
+        if(response.status == 201)
+        {
+          let id = response.body["addedTshirt"]["_id"];
+          //this.cart.addProductToCart(id,1,1);
+          //console.log(id);        
+          this.router.navigateByUrl("/product/" + id);
+          return;
+        } 
+      })
+    ).subscribe();
   }
 
   loggedIn(): boolean {
