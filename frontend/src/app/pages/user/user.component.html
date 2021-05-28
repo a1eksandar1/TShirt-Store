@@ -1,8 +1,23 @@
-<div class="container-md mx-auto mt-5">
-  <h1>username : {{ user.username }}</h1>
-  <h1>e-mail : {{ user.email }}</h1>
+<div class="container">
+  <div class="row text-center" style="margin:20px">
 
-  <div class="my-5">
+
+    <div>
+      <h5 class="text-muted">username</h5>
+    </div>
+    <div><h3 class="mb-4">{{ user.username }}</h3></div>
+
+
+    <div>
+      <h5 class="text-muted">E-mail</h5>
+    </div>
+    <div><h3>{{ user.email }}</h3></div>
+
+
+    <!-- <div style="background-color:black; height:1px"></div> -->
+</div>
+
+  <div class="my-5" *ngIf='wishlistItems.length>0'>
     <h2>Your wishlist</h2>
     <div class="row row-cols-md-4 row-cols-1 g-3">
       <app-card
@@ -13,7 +28,7 @@
   </div>
   <div class="row">
     <div class="col-lg-12 mt-5 rounded shadow-md">
-      <h2>Previous orders</h2>
+      <h2>Previously ordered T-Shirts</h2>
       <div class="table-responsive">
         <table class="table">
           <thead>
