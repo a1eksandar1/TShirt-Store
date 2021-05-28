@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TShirt } from 'src/app/models/tshirt.model';
 import { JwtService } from 'src/app/services/common/jwt.service';
-import { OrderService } from '../../cart/services/order.service';
 import { ProductService } from '../../product/services/product.service';
 
 @Injectable({

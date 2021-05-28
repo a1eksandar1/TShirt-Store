@@ -29,8 +29,7 @@ export class CartComponent implements OnInit {
     if(!this.authService.isLoggedIn()){
       this.toastService.errorToast("Ne treba da mu se dozvoli uopste da udje ovde ako nije ulogovan, to tamo routing");
     }
-    this.userID = this.authService.sendUserDataIfExists()._id;
-    let cartItems = this.localStorageService.getItem(this.userID);
+    let cartItems = this.localStorageService.getItem("CART");
     if(cartItems == null){
       // prikazi samo "Cart is empty i link ka store-u"
       this.cartIsEmpty = true;
@@ -102,12 +101,10 @@ export class CartComponent implements OnInit {
       );
     }
 
-    // neki error checking bi mogo da pogledam
-
     while(this.cartItemsArray.length != 0){
       this.cartItemsArray.pop();
     }
-    this.localStorageService.clear();
+    this.localStorageService.removeItem("CART"); // ovde treba promeniti
     this.toastService.successToast("All orders sent successfully");
   }
 
@@ -122,11 +119,12 @@ export class CartComponent implements OnInit {
   }
 
   updateLocalStorage(newStorageData : any){
+    let key = "CART";
     if(this.cartItemsArray.length == 0){
-      this.localStorageService.removeItem(this.userID);
+      this.localStorageService.removeItem(key);
     }else{
       newStorageData = JSON.stringify(newStorageData).split(`},`).join(`}\n`).slice(1, -1);
-      this.localStorageService.setItem(this.userID, newStorageData);
+      this.localStorageService.setItem(key, newStorageData);
     }
   }
 

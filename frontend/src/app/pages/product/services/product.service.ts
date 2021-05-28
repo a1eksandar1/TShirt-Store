@@ -120,7 +120,7 @@ export class ProductService {
     );
   }
 
-  private getRequestOptionsWithAuth(){
+  public getRequestOptionsWithAuth(){
     return {
       headers: new HttpHeaders().append("Authorization", `Bearer ${this.jwtService.getToken()}`),
     };
@@ -131,13 +131,13 @@ export class ProductService {
       this.toastService.errorToast("You must be logged in to use this feature.");
       return;
     }
-    let userID = this.authService.sendUserDataIfExists()._id;
+    let key = "CART";
     let cartItem = { tshirtId: productId, size: size, quantity: quantity }
-    if(this.localStorageService.getItem(userID) == null){
-      this.localStorageService.setItem(userID, JSON.stringify(cartItem));
+    if(this.localStorageService.getItem(key) == null){
+      this.localStorageService.setItem(key, JSON.stringify(cartItem));
     }else{
-      let previousItems = this.localStorageService.getItem(userID);
-      this.localStorageService.setItem(userID, previousItems + `\n` + JSON.stringify(cartItem));
+      let previousItems = this.localStorageService.getItem(key);
+      this.localStorageService.setItem(key, previousItems + `\n` + JSON.stringify(cartItem));
     }
     this.toastService.successToast("Item added to cart!");
   }
@@ -150,4 +150,12 @@ export class ProductService {
     return this.urls.backend + imgSrc;
   }
 
+  public getSize(size : number){
+    switch(size){
+      case 0 : return "Small";
+      case 1 : return "Medium";
+      case 2 : return "Large";
+      case 3 : return "Extra large";
+    }
+  }
 }

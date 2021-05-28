@@ -27,6 +27,7 @@ import { ToastComponent } from './ui/toast/toast.component';
 import { MapsComponent } from './pages/contact/maps/maps.component';
 import{AgmCoreModule} from '@agm/core';
 import { LoadingComponent } from './pages/loading/loading.component';
+import { OrderComponent } from './pages/user/order-item/order/order.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { LoadingComponent } from './pages/loading/loading.component';
     DesignComponent,
     MapsComponent,
     ToastComponent,
-    LoadingComponent
+    LoadingComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

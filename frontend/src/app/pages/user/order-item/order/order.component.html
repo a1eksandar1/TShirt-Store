@@ -1,0 +1,11 @@
+<th>
+  <div class="p-2">
+    <img [src]="imgSrc" alt="" width="70" class="img-fluid rounded shadow-sm">
+    <div class="ml-3 d-inline-block align-middle ms-4">
+      <h5> <a class="text-dark d-inline-block" [routerLink]="['/product', order.tshirtId]">{{tshirtName}}</a></h5>
+    </div>
+  </div>
+</th>
+<td class="align-middle"><strong>${{price}}</strong></td>
+<td class="align-middle"><strong>{{order.size}}</strong></td>
+<td class="align-middle"><strong>{{order.quantity}}</strong></td>

@@ -36,15 +36,6 @@ export class CartItemComponent implements OnInit {
     );
   }
 
-  getSize(){
-    switch(this.product.size){
-      case 0 : return "Small";
-      case 1 : return "Medium";
-      case 2 : return "Large";
-      case 3 : return "Extra large";
-    }
-  }
-
   deleteMe() {
     this.totalCost.emit(-this.product["quantity"] * this.price);
     this.delete.emit(this.index);

@@ -7,7 +7,7 @@
   </div>
 </th>
 <td class="align-middle"><strong>${{price}}</strong></td>
-<td class="align-middle"><strong>{{getSize()}}</strong></td>
+<td class="align-middle"><strong>{{productService.getSize(product.size)}}</strong></td>
 <td class="align-middle"><strong>{{product["quantity"]}}</strong></td>
 <td class="align-middle"><i class="fa fa-trash" (click)="deleteMe()"></i></td>
 
