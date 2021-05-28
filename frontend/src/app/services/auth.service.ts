@@ -1,3 +1,4 @@
+import { LocalStorageService } from 'src/app/services/localstorage/local-storage.service';
 import { Injectable } from '@angular/core';
 import { Observable, of, Subject, Subscription } from 'rxjs';
 import { User } from '../models/user.model';
@@ -20,7 +21,12 @@ export class AuthService {
     loginUser: "http://localhost:3000/users/login/"
   };
 
-  constructor(private http: HttpClient, private jwtService: JwtService, private toast: ToastService) { }
+  constructor(
+    private http: HttpClient,
+    private jwtService: JwtService,
+    private toast: ToastService,
+    private localStorageService : LocalStorageService
+  ) { }
 
   public isLoggedIn(): boolean {
     return (this.jwtService.getToken() != null);
@@ -59,6 +65,7 @@ export class AuthService {
   public logoutUser(): void {
     this.jwtService.removeToken();
     this.userSubject.next(null);
+    this.localStorageService.clear();
   }
 
   private handleErrorLogin(error: HttpErrorResponse): Observable<{ token: string }> {

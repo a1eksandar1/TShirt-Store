@@ -1,3 +1,4 @@
+import { LocalStorageService } from 'src/app/services/localstorage/local-storage.service';
 import { TShirt } from './../../models/tshirt.model';
 import { ProductService } from './../product/services/product.service';
 import { AfterViewChecked, AfterViewInit, Component, DoCheck, OnChanges, OnDestroy, OnInit } from '@angular/core';
@@ -19,12 +20,14 @@ export class UserComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
 
   currTshirt : TShirt;
   public wishlistItems : TShirt[] = [];
+  // public wishlistIDs : string[] = [];
   public userOrders : Order[] = [];
 
   constructor(
     private authService: AuthService,
     private productService : ProductService,
-    private orderService : OrderService
+    private orderService : OrderService,
+    private localStorageService : LocalStorageService
   ) {
     this.initUserPage();
     this.getUserWishlist();
@@ -42,8 +45,20 @@ export class UserComponent implements OnInit, DoCheck, OnDestroy, OnChanges {
   }
 
   getUserWishlist(){
-    for(let i = 0; i < this.user.wishlist.length; i++){
-      this.productService.getProductById(this.user.wishlist[i]).subscribe(
+
+    let userWishlistStr = this.localStorageService.getItem("WISHLIST");
+
+    let wishlist: string[];
+    if(userWishlistStr == null || userWishlistStr.length === 0){
+      wishlist = [];
+    }else{
+      wishlist = JSON.parse(userWishlistStr);
+    }
+    this.localStorageService.setItem("WISHLIST", JSON.stringify(wishlist));
+
+    console.log(wishlist);
+    for(let i = 0; i < wishlist.length; i++){
+      this.productService.getProductById(wishlist[i]).subscribe(
         (val) => {this.currTshirt = val.tshirt; this.wishlistItems.push(this.currTshirt);},
         (error) => {console.log(error);}
       );
