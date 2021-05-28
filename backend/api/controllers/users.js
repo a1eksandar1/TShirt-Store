@@ -79,11 +79,9 @@ module.exports.usersPostLogin = (req, res, next) => {
             let isAdmin=user.level=="admin"?true:false;
             const token = jwt.sign(
               {
-                _id: user._id,
+                userId: user._id,
                 email: user.email,
-                username: user.username,
-                wishlist: user.wishlist,
-                isAdmin: isAdmin,
+
               },
               process.env.JWT_SECRET,
               {
@@ -92,6 +90,12 @@ module.exports.usersPostLogin = (req, res, next) => {
             );
             return res.status(200).json({
               message: "Login successful",
+              user:{
+                userId: user._id,
+                username: user.username,
+                wishlist: user.wishlist,
+                isAdmin: isAdmin
+              },
               token: token
             });
             // incorrect password
@@ -134,6 +138,7 @@ module.exports.usersDeleteById = (req, res, next) => {
 };
 
 module.exports.usersGetAll = (req, res, next) => {
+  console.log("ovde");
   User.find()
     .exec()
     .then((users) => {
@@ -181,6 +186,40 @@ module.exports.usersAddToWishlist=(req,res,next)=>{
         // console.log(result);
         res.status(200).json({
           message: "Added tshirt to wishlist",
+          userId: id,
+          tshirtId: tshirtId
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
+    });
+}
+
+
+// we dont check if tshirt with given id exists
+// we dont check (on backend) if the given shirt is already in wishlist
+module.exports.usersRemoveFromWishlist=(req,res,next)=>{
+  const id=req.params.userId;
+  const tshirtId=req.body.tshirtId;
+  User.updateOne(
+    { _id: id },
+    { $pull: { wishlist: tshirtId } }
+  )
+    .exec()
+    .then((result) => {
+        console.log(result);
+      if (result.nModified == 0) {
+        res.status(404).json({
+          message: "No user with given id",
+        });
+      } else {
+        // console.log(result);
+        res.status(200).json({
+          message: "Removed tshirt from wishlist",
           userId: id,
           tshirtId: tshirtId
         });
