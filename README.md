@@ -84,6 +84,8 @@ U browser-u otvorite *http://localhost:4200/*.
 
 https://1drv.ms/v/s!AgGIgCBogcrekN4RRK61mbBgl38ZtQ
 
+https://youtu.be/ijrrG5b3bIA
+
 ## Dokumentacija
 
 Sva potrebna dokumentacija vezana za implementiran api se nalazi u *21-ProdavnicaMajica/backend/api/api.md*.
