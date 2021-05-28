@@ -145,15 +145,14 @@ module.exports.ordersSendEmail= (req, res, next) =>{
 
   userEmail=req.body.userEmail;
 
-
   let transporter = nodemailer.createTransport({
     // host: "",
     service:'gmail',
     // port: 465,
     // secure: true, // true for 465, false for other ports
     auth: {
-      user: '21prodavnicamajca@gmail.com', // generated ethereal user
-      pass: 'adminadmin1234*' // generated ethereal password
+      user: process.env.EMAIL, // generated ethereal user
+      pass: process.env.PASSWORD // generated ethereal password
     },
     tls:{
       rejectUnauthorized:false
@@ -163,7 +162,7 @@ module.exports.ordersSendEmail= (req, res, next) =>{
   // send mail with defined transport object
   let mailOptions = {
     from: '"TShirt Shop"<1prodavnicamajca@gmail.com>', // sender address
-    to: "matijasreckovic97@gmail.com", // list of receivers
+    to: userEmail, // list of receivers
     subject: "Purchase successful", // Subject line
     text: "Thank you for using our shop.", // plain text body
     // html: "", // html body
