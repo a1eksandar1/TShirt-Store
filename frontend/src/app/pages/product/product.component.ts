@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/ui/toast/service/toast.service';
 import { ProductService } from './services/product.service';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -43,6 +42,28 @@ export class ProductComponent implements OnInit {
     this.product.subscribe((val) => {
       this.tshirt = val.tshirt;
     });
+  }
+
+  public isFavorited = false;
+  public toggleSelected() {
+    this.isFavorited = !this.isFavorited;
+
+    let userId = this.authService.sendUserDataIfExists()["_id"];
+    if(userId == null){
+      // ili mu samo izbaci ono da se uloguje
+      this.toastService.errorToast("Please log in!");
+      return;
+    }
+
+    if(this.isFavorited){
+      console.log("add to wishlist");
+      this.productService.addToWishlist(userId, this.productId).subscribe(
+        (val) => {console.log(val); this.toastService.successToast("Product added to wishlist!");},
+        (error) => {console.log(error); this.toastService.errorToast("Product not added to wishlist.");}
+      );
+    }else{
+      console.log("remove from wishlist");
+    }
   }
 
   ngOnInit(): void {
