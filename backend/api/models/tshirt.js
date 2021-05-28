@@ -21,6 +21,9 @@ const tshirtSchema = mongoose.Schema({
     type: Number,
     default: 0
   },
+  agreeToShow:{
+    type: Boolean
+  },
   popularity: {
     type: Number,
     default: 0

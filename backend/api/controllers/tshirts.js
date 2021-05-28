@@ -17,6 +17,7 @@ module.exports.tshirtsGetAll = (req, res, next) => {
             image: tshirt.image,
             ratingSum: tshirt.ratingSum,
             numberOfRatings: tshirt.numberOfRatings,
+            agreeToShow: tshirt.agreeToShow,
             comments: tshirt.comments
           };
         }),
@@ -47,6 +48,7 @@ module.exports.tshirtsGetById = (req, res, next) => {
             image: tshirt.image,
             ratingSum: tshirt.ratingSum,
             numberOfRatings: tshirt.numberOfRatings,
+            agreeToShow: tshirt.agreeToShow,
             popularity: tshirt.popularity + 1,
             comments: tshirt.comments
           },
@@ -77,6 +79,7 @@ module.exports.tshirtsPost = (req, res, next) => {
           _id: new mongoose.Types.ObjectId(),
           tshirtName: req.body.tshirtName,
           price: req.body.price,
+          agreeToShow: req.body.agreeToShow,
           // if we dont send image use default
           image:
             req.file === undefined
