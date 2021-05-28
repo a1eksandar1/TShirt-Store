@@ -1,7 +1,42 @@
-<ng-container *ngIf="user | async as u">
-  <div class="container">
-    test
-    <h1>korisnik : {{ u.username }}</h1>
-    <h1>e-mail : {{ u.email }}</h1>
+<div class="container-md mx-auto mt-5">
+  <h1>username : {{ user.username }}</h1>
+  <h1>e-mail : {{ user.email }}</h1>
+
+  <div class="my-5">
+    <h2>Your wishlist</h2>
+    <div class="row row-cols-md-4 row-cols-1 g-3">
+      <app-card
+        *ngFor="let tshirt of wishlistItems"
+        [tshirt]="tshirt"
+      ></app-card>
+    </div>
   </div>
-</ng-container>
+  <div class="row">
+    <div class="col-lg-12 mt-5 rounded shadow-md">
+      <h2>Previous orders</h2>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr class="bg-light">
+              <th scope="col" class="border-0">
+                <div class="p-2 px-3 text-uppercase">Product</div>
+              </th>
+              <th scope="col" class="border-0">
+                <div class="py-2 text-uppercase">Price</div>
+              </th>
+              <th scope="col" class="border-0">
+                <div class="py-2 text-uppercase">Size</div>
+              </th>
+              <th scope="col" class="border-0">
+                <div class="py-2 text-uppercase">Quantity</div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr app-order *ngFor="let order of userOrders" [order]="order"></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

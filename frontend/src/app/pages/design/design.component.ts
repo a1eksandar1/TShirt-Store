@@ -31,6 +31,26 @@ export class DesignComponent implements OnInit, AfterViewInit {
 
   private selectedColor: string = "/assets/defaultTshirts/tshirtDefault.png";
   
+  public colors: string[] = [
+    "assets/defaultTshirts/tshirtDefault.png",
+    "assets/defaultTshirts/tshirtDefaultBlack.png",
+    "assets/defaultTshirts/tshirtDefaultBlue.png",
+    "assets/defaultTshirts/tshirtDefaultGreen.png",
+    "assets/defaultTshirts/tshirtDefaultRed.png",
+    "assets/defaultTshirts/tshirtDefaultYellow.png",
+    "assets/defaultTshirts/tshirtDefaultGradient1.png",
+    "assets/defaultTshirts/tshirtDefaultGradient2.png",
+    "assets/defaultTshirts/tshirtDefaultGradient3.png",
+    "assets/defaultTshirts/tshirtDefaultGradient4.png",
+    "assets/defaultTshirts/tshirtDefaultGradient5.png",
+    "assets/defaultTshirts/tshirtDefaultGradient6.png",
+    "assets/defaultTshirts/tshirtDefaultGradient7.png",
+    "assets/defaultTshirts/tshirtDefaultGradient8.png",
+    "assets/defaultTshirts/tshirtDefaultGradient9.png",
+    "assets/defaultTshirts/tshirtDefaultGradient10.png",
+    "assets/defaultTshirts/tshirtDefaultGradient11.png",
+  ];
+
   private selectedFile: File;
   private selectedImageSource;
   private doneImage: Blob;
