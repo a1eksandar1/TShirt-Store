@@ -5,6 +5,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { DesignComponent } from './pages/design/design.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoadingComponent } from './pages/loading/loading.component';
 import { ProductComponent } from './pages/product/product.component';
 import { StoreComponent } from './pages/store/store.component';
 import { UserAuthenticatedGuard } from './pages/user/guards/user-authenticated.guard';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'user', component: UserComponent, canActivate: [UserAuthenticatedGuard]},
   { path: 'product/:_id', component: ProductComponent},
   { path: 'design', component: DesignComponent},
+  { path: 'loading', component: LoadingComponent},
 ];
 
 @NgModule({

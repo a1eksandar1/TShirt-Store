@@ -40,9 +40,9 @@ export class DesignService {
       if(typeof response.body != "undefined")
       {
         let id = response.body["addedTshirt"]["_id"];
-        this.cart.addProductToCart(id,1,1);
+        //this.cart.addProductToCart(id,1,1);
         //console.log(id);
-        this.router.navigateByUrl("/cart");
+        this.router.navigateByUrl("/product/" + id);
       }
     });
     //console.log(selectedFile);

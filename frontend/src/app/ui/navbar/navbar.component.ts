@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,6 +25,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
       }
     });
+
+    router.events.subscribe((value) => {
+      if(value instanceof NavigationStart && value.url != "/store" && value.url != "/loading") {
+        console.log(value);
+        this.searchService.search("");
+        this.searchBar.nativeElement.value = "";
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -43,7 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const value: string = this.searchBar.nativeElement.value;
     console.log("searching: ", value);
     this.searchService.search(value);
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigateByUrl('/loading', {skipLocationChange: true}).then(()=>
     this.router.navigateByUrl("/store"));
   }
 }

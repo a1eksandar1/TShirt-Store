@@ -24,6 +24,7 @@ import { CarouselComponent } from './pages/home/carousel/carousel.component';
 import { DesignComponent } from './pages/design/design.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastComponent } from './ui/toast/toast.component';
+import { LoadingComponent } from './pages/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ToastComponent } from './ui/toast/toast.component';
     CommentComponent,
     CarouselComponent,
     DesignComponent,
-    ToastComponent
+    ToastComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
