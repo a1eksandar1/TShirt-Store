@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const nodemailer=require("nodemailer");
+
 const Order = require("../models/order");
 const Tshirt = require("../models/tshirt");
 const User = require("../models/user");
@@ -136,6 +138,60 @@ module.exports.ordersPost = (req, res, next) => {
       });
     });
 };
+
+
+
+module.exports.ordersSendEmail= (req, res, next) =>{
+
+  userEmail=req.body.userEmail;
+
+
+  let transporter = nodemailer.createTransport({
+    // host: "",
+    service:'gmail',
+    // port: 465,
+    // secure: true, // true for 465, false for other ports
+    auth: {
+      user: '21prodavnicamajca@gmail.com', // generated ethereal user
+      pass: 'adminadmin1234*' // generated ethereal password
+    },
+    tls:{
+      rejectUnauthorized:false
+    }
+  });
+
+  // send mail with defined transport object
+  let mailOptions = {
+    from: '"TShirt Shop"<1prodavnicamajca@gmail.com>', // sender address
+    to: "matijasreckovic97@gmail.com", // list of receivers
+    subject: "Purchase successful", // Subject line
+    text: "Thank you for using our shop.", // plain text body
+    // html: "", // html body
+  };
+
+  transporter.sendMail(mailOptions,(error,info)=>{
+      if(error){
+      
+        res.status(500).json({
+          error: error,
+        });
+        return console.log(error);
+
+          
+      }
+
+      res.status(200).json({
+        message: "Mail sent",
+      });
+
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  });
+}
+
 
 module.exports.ordersDeleteById = (req, res, next) => {
   const id = req.params.orderId;
