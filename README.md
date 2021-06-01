@@ -82,7 +82,9 @@ U browser-u otvorite *http://localhost:4200/*.
 
 ## Demo
 
+https://youtu.be/ijrrG5b3bIA
 
+(Izvinjavam se sto je zvuk samo na levoj strani)
 
 ## Dokumentacija
 
